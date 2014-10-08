@@ -1,0 +1,398 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+\newtheorem{oprob}[theorem]{Open Problem}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+\newtheorem{prob}[theorem]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+
+	\title{On Sensitivity of $k$-uniform Hypergraph Properties}
+
+	\author{Joshua Biderman, Kevin Cuddy, Ang Li, Min Jae Song}
+	\date{\today}
+	\begin{abstract}
+		 In this paper we present a graph property with sensitivity $\Theta(\sqrt{n})$, where $n={v\choose2}$ is the number of variables, and generalize it to a $k$-uniform hypergraph property with sensitivity $\Theta(\sqrt{n})$, where $n={v\choose k}$ is again the number of variables. This yields mallest sensitivity yet acheived for a $k$-uniform hypergraph property. We then prove that, for even $k$, our property provides an example of a quadratic gap between sensitivity and block sensitivity. This matches the previously known maximal gap found by Rubinstein (1995) for a general boolean function and Chakraborty (2005) for a cyclicly invarient boolean function, and is the first known example of such a gap for a graph or hypergraph property.
+	\end{abstract}
+	\maketitle
+	
+	\tableofcontents
+	
+	\section{Introduction}
+The sensitivity of a Boolean function $f$ on $n$ variables is the maximum over all inputs $x$ of the number of $i$ such that flipping the $i$-th bit of $x$ flips the value of $f(x)$. This concept was origionally introduced by XXXXXXXXXXXXXXXXXX. Block sensitivity, introduced by Nisan \cite{N}, is the maximum over all inputs, $x$, of the maximum number of disjoint blocks of of variables such that flipping each block flips the value of $f(x)$. It is clear from the definition that for all $f$, $s(f) \leq bs(f)$, since we can just consider blocks of size one.  Whether there is a polynomial bound in the other direction is a long-standing open question and is known as the Sensitivity Conjecture, i.e. is it the case that $\exists a,b\in\mathbb{R}$ such that $\forall f:\{0,1\}^n\to\{0,1\}, bs(f)<a\cdot s(f)^b$. A stronger conjecture by Nisan and Szegedy \cite{NS} is that $bs(f) \leq O(s(f)^{2})$. Currently, the best known upper bound on block sensitivity is exponential in sensitivity, as given by Hans-Ulrich Simon \cite{S}, $bs(f)=O(2^n)$ which follows from his lower bound on sensitivity combined with the trivial upper bound on block sensitivity.
+
+The sensitivity conjecture motivates the search for Boolean functions with large gaps between sensitivity and block sensitivity. The largest known gap is quadratic, and is due to Rubinstein \cite{R}. Chakraborty \cite{C} explained how a minor tweak to Rubenstein's function yields a Boolean function with a quadratic gap that is highly symmetric, and specifically is invarient under the permutation of the varibles by the action induced by a cyclic group on those variables, which raises the question of if even more symmetric functions, specifically graph properties, those functions on $n={v\choose 2}$ variables that are invarient under the action of the natural copy of $S_v$ inside of $S_n$, a concept we can further extend to $k$-uniform hypergraphs, wtih $n={v\choose k}$. In this paper, we explore the sensitivity of $k$-uniform hypergraph properties and consider following three conjectures of Laszlo Babai (all three conjectures are for every $k$):
+
+\begin{conj}
+There exists a $k$-uniform hypergraph property, $f$, such that $$s(f)=O(\sqrt{n})=O(v^{k/2})$$
+\end{conj}
+
+\begin{conj}
+There exists a $k$-uniform hypergraph property, $f$, such that $s(f)$ and $bs(f)$ have a quadratic gap. That is,  $bs(f)=\Theta(s(f)^2)$.
+\end{conj}
+
+\begin{conj}
+For every $k$-uniform hypergraph property, $f$, $$s(f)=\Omega(\sqrt{n})=\Omega(v^{k/2})$$
+\end{conj}
+
+In Section 3, we fully answer Conjecture 1 in the afirmative, by demonstrating, for every $k$, a $k$-uniform hypergraph property with sensitivity $s(f)=\Theta(\sqrt{n})=\Theta(v^{k/2})$. In Section 4, we make progress towards answering Conjecture 2 by demonstrating a $k$-uniform hypergraph property with a quadratic gap between senstivity and block sensitivity for every even $k$, however for odd $k$ the best we can accomplish is a gap of $\frac{2k}{k+1}$ in the exponent, i.e., for all $k$, we give a graph propert $f$ such that 
+$$bs(f)=\Theta(s(f)^{\lceil\frac{2k}{k+1}\rceil})$$
+
+SOMETHING ABOUT IF WE THINK IT IS TRUE FOR ODD $k$. Interestingly, in the case of $k=2$, we know that the function we give in Section 4 is optimal in the sense of giving the largest gap between sensitivity and block sensitivity, as Turan \cite{T} has shown that for a graph property $f$ on $v$ vertices, $s(f) = \Omega(\sqrt{n})=\Omega(v)$. This also answers Conjecture 3 in the afirmative for the case of $k=2$. We fail to make any progress on Conjecture 3, but continue to believe that Conjecture 3 holds.
+
+	\section{Preliminaries}
+		We first introduce some complexity measures that can be used to analyze Boolean functions.  
+
+	\subsection{Definitions}
+\begin{defn}\label{sensitivity}
+For a Boolean function $f: \{0,1\}^n \to {0,1}$ and an input string $x$, we define the \textbf{sensitivity of $\boldsymbol{f}$ at $\boldsymbol{x}$}, introduced by Cook et al \cite{CDR} and denoted $\boldsymbol{s(f,x)},$ is $$s(f,x) =|\{i \in [n] \: | \: f(x) \neq f(x^{i})\}|$$ where 
+$\lbrack n \rbrack$ is the set 
+$\{1,2,\ldots ,n\}$ and 
+$x^{i}$ is the string $x$ with the $i^{th}$ bit flipped, 
+that is, changed either from 0 to 1 or from 1 to 0.  So the sensitivity of $f$ at $x$ is the number of single-bit changes to $x$ that change $f(x)$.  
+\\
+The \textbf{sensitivity of $\boldsymbol{f}$} or $\boldsymbol{s(f)}$ is then $$s(f) = \max\limits_{x \in \{0,1\}^{n}} s(f,x).$$
+\end{defn}
+
+There is a similar measure called block sensitivity, introduced by Nisan \cite{N}.  
+\begin{defn}\label{blocksensitivity}
+A \textbf{sensitive block for $\boldsymbol{f}$ at $\boldsymbol{x}$} is $B \subseteq [n]$ such that 
+$f(x) \neq f(x^{B})$, where $x^{B}$ is the string $x$ with all bits whose indices are in $B$ flipped.
+For example, if $n=3, \: B_{1} = \{1,2\},$ and $x=101$, then $x^{B_{1}}$ is $011$.  
+The \textbf{block sensitivity of $\boldsymbol{f}$ at $\boldsymbol{x}$} is then
+$$bs(f,x) = \max_{B_{1}, \ldots , B_{k}} k$$ 
+where the maximum is taken over all sets of disjoint sensitive blocks for $f$ at $x$.  This is simply the maximum number of disjoint sensitive blocks in $[n]$ for $f$ at $x$.
+The \textbf{block sensitivity of $\boldsymbol{f}$} or $\boldsymbol{bs(f)}$ is then defined to be
+$$bs(f) = \max\limits_{x \in \{0,1\}^{n}} bs(f,x).$$
+\end{defn}
+
+Obviously, for any Boolean function $f$, we have 
+		\begin{equation}
+			s(f) \leq bs(f). \nonumber
+		\end{equation}
+		
+
+\begin{defn}\label{oneandzero}
+It will be useful when presenting proofs to use the notation $\boldsymbol{s^{0}(f)}$ for the sensitivity when changing $f$'s value from 0 to 1, 
+and $\boldsymbol{s^{1}(f)}$ for the sensitivity when changing 
+the value from 1 to 0.  Sensivitity is then $\max \{ s^{0}(f), s^{1}(f)\}$.  The same notation will be used for block sensitivity when required.  
+\end{defn}
+
+		\begin{defn}
+			A Boolean function $f: \{0,1\}^{v \choose{2}} \to \{0,1\}$ is called a \textit{graph property} if for every input $x = (x_{(1,2)},...,x_{(n-1,n)})$ and every permutation $\sigma \in S_v$, we have
+			\begin{equation}
+				f(x_{(1,2)},...,x_{(n-1,n)}) = f(x_{(\sigma (1), \sigma (2))},...,x_{(\sigma (n-1), \sigma (n))}). \nonumber
+			\end{equation}
+		\end{defn}
+		Similarly, we can define $k$-uniform hypergraph property.
+			\begin{defn}
+				A Boolean function $f: \{0,1\}^{v \choose{k}} \to \{0,1\}$ is called a \textit{$k$-uniform hypergraph property} if for every input $x = (x_{(1,2,...,k)},...,x_{(n-k+1,...,n-1,n)})$ and every permutation $\sigma \in S_v$, we have
+			\begin{equation}
+				f(x_{(1,2,...,k)},...,x_{(n-k+1...,n-1,n)}) = f(x_{(\sigma (1), \sigma (2),..., \sigma(k))},...,x_{(\sigma (n-k+1),...,\sigma (n-1), \sigma (n))}). \nonumber
+			\end{equation}
+			\end{defn}
+
+	\subsection{Previous Results}
+
+		The largest known gap between sensitivity and block sensitivity is quadratic, and this was demonstrated by Rubinstein's function [4].
+	\begin{exmp} ({\it Rubinstein's function})
+		Let $n = k^2$ for some even $k$. We partition the $n$ variables into $k$ consecutive blocks of $k$ variables. We denote the blocks by $B_1,...,B_k$. Let $f(x) = 1$ if and only if there exists a block $B_i$ such that exactly two consecutive bits $x_{(i-1)k+j}, x_{(i-1)k+(j+1)} \in B_i$ take on the value 1 and all the other bits in $B_i$ are 0. The sensitivity of $f$ is $2k$ and the block sensitivity is $k^2/2$.
+	\end{exmp}
+
+	Chakraborty modified Rubinstein's function and constructed a cyclically invariant Boolean function with a quadratic gap between sensitivity and block sensitivity.
+\begin{defn} Let $x = x_1x_2...x_n$ where each $x_i \in \{0,1\}$. Then for $0 < l < n$, the binary string $x_{l+1}x_{l+2}...x_nx_1...x_l$ is a {\it cyclic shift} of $x$.
+\end{defn}
+
+	\begin{exmp}
+		Let $g : \{0,1\}^{k^2} \rightarrow \{0,1\}$ be Rubinstein's function. Define $f : \{0,1\}^{k^2} \rightarrow \{0,1\}$ as $f(x) = 1$ iff $g(x') = 1$ for some $x'$ which is a cyclic shift of $x$. $f$ has sensitivity $2k$ and block sensitivity $k^2/2$.
+	\end{exmp}
+
+	H.-U. Simon \cite{S} proved that for any Boolean function $f$, we have $s(f) \geq 1/2\log n -1/2\log{\log n} + 1/2$, where $n$ is the number of effective variables, that is, the number of variables on which the function actually depends. This lower bound is tight up to the additive  $O(\log{\log n})$.
+
+	For graph properties, Turan \cite{T} proved if $f$ is a graph property on $v$ vertices, then $s(f) = \Omega(v)$, which implies that the gap is at most quadratic for graph properties. In the same paper, he provides an example, the ``isolated vertex'' property, which shows that the lower bound is tight.
+
+	\begin{exmp} ({\it Isolated vertex property}) 
+		Let $f$ be the graph property on $v$ vertices such that $f(G) = 1$ iff $G$ has an isolated vertex. The sensitivity of $f$ is $v-1$.
+	\end{exmp}
+			
+\section{$k$-Uniform  Hypergraph Property with $\Theta(v^{k/2})$ Sensitivity}
+	We begin with presenting the case $k=2$, demonstrating a graph property with sensitivity exactly $\Theta(v)$, and then generalize our proof to any $k\geq 3$.
+
+	\begin{theorem}
+		There exists a graph property $f$, such that, $s(f) = \Theta(v)$.
+	\end{theorem} 
+
+	\begin{proof}
+		Let $f$ be the graph property, ``there exists an isolated triangle''. By isolated triangle, we mean three vertices $a,b,c$ that are connected to each other and not connected to any $v \in V\setminus\{a,b,c\}$.
+
+		We consider $s^0(f)$ first. To change from 0 to 1, we need to either add an edge to complete an isolated triangle or remove an edge so that a triangle becomes isolated. We call a triple $(v_1,v_2,v_3)$ sensitive if adding or removing an edge from the graph will make the $(v_1,v_2,v_3)$ vertices an isolated triangle.
+
+	\begin{claim}
+		Sensitive triples are pairwise vertex disjoint. 
+	\end{claim}
+	\begin{proof}
+		To see this, let two distinct sensitive triples be $(a,v_1,v_2)$ and $(a,w_1,w_2)$. Since, $(a,v_1,v_2)$ is 1 bit away from being an isolated triangle, $(a,w_1,w_2)$ can have at most 1 edge incident to $a$ because if the triple has more than 2 edges incident to $a$, $(a,v_1,v_2)$ will not be isolated from vertices $w_1$ and $w_2$ after flipping 1 bit. In fact, $(a,w_1,w_2)$ has exactly 1 edge incident to $a$ since if it has no edges incident to $a$, it cannot be 1 bit away from a triangle. By the same logic, $(a,v_1,v_2)$ has exactly 1 edge incident to $a$. This implies that induced subgraphs on $(a,v_1,v_2)$ and $(a,w_1,w_2)$ are trees. However, this means that $(a,v_1,v_2)$ cannot be sensitive since there is an edge connecting $a$ to a vertex other than $v_1,v_2$. Hence, sensitive triples cannot share a vertex. 
+	\end{proof}
+
+	Now we can prove that $s^0(f) = \Theta(v)$. Let $C_1, C_2, ... C_m$ be sensitive 3-tuples on a graph $G$. Since two sensitive 3-tuples cannot share a vertex, a vertex uniquely determines a sensitive 3-tuple. Hence, $m \leq v$. Since we can have $v/3$ vertex disjoint trees consisting of 3 vertices on $G$, $s^0(f) = \Theta(v)$.
+
+	Next we consider $s^1(f)$. To change from 1 to 0, we need to either remove an edge from the isolated triangle or add an edge to it so that it is no longer isolated. For the first case, it is easy to see that at most 3 bits are sensitive. For the second case, at most $3(v-3)$ bits can make the triangle not isolated, so $s^1(f) = \Theta(v),$ and therefore $s(f) = max\{\Theta(v),\Theta(v)\}=\Theta(v)$.
+	\end{proof}
+
+Now, we will present the general case. We assume for simplicity that $k\geq 3$.
+	
+	\begin{theorem}
+		Given any $k\geq 3$, $i \leq k$ and any $t \in [0,1]$, there exists a $k$-uniform hypergraph property $f$, such that $s(f) = max\{\Theta(v^{i(1-t)}), \Theta(v^{k-i(1-t)})\}$.
+	\end{theorem}
+	\begin{proof}
+		Let $\mathcal{H}$ be a $k$-uniform click on $\Theta(v^t)$ vertices.  Define a $k$-uniform hypergraph property $f$ such that $f=1$ if there exists a copy of $\mathcal{H}$ inside the graph such that given any edge $E$ not entirely in $\mathcal{H}$, we have
+		\begin{equation}
+			|V(\mathcal{H}) \cap E| < i. \nonumber
+		\end{equation}
+		\indent We claim that this is the desired $k$-uniform hypergraph property. First we consider $s^0(f)$. When there's no desired $\mathcal{H}$ inside the graph, we call $v^t$ vertices $\{w_1,...w_{v^t}\}$ sensitive tuple if we can form a desired $\mathcal{H}$ by either removing or adding one edge. 
+		\begin{lem}
+			Every sensitive tuple contains exactly one sensitive edge.
+		\end{lem}
+		\begin{proof}
+			If the tuple can form a desired $\mathcal{H}$ by removing one edge, then it is a desired click but does not fit the isolation criterion. There can only be one edge that needs to be removed, as if there were two edges that violated the isolation criterion, then by removing only one of them the value of the function wouldn't change and so it wouldn't actually be a sensitive tuple.
+the sensitive tuple contains at most one sensitive edge, since otherwise, it can't form a desired $\mathcal{H}$ by removing exactly $1$ edge. If the tuple can for a desired $\mathcal{H}$ by adding one edge, then it satisfied the isolation criterion and is one edge short of being a click. But then there's only one edge that can be added to those points, as every other edge is already existent.
+		\end{proof}
+		 Then every sensitive tuple contains exacly one sensitive edge. Let $\mathcal{F}$ denote the set of all sensitive tuples, we have
+		\begin{equation}
+			s^0(f) \leq |\mathcal{F}|. \nonumber
+		\end{equation}
+		Then we can get an upper bound of $s^0(f)$ by finding an upper bound of $|\mathcal{F}|$. We claim that no two elements of $\mathcal{F}$ can share more than $i-1$ vertices. If given $\{w_1,...,w_{v^t}\}$ and $\{w_1^\prime,...,w_{v^t}^\prime\}$ two sensitive tuples, such that they have $i$ common vertices $\{v_1,...,v_i\}$. If both of them can form a desired $\mathcal{H}$ by adding one edges, there is at least one edge through $\{v_1,..,v_i\}$ inside each of them, since there are at least two edges in $\mathcal{H}$ through any $i$ vertices. Hence none of them can form a desired $\mathcal{H}$ by just removing one edge, which is a contradiction. If one of these two tuples can form a desired $\mathcal{H}$ by adding one edge, there are at least two edges through these $i$ points in this tuple, which means another tuple can't form a desired $\mathcal{H}$ by either adding or removing exactly one edge.\\
+		\indent Thus we know that any set of $i$ vertices contained in no more than one element of $\mathcal{F}$ and any sensitive tuple contains $v^t \choose{i}$ distinct sets of $i$ vertices. Then we have
+		\begin{equation}
+			s^0(f) \leq |\mathcal{F}| \leq \frac{{v \choose{i}}}{{v^t \choose{i}}} = O(v^{i(1-t)}). \nonumber
+		\end{equation}
+		Finally we consider $s^1(f)$. When there exists such $\mathcal{H}$ inside the graph, the only way to eliminate it is to either remove an edge inside $\mathcal{H}$ or add an edge with more than $i-1$ vertices in $V(\mathcal{H})$. Thus we have
+		\begin{equation}
+			s^1(f) = {v^t \choose{k}} + {v^t \choose{i}}{v-i \choose{k-i}} = \Theta (v^{k-i(1-t)}). \nonumber
+		\end{equation}
+		It then immediately follows that we have
+		\begin{equation}
+			s(f)= max\{s^0(f),s^1(f)\} = max\{ \Theta(v^{i(1-t)}),  \Theta(v^{k-i(1-t)})\}. \nonumber
+		\end{equation}
+	\end{proof}
+	By looking at special cases of this proposition, we can find a $k$-uniform hypergraph property for any $k$ odd with sensitivity $O(v^{k/2})$.
+	\begin{cor}
+		There exists $k$-uniform hypergraph property with sensitivity exactly $O(v^{k/2})$, for all $k$.
+	\end{cor}
+	\begin{proof}
+		The $k=2$ case has been done. For $k\geq 3$, any solution to the equation $i(1-t)=\frac{k}{2}$ for $t\in[0,1]$ and $i\in\mathbb{N}$ works, and specifically for every $i\geq\frac{k}{2}, t=1-\frac{k}{2i}$ yields the desired result.
+	\end{proof}
+
+	We now introduce a lemma which will allow us, in certain cases, to obtain a tight lower bound on $s^0(f)$.
+
+	\begin{lem}
+		Let $q$ be a prime power and $d \leq q$. $\forall\ell\in\mathbb{N}$, there exists a collection of sets $S_1, ..., S_m \subseteq [q^{\ell+1}]$ such that $|S_i| = q$ for all $i$ and $|S_i \cap S_j| < d$ for $i \neq j$ and $m = q^{d\ell}$.
+	\end{lem}
+	\begin{proof}
+		Let $f : \mathbb{F}_q \rightarrow \mathbb{F}^\ell_q$ such that $f(x) = (f_1(x), ... ,f_k(x))$ where each $f_i$ is a degree $k-1$ polynomial over $\mathbb{F}_q$. Then each $f$ corresponds to a set of $(k+1)$-tuples, $S_f = \{(x,f_1(x),...,f_k(x))\text{ }  |\text{ } x \in \mathbb{F}_q\}$. 
+
+		If $g \neq f$, then the sets $S_f$ and $S_g$ intersect at most $k-1$ points since the equation $f_1(x) = g_1(x)$ already has at most $k-1$ solutions in $x \in \mathbb{F}_q$. We can relabel $S_f$ by associating $i \in [q^{k+1}]$ to each $f : \mathbb{F}_q \rightarrow \mathbb{F}^k_q$. There are $q^k$ distinct polynomials over $\mathbb{F}_q$ of degree $k-1$, so there are $(q^k)^k$ distinct sets of $(k+1)$-tuples that satisfy the above property. Hence, we can construct a collection of sets $S_1, ..., S_{q^{k^2}}$ such that $|S_i| = q$ for all $i$ and $|S_i \cap S_j| < k$ for $i \neq j$.
+	\end{proof}
+	\begin{prop}
+		The upper bound in the Corollary 3.5 is tight, that is, $\forall k\exists i\in\mathbb{N},t\in[0,1]$ such that if $f$ is the function in Corollary 3.5 with those parameters, then $s(f)=\Theta(v^\frac{k}{2})$
+	\end{prop}
+	\begin{proof}
+		It is sufficent to prove that, in a special case of Theorem 3.3, the upper bound on $s^0(f)$ is tight. We will prove this by evoking the lemma just introduced.
+
+		First, consider the case of $k$ even. $i=\frac{k}{2},t=1$ is an assignment yielding $s(f)=O(v^\frac{k}{2})$, which we will prove to be tight.  Let $q$ be a prime power such that $k+1<2(k+1)$, the existence of which is guarenteed by Bertrand's Postulate. Let $\ell=\lfloor\log_q(v)-1\rfloor\geq\log_q(v)-2$, and $d=\frac{k}{2}$. Then by the lemma we have $m=q^{d\ell}=\Omega(v^\frac{k}{2}q^{-2\frac{k}{2}})=\Omega(v^\frac{k}{2}q^{-k})=\Omega(v^\frac{k}{2})$ many sets $S_1,\ldots S_m$ such that $|S_i|\geq k+1$ such that $\forall i\neq j,|S_i\cap S_j|<\frac{k}{2}$. Let $S'_i$ be any subset of $S_i$ such that $|S'_i|=k+1$. Note that $\forall i\neq j,|S'_i\cap S'_j|<\frac{k}{2}$.
+
+		Now we can construct an input for which $s^0(f)=\Omega(v^\frac{k}{2})$. Label the vertices $1,\ldots v$ and partition a subset of these into the sets $S'_i$. Make the sets of points $S'_i$ be clicks, and then remove any one edge from each of the clicks. Since no two share $\frac{k}{2}$ points, the isolation criterion is automatically satisfied, so readding the removed edge to any of the almost clicks changes the value of $f$ from $0$ to $1$. There are $\Omega(v^\frac{k}{2})$ many sets $S'_i$, so $s^0(f)=\Omega(v^\frac{k}{2})$.
+
+		Next, for the case of $k$ odd.  $i=\frac{k+1}{2},t=\frac{1}{k+1}$ is an assignment yielding $s(f)=O(v^\frac{k}{2})$, which we will prove to be tight. Let $q$ be a prime power such that $\frac{1}{2}v^t<q<v^t$, the existence of which is guarenteed by Bertrand's Postulate.  Let $\ell=\frac{1}{t}-1=k$, and $d=\frac{k+1}{2}$. Then by the lemma we have $m=q^{d\ell}=\Omega(v^{td\ell})=\Omega(v^{\frac{1}{k+1}\frac{k+1}{2}k})=\Omega(v^\frac{k}{2})$ many sets $S_1,\ldots S_m$ such that $|S_i|\geq k+1$ such that $\forall i\neq j,|S_i\cap S_j|<\frac{k}{2}$. We proceed to construct our input as before, and again obtain $s^0(f)=\Omega(v^\frac{k}{2})$.
+	\end{proof}
+
+	\begin{rem}
+		Although it might appear that Lemma 3.6 could be used to obtain a general tight lower bound on $s^0(f)$, there is an important cavat. Since we consider $\mathbb{F}^\ell_q$, $\ell$ must be a positive integer. However, using our arguement, except in the case of $t=0$, $l$ is an integer if and only if $\frac{1}{t}$ is, and since $t\in[0,1]$, this is not guarenteed in general.
+	\end{rem}
+
+\section{Gaps in Sensitivity and Block Sensitivity for Graph Properties}
+	We prove bounds on the block sensitivity of the function discussed in Theorem 3.3 for some values of the parameters $k,i,$ and $t$. Specifically, we give a quadratic gap between sensitivity and block sensitivity for every even $k$.
+q
+	\begin{prop}
+		There exists a graph property $f$, such that, $s(f) = \Theta(v)$ and $bs(f) = \Theta(v^2)$.
+	\end{prop} 
+	\begin{proof}
+		Let $f$ be the graph property, ``there exists an isolated triangle'' from Theorem 2.1. It is sufficent to show that $bs(f)=\Omega(v^2)$. Consider the block sensitivity on an empty graph input. A triangle is not edge disjoint with $3(v-2)+1$ triangles and there are ${v \choose 3}$ triangles on a graph on $v$ vertices. It follows that there are at least $\Omega(v^2)$ edge disjoint triangles on $v$ vertices. Hence, $bs(f) = \Omega(v^2)$. Since $bs(f) \leq {v \choose 2}$ trivially, it follows that $bs(f) = \Theta(v^2)$.
+	\end{proof}
+
+	Then we can generalize this graph property to a $k$-uniform hypergraph property for any $k \in \mathbb{N}$, which gives a quadratic gap for $k$ even and nearly a quadratic gap for $k$ odd.
+	\begin{theorem}
+		Let $k,i \in \mathbb{N}$ and $1 \leq i \leq k/2$, there exists a $k$-uniform hypergraph property $f$ on $v$ vertices such that $s(f) = \Theta(v^{k-i})$ and $bs(f) = \Theta(v^{k})$.
+	\end{theorem}
+	\begin{proof}
+		Consider the function from Theorem 3.3, with $t=0$ set. Since $i\leq\frac{k}{2}$, we have that $i\leq k-i$, so $s(f)=\Theta(v^{k-i})$. We now wish to show that $bs(f)=\Theta(v^k)$.
+		\begin{lem}
+			In a $k$-uniform hypergraph on $v$ vertices, there are $\Omega (v^k)$ edge disjoint $K_{k+1}^{(k)}$.
+		\end{lem}
+		\begin{proof}
+			There are $v \choose{k+1}$  many ($k+1$)-cliques and for every clique chosen we eliminate any other cliques with more than $k-1$ points in common. In this way we get at least
+		\begin{equation}
+			\frac{{v \choose{k+1}}}{{k+1 \choose{k}}(v-k)} = c*v^{k} \nonumber
+		\end{equation}		 
+		many cliques and any two of them have no more than $k-1$ points in common, which guarantees that they are disjoint cliques.
+		\end{proof}
+		Consider the empty grap. By the lemma, there are $\Omega (v^k)$ disjoint cliques and each of them is a sensitive block. Hence we have $bs(f) = \Theta (v^k)$ by applying the trivial upper bound on block sensitivity.
+	\end{proof}
+	
+	\begin{cor}
+		For all $k \in \mathbb{N}$, there exists $k$-uniform hypergraph property on $v$ vertices such that $s(f) = \Theta(v^{\lceil k/2 \rceil})$ and $bs(f)= \Theta (v^k)$.
+	\end{cor}
+	\begin{proof}
+		When $k$ is even, choose $i=k/2$ and when $k$ is odd, choose $i=(k-1)/2$ in above proposition.
+	\end{proof}
+	
+	\begin{rem}
+		Note that we don't actually require the ``isolated'' graph to be a clique, i.e. $K_{k+1}^{(k)}$ in our analysis of the block sensitivity and sensitivity. So we can replace $K_{k+1}^{(k)}$ by any $k$ hypergraph $\mathcal{H}$ on $k+1$ vertices, such that given any $i$ vertices of $\mathcal{H}$, there are at least two edges through these $i$ vertices. Then we can construct many $k$-uniform hypergraph properties with the desired lower bound on block sensitivity and upper bound on sensitivity in a similar way.
+	\end{rem}
+	
+	\begin{rem}
+		Also, for $k$ even, our $k$-uniform hypergraph property has sensitivity $O(v^{k/2})$ but for $k$ odd, the sensitivity is $O(v^{(k+1)/2})$, an upper bound strictly greater than $O(v^{k/2})$.
+	\end{rem}
+	
+
+	\section{Further Discussion on Possible Quadratic Gap}
+		Though we have some $k$-uniform hypergraph properties with sensitivity $O(v^{k/2})$ for $k$ odd,
+the graph property in the previous section won't give a quadratic gap for $k$ odd. To see this, we start by proving a lemma:	
+	
+	Then we can compute the block sensitivity when $t = v^{1/4}$.
+	\begin{prop}
+		Let $f$ be the property defined in Prop. 4.1. If $t = v^{1/4}$, we have $s(f) = O(v^{3/2})$ and $bs(f) = \Omega(v^{9/4})$.
+	\end{prop}
+	
+	\begin{proof}
+		For the block sensitivity, we consider the block sensitivity on the empty graph. The block sensitivity on the empty graph is equal to the maximum number of edge disjoint cliques of size $v^{1/4}$ on $v$ vertices. Assuming that $v$ is a prime power, we can use Lemma 4.1 and conclude that $bs(f) \geq v^{9/4}$.
+	\end{proof}
+		 However, it's possible that for some hypergraph $\mathcal{H}$, integer $i$ and $t \in [0,1]$, we get a graph property that gives quadratic gap.\\ 
+ \indent First we can analyze for which $i$ and $t$, it's impossible to have a quadratic gap for this $k$ graph property by assuming the trivial upper bound on block sensitivity, $bs(f) = O(v^k)$.\\
+	\indent It's easy to see that $s^1 = \Theta(v^{k-i(1-t)})$ but the best lower bound we get for $s^0$ is 
+	\begin{equation}
+		s^0(f) = \Omega(\frac{{v \choose{v^t}}}{{v^t \choose{i}}{v-i \choose{k-i}}}) = \Omega(v^{i(1-2t)}). \nonumber
+	\end{equation}
+		by embedding $\mathcal{H}$ inside a clique of same size $\Theta(v^t)$ and choosing cliques with less than $i$ vertices in common. Since $s(f) = max \{ s^0(f), s^1(f) \}$, for $i \leq (k-1)/2$, $s(f) = \Omega(v^{(k+1)/2})$ and quadratic gap is impossible. For $i \geq (k+1)/2$, if quadratic gap is possible, i.e, $s^0 = O(v^{k/2})$ and $s^1 = O(v^{k/2})$, we have
+		\begin{equation}
+			i(1-2t) \leq k/2 \leq i(1-t),	\nonumber
+		\end{equation}
+		which gives
+		\begin{equation}
+			\frac{1}{2} (1- \frac{k}{2i}) \leq t \leq 1- \frac{k}{2i}. \nonumber
+		\end{equation}
+		
+		Then we end with this criterion for our class of $k$-uniform graph properties:
+		\begin{prop}
+			For any $\mathcal{H}$, if $i \leq (k-1)/2$ or $t > 1- \frac{k}{2i}$ or $t < \frac{1}{2} (1- \frac{k}{2i})$, our graph property in section 4 won't give a quadratic gap between block sensitivity and sensitivity.
+		\end{prop}
+	
+	\section{Open Problems}
+		\indent There are several ways we can improve this criterion. First of all, if we can improve the upper bound on block sensitivity for some $\mathcal{H}$, we have a larger interval on $t$ for fixed $i$, in which a quadratic gap is impossible. Since there is no isolated vertex in $\mathcal{H}$, at $x=0$, $bs(f,0) = O(v^{k-t})$. However, $0$ may not the the point where $bf(f,x)$ achieves maximum.\\
+		\indent Another way we can improve this criterion is by improving the lower bound on sensitivity. Since it seems that for most ``nice'' Boolean functions $f$, $s^0(f)s^1(f) = \Omega(n)$ is true. We have the following conjecture:
+		\begin{conj}
+			For any $k$-uniform hypergraph property $f$, 
+			\begin{equation}
+				s^0(f)s^1(f) = \Omega(n). \nonumber
+			\end{equation}
+		\end{conj}		
+		If we assume this conjecture to be true, there's possibly a quadratic gap for $\mathcal{H},i$ and $k$ only if $s^1(f) = s^0(f) = O(v^{k/2})$.\\
+		\indent Finally, if we combine these two ways, suppose for some hypergraph $\mathcal{H}$,$i$ and $t$, the upper bound for block sensitivity is strictly less than $O(v^k)$. And also, we assume the conjecture to be true. We know that $s(f) = \Omega(v^{k/2})$, which means a quadratic gap is impossible.\\
+		\indent However, since the conjecture is open, the following problem are still open:
+		\begin{prob}
+			Does there exist any $k$-uniform hypergraph properties in our class that gives a quadratic gap between block sensitivity and sensitivity? 
+		\end{prob}
+		And also a more general question:
+		\begin{prob}
+			Does there exist any $k$-uniform hypergraph property that gives a quadratic gap for $k$ odd?
+		\end{prob}
+	
+\begin{thebibliography}{6}
+
+\bibitem{C}
+Sourav Chakraborty.
+{\it On the sensitivity of cyclically-invariant Boolean functions}.
+Proc. 20th Ann. IEEE Conf. Comput. Complexity (CCC), pp. 163-167.
+IEEE Comp. Soc. Press, 2005.
+
+\bibitem{CDR}
+Stephen Cook, Cynthia Dwork, and Rudiger Reishuk
+{\it Upper and lower time bounds for parallel random access machines without simultaneous writes}
+SIAM J.Comput. 15 (1986), no. 1, 87-97
+
+\bibitem{HKP}
+Pooya Hatami, Raghav Kulkarni, Denis Pankratov
+{\it Variations on the Sensitivity Conjecture}
+Theory of Computing Graduate Surveys 4 (2011), pp. 1-27
+
+\bibitem{KK}
+Claire Kenyon, Samuel Kutin.
+{\it Sensitivity, block sensitivity, and $l$-block sensitivity of Boolean functions}.
+Information and Computation, vol 189 (2004), no. 1, 43-53.
+
+\bibitem{N}
+Noam Nisan.
+{\it CREW PRAMS and decision trees}.
+SIAM J. Comput. 20 (1991), no. 6, 999-1070
+
+\bibitem{NS}
+Noam Nisan, Mario Szegedy.
+{\it On the degree of Boolean functions as real polynomials.}
+Comput. Complexity, 4:462-467, 1992.
+
+\bibitem{R}
+David Rubinstein.
+{\it Sensitivity vs. block sensitivity of Boolean functions}.
+Combinatorica 15 (1995), no. 2, 297-299.
+
+\bibitem{S}
+Hans-Ulrich Simon.
+{\it A tight $\Omega(\log{\log{n}})$-bound on the time for parallel RAM's to compute nondegenerated Boolean functions}. FCT vol 4 (1983), Lecture notes in Comp. Sci. 158.
+
+\bibitem{T}
+Gyorgy Turan.
+{\it The critical complexity of graph properties}.
+Inform. Process. Lett. 18 (1984). 151-153.
+
+\end{thebibliography}
+
+\end{document}

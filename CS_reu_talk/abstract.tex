@@ -1,0 +1,47 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{Abstract}
+		The block sensitivity of a Boolean function is known to be polynomial related to a number of other complexity measures of a Boolean function, including deterministic decision-tree complexity, degree as a polynomial and certificate complexity. However, a long-standing open question is whether block sensitivity is also polynomial related to sensitivity of a Boolean function and a positive answer to this question is known as the Sensitivity Conjecture.  Also, there is a stronger version of the Sensitivity Conjecture if we limit our view to a subclass of Boolean functions called uniform hypergraph properties. We will first analyze the polynomial relationship between block sensitivity and complexity measures, introduce the Sensitivity Conjecture and then restrict our view to transitive Boolean functions and present a uniform hypergraph property that improves the previous know largest gap between sensitivity and block sensitivity.
+\end{document}

@@ -1,0 +1,9 @@
+\contentsline {section}{\tocsection {}{1}{Introduction}}{1}
+\contentsline {section}{\tocsection {}{2}{Preliminaries}}{2}
+\contentsline {subsection}{\tocsubsection {}{2.1}{Definitions}}{2}
+\contentsline {subsection}{\tocsubsection {}{2.2}{Previous Results}}{3}
+\contentsline {section}{\tocsection {}{3}{$k$-Uniform Hypergraph Property with $\Theta (v^{k/2})$ Sensitivity}}{4}
+\contentsline {section}{\tocsection {}{4}{Gaps in Sensitivity and Block Sensitivity for Graph Properties}}{7}
+\contentsline {section}{\tocsection {}{5}{Further Discussion on Possible Quadratic Gap}}{8}
+\contentsline {section}{\tocsection {}{6}{Open Problems}}{9}
+\contentsline {section}{\tocsection {}{}{References}}{9}
