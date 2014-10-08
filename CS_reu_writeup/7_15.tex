@@ -1,0 +1,88 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\begin{document}
+	\section{$k$ Graph Property with $v^{k/2}$ Sensitivity}
+	The case for $k$ even is clear. For $k$ odd, we previously have $k$ graph properties with sensitivity  $O((k+1)/2)$ and we want to find $k$ graph properties with sensitivity exactly $O(k/2)$.
+	
+	\begin{prop}
+		Given any $k$ odd, $i \in \mathbb{N}$ and any $t \in [0,1]$, there exists a $k$ graph property $f$, such that $s(f) = max\{O(v^{i(1-t)}), O(v^{k-i(1-t)})\}$.
+	\end{prop}
+	\begin{proof}
+		Let $\mathcal{H}$ be any $k$ hypergraph on $v^t$ vertices such that given any $i$ vertices, there are more than one edge through these vertices. Define a $k$ graph property $f$ such that $f=1$ if there exists a copy of $\mathcal{H}$ inside the graph such that given any edge $E$ not entirely in $\mathcal{H}$, we have
+		\begin{equation}
+			|V(\mathcal{H}) \cap E| < i.
+		\end{equation}
+		\indent We claim that this is the desired $k$ graph property, i.e, $s(f) = O(v^{k-t})$. First look at $s^1(f)$. When there exists such $\mathcal{H}$ inside the graph, the only way to eliminate it is to either remove an edge inside $\mathcal{H}$ or add an edge with more than $i-1$ vertices in $V(\mathcal{H})$. Thus we have
+		\begin{equation}
+			s^1(f) \leq {v^t \choose{k}} + {v^t \choose{i}}{v-i \choose{k-i}} = O(v^{k-i(1-t)}).
+		\end{equation}
+		Then consider $s^0(f)$. When there's no desired $\mathcal{H}$ inside the graph, we call $v^t$ vertices $\{w_1,...w_{v^t}\}$ sensitive tuple if we can form a desired $\mathcal{H}$ by either removing or adding one edge. It's easy to see that each sensitive tuple contains exactly one sensitive edge and any sensitive edge is contained in at least one sensitive tuple. Let $\mathcal{F}$ denote the set of all sensitive tuples, we have
+		\begin{equation}
+			s^0(f) \leq |\mathcal{F}|.
+		\end{equation}
+		Then we can get an upper bound of $s^0(f)$ by finding an upper bound of $|\mathcal{F}|$. We claim that no two elements of $\mathcal{F}$ can share more than $i-1$ vertices. If given $\{w_1,...,w_{v^t}\}$ and $\{w_1^\prime,...,w_{v^t}^\prime\}$ two sensitive tuples, such that they have $i$ common vertices $\{v_1,...,v_i\}$. If both of them can form a desired $\mathcal{H}$ by adding one edges, there is at least one edge through $\{v_1,..,v_i\}$ inside each of them, since there are at least two edges in $\mathcal{H}$ through any $i$ vertices. Hence none of them can form a desired $\mathcal{H}$ by just removing one edge, which is a contradiction. If one of these two tuples can form a desired $\mathcal{H}$ by adding one edge, there are at least two edges through these $i$ points in this tuple, which means another tuple can't form a desired $\mathcal{H}$ by either adding or removing exactly one edge.\\
+		\indent Thus we know that any set of $i$ vertices contained in no more than one element of $\mathcal{F}$ and any sensitive tuple contains $v^t \choose{i}$ distinct sets of $i$ vertices. Then we have
+		\begin{equation}
+			s^0(f) \leq |\mathcal{F}| \leq \frac{{v \choose{i}}}{{v^t \choose{i}}} = O(v^{i(1-t)}).
+		\end{equation}
+		To conclude, we give an upper bound of $s(f)$ by upper bounds of $s^0(f)$ and $s^1(F)$. We have
+		\begin{equation}
+			s(f) \leq max\{s^0(f),s^1(f)\} = max\{ O(v^{k-i(1-t)}), O(v^{i(1-t)})\}.
+		\end{equation}
+	\end{proof}
+	
+	\begin{theorem}
+	
+	\end{them}
+	
+	 looking at special cases of this proposition, we can find a $k$ graph property for any $k$ odd.
+	\begin{cor}
+		There exists $k$ graph property with sensitivity exactly $O(k/2)$ for $k$ odd.
+	\end{cor}
+	\begin{proof}
+		Pick $i=(1+k)/2$ and $t = 1/(k+1)$ in the above proposition, we have
+		\begin{equation}
+			s(f) = max\{O(v^{k- \frac{(k+1)}{2}  \frac{k}{k+1}}), O(v^{\frac{k+1}{2}  \frac{k}{k+1}})\} = O(v^{k/2}).
+		\end{equation}
+	\end{proof}
+	Thus we have $k$ graph properties with sensitivity exactly $O(v^{k/2})$ for any positive integer $k$. Also note that, it's easy to show that the block sensitivity of our $k$ graph property is $O(v^{k-t})$. This means that the largest gap between $s(f)$ and $bs(f)$ is still our former gap $2k/(k+1)<2$, which is achieved when $i=(k+1)/2$ and $t=0$.
+	
+\end{document}
+

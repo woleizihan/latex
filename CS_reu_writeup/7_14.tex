@@ -1,0 +1,108 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\begin{document}
+
+	\begin{prop}
+		Let $k,i \in \mathbb{N}$ and $1 \leq i \leq k/2$, there exists $k$ graph property on $v$ vertices that has sensitivity $O(v^{k-i})$ and block sensitivity $\Omega (v^{k})$.
+	\end{prop}
+	We prove the proposition by first proving two lemmas.
+	\begin{lem}
+		In a $k$-uniform hypergraph on $v$ vertices, there are $\Omega (v^k)$ disjoint $K_{k+1}^{(k)}$.
+	\end{lem}
+	\begin{proof}
+		there are $v \choose{k+1}$ such cliques and for every clique chosen we eliminate any other cliques with more than $k-1$ points in common. In this way we get at least
+		\begin{equation}
+			\frac{{v \choose{k+1}}}{{k+1 \choose{k}}(v-k)} = c*v^{k}
+		\end{equation}		 
+	many cliques and any two of them have no more than $k-1$ points in common, which guarantees that they are disjoint cliques.
+	\end{proof}
+		We also need a special case of the Ray-Chaudhuri-Wilson's Theomrem.
+	\begin{lem}
+		Given $\mathcal{F}$ a family of subsets of $[n]$ such that any element of $\mathcal{F}$ has size $s \geq i$ and the intersection of any two elements has size at most $i-1$. Then we have
+		\begin{equation}
+			|\mathcal{F}| \leq {n \choose{i}}.
+		\end{equation}
+	\end{lem}
+	\begin{proof}
+		Since the intersection of any element of $mathcal{F}$ has size at most $i-1$, any subset of $[n]$ with size $i$ is contained in at most one element of $\mathcal{F}$. And any element of $\mathcal{F}$ contains at least one $i$ subset of $[n]$, we have 
+		\begin{equation}
+			|\mathcal{F}| \leq {n \choose{i}}.
+		\end{equation}
+	\end{proof}
+	With these two lemmas we can define the desired $k$ graph property and analyze its block sensitivity and sensitivity.
+	\begin{proof}
+		Define $f$ be the graph property that there exists a $K_{k+1}^{(k)}$ inside the graph such that $|K_{k+1}^{(k)} \cap E| \leq  i-1$ for any edge $E$ lies not entirely inside the clique. We claim that this is the desired $k$-graph property.\\
+		\indent First we calculate the block sensitivity. Consider the empty graph, by the first lemma, there are $\Omega (v^k)$ disjoint cliques and each of them is a sensitive block. Hence we have 
+		\begin{equation}
+			bs(f) = \Omega (v^k).
+		\end{equation}
+		\indent Then we want to show that the sensitivity of $f$ is $O(v^{k-i})$. We calculate the sensitivity by looking at $s^0(f)$ and $s^1(f)$ separately\\
+		\indent When $f=1$, there is a desired $K_{k+1}^{(k)}$ clique inside the graph. To change the value of $f$, we need to either remove an edge from $K_{k+1}^{(k)}$ or add an edge with more than $i-1$ common vertices with the clique. We have
+		\begin{equation}
+			s^1(f) \leq {k+1 \choose{2}}+{k+1 \choose{i}}{v-i \choose{k-i}} \leq C*v^{k-i},
+		\end{equation}
+		for some constant $C$.\\
+		\indent When $f=0$, there doesn't exist such $K_{k+1}^{(k)}$ in the graph. We call a $k+1$-tuple $\{v_1,...,v_{k+1}\}$ sensitive if adding or removing an edge from the graph will make $\{v_1,...,v_{k+1}\}$ the vertices of a desired clique. Any sensitive edge is associated with a sensitive tuple by this definition. Also, we can show that there is precisely 1 sensitive edge associated with each sensitive tuple since if there are two sensitive edges associated with a $k+1$-tuple, we can't construct a desired clique by just removing or adding just one edge. Thus we have a injection from the set of sensitive edges into the set of sensitive tuples, and let $\mathcal{F}$ denote the set of all sensitive tuples, we have
+		\begin{equation}
+			s^0(f) \leq |\mathcal{F}|.
+		\end{equation}
+		\indent Given two sensitive tuples, if they have more than $i-1$ vertices in common, without loss of generality, assume that $\{v_1,...,v_i\}$ are vertices in common. If both of them can form a desired clique by adding an edge to the graph, there are no less than 1 edge through these $i$ points and adding any edge will not remove these edges, which contradicts the fact that these two tuples can form a desired clique by adding an edge. If there exists one tuple can form a desired clique by removing an edge, there exists no less than 2 edges through $\{v_1,...,v_i\}$ in one of the tuples, and thus another tuple can't form a desired clique by either removing or adding exactly 1 edge, which contradicts the fact that the tuple is sensitive. Then given any two sensitive tuples, they have at most $k-i-1$ common vertices.\\
+		\indent Then $\mathcal{F}$ is a family of subsets of $[v]$ such that any element has size $k+1$ and any two elements have at most $i-1$ intersections. By our second lemma,
+		\begin{equation}
+			|\mathcal{F}| \leq {v \choose{i}} \leq C^{\prime} * v^i,
+		\end{equation}
+		for some constant $C^\prime$.\\
+		\indent From above $s^0(f) = O(v^{k-i})$ and $s^1(f) = O(v^{i})$ we conclude that $s(f) = O(v^{k-i})$ since $i \leq k/2$. Hence, $f$ is a $k$-graph property with sensitivity $v^{k-i}$ and block sensitivity $v^{k}$.
+	\end{proof}
+	
+	\begin{cor}
+		When $k$ is even, there exists $k$ graph property on $v$ vertices that has sensitivity $O(v^{k/2})$ and block sensitivity $\Omega (v^k)$. When $k$ is odd, there exists $k$ graph property on $v$ vertices that has sensitivity $O(v^{(k+1)/2})$ and block sensitivity $\Omega (v^k)$.
+	\end{cor}
+	\begin{proof}
+		When $k$ is even, choose $i=k/2$ and when $k$ is odd, choose $i=(k-1)/2$ in above proposition.
+	\end{proof}
+	
+	\begin{rem}
+		Note that we don't actually require the "isolated" graph to be a clique, i.e. $K_{k+1}^{(k)}$ in our analysis of the block sensitivity and sensitivity. So we can replace $K_{k+1}^{(k)}$ by any $k$ hypergraph $\mathcal{H}$ on $k+1$ vertices, such that given any $i$ vertices of $\mathcal{H}$, there are at least two edges through these $i$ vertices. Then we can construct many $k$ graph properties with the desired lower bound on block sensitivity and upper bound on sensitivity in a similar way.
+	\end{rem}
+\end{document}
+
+\end{document}
+
