@@ -1,0 +1,7 @@
+\contentsline {section}{\tocsection {}{1}{Homotopies and the Fundamental Group}}{1}
+\contentsline {section}{\tocsection {}{2}{Fundamental Theorem of Algebra}}{4}
+\contentsline {section}{\tocsection {}{3}{Brouwer Fixed Point Theorem}}{5}
+\contentsline {section}{\tocsection {}{4}{Deformation Retractions and Homotopy type}}{6}
+\contentsline {section}{\tocsection {}{5}{Preliminaries for Van Kampen's Theorem}}{8}
+\contentsline {section}{\tocsection {}{6}{Van Kampen's Theorem}}{8}
+\contentsline {section}{\tocsection {}{7}{Applications of van Kampen's Theorem}}{8}

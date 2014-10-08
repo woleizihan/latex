@@ -1,0 +1,403 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+%--------Meta Data: Fill in your info------
+\title{FUNDAMENTAL GROUPS AND THE VAN KAMPEN'S THEOREM}
+
+\author{Ang Li}
+
+\date{August 10, 2012}
+
+\begin{document}
+
+\begin{abstract}
+
+In this paper, we start with the definitions and properties of the fundamental group of a topological space, and then proceed to prove Van-Kampen's Theorem, which help to calculate the fundamental groups of complicated topological spaces from the fundamental groups we already known. We also use the properties of covering space to prove the Fundamental Theorem of Algebra and Brouwer's Fixed Point Theorem.
+
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\section{Homotopies and the Fundamental Group}
+
+	Before defining the fundamental group of a space $X$, we shall define an equivalence relation called \textit{path homotopy}.
+	\begin{defn}
+		If $f$ and $f^\prime$ are continuous maps of the space $X$ into the space $Y$, we say that $f$ is \textbf{homotopic} to $f^\prime$ if there is a continuous map $F : X \times I \to Y$ such that
+		\begin{equation}
+			F(x, 0) = f(x) \;\;\;\; and \;\;\;\;    F(x, 1) = f^\prime(x)
+		\end{equation}
+		for each $x$. The map $F$ is called a \textbf{homotopy} between $f$ and $f^\prime$. If $f$ is homotopic to $f^\prime$, we write $f \simeq f^\prime$. If $f \simeq f^\prime$ and $f^\prime$ is a constant map, we say that $f$ is \textbf{nulhomotopic}.
+	\end{defn}
+	
+	If we imagine the parameter $t$ as a representation of time, a homotopy between $f$ and $f^\prime$ resents a continuous transformation from $f$ to $f^\prime$.\\
+	There is a special case when $f$ is a path in $X$. Then $f;:[0,1] \to X$ is a continuous map such that $f(0)=x_0$ and $f(1)=x_1$. We also define $x_0$ to be the \textbf{initial point} and $x_1$ the \textbf{final point}.
+	
+	\begin{defn}
+		Two paths $f$ and $f^\prime$ are said to be \textbf{path homotopic} if they have the same initial point $x_0$ and final point $x_1$, and if there is a continuous map $F:I \times I \to X$ such that
+		\begin{equation}
+			F(s,0) = f(s) \;\;\; and \;\;\; F(s,1) = f^\prime(s),
+		\end{equation}
+		\begin{equation}
+			F(0,t) = x_0 \;\;\; and \;\;\; F(1,t) = x_1,
+		\end{equation}
+		for each $s \in I$ and each $t \in I$. We call $F$ a \textbf{path homotopy} between $f$ and $f^\prime$. If $f$ is path homotopic to $f^\prime$, we write $f \simeq _pf^\prime$.	
+	\end{defn}
+	
+	The first condition is simply that $F$ is a homotopy between $f$ and $f^\prime$, and the second says that for fixed $t$, $F(s,t)$ is a path from $x_0$ to $x_1$.\\
+	Directly from the definitions of homotopy and path homotopy, we have the following lemma, whose proof is trivial.
+	
+	\begin{lem}
+		The relations $\simeq$ and $\simeq_p$ are equivalence relations.
+	\end{lem}
+	
+	Because $\simeq_p$ is an equivalence relation, we can define a certain operation on path-homotopy classes as follows:
+	\begin{defn}
+		If $f$ is a path in $X$ from $x_0$ to $x_1$, and if $g$ is a path in $X$ from $x_1$ to $x_2$, we define the \textbf{product} $f*g$ of $f$ and $g$ to be the path $h$ given by the equations
+		\begin{equation}
+			f(x) = \begin{cases}
+			f(2s), & \text{for $s\in [0,1/2]$}.\\
+			g(2s-1) & \text{for $s \in [1/2, 1]$}.
+			\end{cases}
+		\end{equation} 
+	\end{defn}
+	
+	The function $h$ is well-defined and continuous, by the previous lemma and it is a path in $X$ from $x_0$ to $x_2$.\\
+	This product operation on paths induces a well-defined operation on equivalence classes, defined by
+	\begin{equation}
+		[f]*[g] = [f*g]
+	\end{equation}
+	
+	We can prove that the operation $*$ between equivalence classes is associative with left and right identities as well as inverse for any equivalence class $[f]$ by using the fact that $\mathbb{R}^2$ is convex and applying the straight-line homotopy.\\
+	A result that will be useful to us later is that $[f]$ can be decomposed to the product of equivalence classes of the segments composing $f$.
+	\begin{thm}
+		Let $f$ be a path in $X$, and let $a_0$, ..., $a_n$ be numbers such that $0=a_0<a_1<...<a_n=1$. Let $f_i:I \to X$ be the path that equals the positive linear map of $I$ onto $[a_{i-1}, a_i]$ followed by $f$. Then
+		\begin{equation}
+			[f] = [f_1]*[f_2]*...*[f_n].
+		\end{equation}
+	\end{thm}
+	
+	With this operator $*$ on equivalence classes of $\simeq_p$, we can define the fundamental group of a space $X$.
+	
+	\begin{defn}
+		Let $X$ be a space; let $x_0$ be a point of $X$. A path in $X$ that begins and ends at $x_0$ is called a \textbf{loop} based at $x_0$. The set of path homotopy classes of loops based at $x_0$, with the operation $*$ is called the \textbf{fundamental group} of $X$ relative to the \textbf{base point} $x_0$. It is denoted by $\pi_1(X,x_0)$.	
+	\end{defn}
+	
+	\begin{exmp}
+		Let $\mathbb{R}^n$ be the euclidean n-space. Then $\pi(X,x_0)$ is trivial for $x_0 \in X$ because if $f$ is a loop based at $x_0$, the straight-line homotopy is a path homotopy between $f$ and the constant path at $x_0$. More generally, if $X$ is any convex subset of $\mathbb{R}^n$, then $\pi_1(X,x_0)$ is the trivial group.
+	\end{exmp}	
+	
+	One immediate question is that how the fundamental groups based at two different points are related. We now consider this question.
+	
+	\begin{defn}
+		Let $\alpha$ be a path in $X$ from $x_0$ to $x_1$. We define a map 
+		\begin{equation}
+			\hat{\alpha}: \pi_1(X,x_0) \to \pi_1(X,x_1)
+		\end{equation}
+		by the equation
+		\begin{equation}
+			\hat{\alpha}([f]) = [\bar{\alpha}]*[f]*[\alpha].
+		\end{equation}
+	\end{defn}
+	
+	If $f$ is path from $x_0$ to $x_1$, then the image of $f$ under $\hat{\alpha}$ is a loop based at $x_1$. Hence $\hat{\alpha}$ maps $\pi_1(X,x_0)$ to $\pi_1(X,x_1)$ as desired.
+	
+	\begin{thm}
+		The map $\hat{\alpha}$ is a group isomorphism.
+	\end{thm}
+	\begin{proof}
+		To show that $\hat{\alpha}$ is a homomorphism, we compute
+		\begin{eqnarray}
+			\hat{\alpha}([f])*\hat{\alpha}([g])
+			&=& ([\bar{\alpha}]*[f]*[\alpha])*([\bar{\alpha}]*[g]*[\alpha])\\
+			&=& [\bar{\alpha}]*[f]*[g]*[\alpha]\\
+			&=& \hat{\alpha}([f]*[g]).
+		\end{eqnarray}
+		
+		To show that $\hat{\alpha}$ is an isomorphism, we show that the reverse of $\alpha$ is an inverse for $\hat{\alpha}$.
+		\begin{equation}
+			\hat{\beta}([h]) = [\alpha]*[h]*[\bar{\alpha}],
+		\end{equation}
+		\begin{equation}
+			\hat{\alpha}(\hat{\beta}([h])) = [\bar{\alpha}]*([\alpha]*[h]*[\bar{\alpha}])*[\alpha] = [h].
+		\end{equation}
+		Similarly, we have $\hat{\beta}(\hat{\alpha}[f]) = [f]$
+		for each $[f]\in\pi_1(X,x_0)$. And thus, $\hat{\alpha}$ is a group isomorphism.
+	\end{proof}
+	
+	Use this result, we can prove that if a space $X$ is path connected, all the fundamental groups $\pi_1(X,x)$ are isomorphic because there is a path connecting any two points in $X$.\\
+	We then define a even better space which is path connected and has a trivial fundamental group.
+	\begin{defn}
+		A space $X$ is said to be \textbf{simply connected} if it is a path-connected space and if $\pi_1(X,x_0)$ is trivial grop for some $x_0 \in X$, and hence for every $x_0 \in X$.
+	\end{defn}
+	
+	\begin{lem}
+		In a simply connected space $X$, any two paths having the same initial and final points are path homotopic.
+	\end{lem}
+	This lemma is proved by using the fact that any loop is path homotopic to the constant loop and we omit the detailed proof here.\\
+	It is intuitively clear that the fundamental group is a topological invariant of the space $X$. We prove this fact by introducing the notion of "homomorphism induced by a continuous map."
+	\begin{defn}
+		Let $h: (X,x_0) \to (Y,y_0)$ be a continuous map. Define
+		\begin{equation}
+			h_*:\pi_1(X,x_0) \to \pi_1(Y,y_0)
+		\end{equation}
+		by the equation
+		\begin{equation}
+			h_*([f])=[h \circ f].
+		\end{equation}
+		The map $h_*$ is called the \textbf{homomorphism induced by $h$}, relative to the base point $x_0$.
+	\end{defn}
+	The induced homomorphism has two properties that are crucial in the applications.
+	\begin{thm}
+		If $h:(X,x_0)\to (Y,y_0)$ and $k:(Y,y_0)\to (Z,z_0)$ are continuous, then $(k \circ h)_* = k_* \circ h_*$. If $i:(X,x_0) \to (X,x_0)$ is the identity map, then $i_*$ is the identity homomorphism. 
+	\end{thm}
+	
+	\begin{cor}
+		If $h:(X,x_0) \to (Y,y_0)$ is a homeomorphism of $X$ with $Y$, then $h_*$ is an isomorphism of $\pi_1(X,x_0)$ with $\pi_1(Y,y_0)$.
+	\end{cor}
+	Since $h$ is a homeomorphism, it has an inverse $k:(Y,y_0) \to (X,x_0)$.And this corollary is proved by applying the previous theorem to $h$ and $k$.
+	
+\section{Fundamental Theorem of Algebra}
+	A famous result is that the fundamental group of the circle is isomorphic to $\mathbb{Z}$, which can be proved by covering space theory. We state it as a theorem but omit the proof here.
+	\begin{thm}
+		The fundamental group of the circle is isomorphic to the additive group of the integers, i.e.
+		\begin{equation}
+			\pi_1(S^1) \cong \mathbb{Z}.
+		\end{equation}
+	\end{thm}
+	
+	We can prove the Fundamental Theorem of Algebra by the above result.
+	
+	\begin{thm}[The fundamental theorem of algebra]
+		A polynomial equation
+		\begin{equation}
+			x^n + a_{n-1}x^{n-1}+...+a_1x+a_0=0
+		\end{equation}
+		of degree $n>0$ with real or complex coefficients has at least one (real or complex) root.
+	\end{thm}
+	
+	\begin{proof}
+		\textit{Step 1.} Consider the map $f:S^1 \to S^1$ given by $f(z)=z^n$, where $z$ is a complex number. We show that the induced homomorphism $f_*$ of fundamental groups is injective.\\
+		Let $p_0:I \to S^1$ be a loop in $S^1$ such that,
+		\begin{equation}
+			p_0(s) = e^{2\pi is} = (cos2\pi s,sin2\pi s).
+		\end{equation}
+		Then we have
+		\begin{equation}
+			f(p_0(s)) = (e^{2\pi is})^n = (cos2n\pi s,sin2n\pi s).
+		\end{equation}
+		This is a loop and lifts to the path $s\to ns$ in the covering space $\mathbb{R}$. Therefore the loop $f \circ p_0$ corresponds to the integer $n$ under the isomorphism from $\pi_1(S^1)$ to $S^1$. Thus $f_*$ can be considered as a "multiplication by $n$" in the fundamental group of $S^1$ and then $f_*$ is injective.\\
+		\textit{Step 2.} We want to show that if $g: S^1 \to \mathbb{R}^2 - \textbf{0}$ is the map $g(z) = z^n$, then $g$ is not nulhomotopic.\\
+		Let $j:S^1 \to \mathbb{R}^2-\textbf{0}$ be the inclusion map. Then we have $g = f \circ j$. From step 1 we know that $f_*$ is injective and $j_*$ is injective because $S^1$ is the retract of $\mathbb{R}^2-\textbf{0}$. Therefore $g_*=j_* \circ f_*$ is also injective. Thus $g$ is not nulhomotopic.\\
+		\textit{Step 3.} Now we want to prove a special case of the fundamental theorem of algebra under the condition that 
+		\begin{equation}
+			\sum_{i=0}^{n-1} |a_i| < 1,
+		\end{equation}
+		and we want to show that the equation has a root lying in the unit ball $B^2$.\\
+		Assume that there's no such root. We can define $k:B^2 \to \mathbb{R}^2-\textbf{0}$ by
+		\begin{equation}
+			k(z) = z^n + a_{n-1}z^n + ... +a_1z + a_0.
+		\end{equation}
+		Let $h$ be the restriction of $k$ to $S^1$. Because $h$ extends to a map of the unit ball into $\mathbb{R}^2-\textbf{0}$, $h$ is nulhomotopic.
+		On the other hand, if we define $F: S^1 \times I \to \mathbb{R}^2 - \textbf{0}$ by
+		\begin{equation}
+			F(z,t)=z^n+t(a_{n-1}z^{n-1}+...+a_0),
+		\end{equation}
+		$F$ is a homotopy between $h$ and $g$. Then $g$ is nulhomotopic, which is a contradiction with the result in step 2.\\
+		\textit{Step 4.} Now we can prove the general case. Let $c>0$ be any real number and we substitute $x=cy$ and divide both side of the equation by $c^n$, we obtain the equation
+		\begin{equation}
+			y^n + \frac{a_{n-1}}{c} y^{n-1} + ... + \frac{a_1}{c^{n-1}} y + \frac{a_0}{c^n} = 0.
+		\end{equation}
+		For $c$ large enough we have
+		\begin{equation}
+			\mid \frac{a_{n-1}}{c} \mid + ... + \mid \frac{a_1}{c^{n-1}} \mid + \mid \frac{a_0}{c^n} \mid < 1.
+		\end{equation}
+		Then from step 3, this equation has a root $y_0$ in the unit ball, and $x_0=cy_0$ is a root of the original equation. Thus we prove the fundamental theorem of algebra.				 
+	\end{proof}
+
+\section{Brouwer Fixed Point Theorem}
+	Another famous result from \textbf{Theorem 2.1} is the Brouwer fixed-point theorem for the disc. We prove the theorem by first introducing a definition and a lemmma.
+	\begin{defn}
+		A \textbf{vector field} on $B^2$ is an ordered pair $(x,v(x))$, where $x$ is in $B^2$ and $v$ is a continuous map of $B^2$ into $\mathbb{R}^2$.
+	\end{defn}
+	\begin{lem}
+		Given a nonvanishing vector field on $B^2$, there exists a point of $S^1$ where the vector field points directly inward and a point of $S^1$ where it points directly outward.
+	\end{lem}
+	\begin{proof}
+		Let $(x,v(x))$ be a nonvanishing vector field on $B^2$, then we have $v(x) \neq 0$ for every $x$, and thus $v$ maps $B^2$ to $\mathbb{R}^2-\textbf{0}$.\\
+		We first suppose that $v(x)$ does not point directly inward at any point $x$ of $S^1$ and derive a contradiction. Let $w$ be the restriction of $v$ to $S^1$. Since $w$ extends to a map of $B^2$ into $\mathbb{R}^2-\textbf{0}$, $w$ is hulhomotopic.\\
+		On the other hand, $w$ is homotopic to the inclusion map $j: S^1 \to \mathbb{R}^2-\textbf{0}$ by the straight-line homotopy
+		\begin{equation}
+			F(x,t) = tx + (1-t)w(x),
+		\end{equation}
+		for $x \in S^1$. We must show that $F(x,t)\neq 0$. For $t=1$ and $t=0$, this is trivial. If $F(x,t)=0$ for some $0<t<1$, then we have $tx+(1-t)w(x)=0$, so that $w(x) = -\frac{t}{1-t}x$. And thus $w(x)$ points directly inward at $x$, which is a contradiction. Hence $F \neq 0$.\\
+		It follows that $j$ is nulhomotopic, which contradicts the fact that $\pi_1(S^1) \cong \mathbb{Z}$.\\
+		To show that $v$ points directly outward at some point of $S^1$, we simply let $w$ be the restriction of $-v$ on $S^1$. And this ends the proof of the lemma. 
+	\end{proof}
+	With this lemma, we can prove the Brouwer fixed-point theorem for the disc.
+	\begin{thm}[Brouwer fixed-point theorem for the disc]
+		If $f:B^2 \to B^2$ is continuous, then there exists a point $x \in B^2$ such that $f(x)=x$.
+	\end{thm}
+	\begin{proof}
+		We prove this theorem by contradiction. Suppose $f(x) \neq x$ for any $x \in B^2$. Then let $v(x) = f(x) -x$, and thus the vector field $(x,v(x))$ is nonvanishing on $B^2$. But $v$ cannot point directly outward at any $x \in S^1$, for that would have
+		\begin{equation}
+			f(x) - x = ax
+ 		\end{equation}
+ 		for $a>0$, so that $f(x) = (1+a)x$ lies outside the unit ball. This is a contradiction.		  
+	\end{proof}
+	
+\section{Deformation Retractions and Homotopy type}
+	One way of studying the fundamental group of a space $X$ is to study the covering spaces of $X$. In this section, we will discuss another way to study the fundamental group, which involves the notion of \textit{homotpy type}.
+	\begin{defn}
+		Let $A$ be a subspace of $X$. We say that $A$ is a \textbf{deformation retract} of $X$ if there is a continuous map $H ; X \times I \to X$ such that $H(x,0)=x$ and $H(x,1)\in A$ for all $x \in X$, and $H(a,t)=a$ for all $a \in A$. The homotopy $H$ is called a \textbf{deformation retraction} of $X$ onto $A$. The map $r(x) = H(x,1)$ is a retraction of $X$ onto $A$, and $H$ is a homotopy between the identity map of $X$ and the map $j \circ r$, where $j:A \to X$ is the inclusion map.
+	\end{defn}
+	
+	We can prove the following theorem:
+	\begin{thm}
+		Let $A$ be a deformation retract of $X$; let $x_0 \in A$. Then the inclusion map 
+		\begin{equation}
+			j:(A,x_0) \to (X,x_0)
+		\end{equation}
+		induces an isomorphism of fundamental groups.		 
+	\end{thm}
+	\begin{proof}
+		Since $A$ is a deformation retract of $X$, there exists a continuous map $H$ defined in the previous definition. Since $H(x,0)=x$ and $H(x,1) \in A$, $H$ is a homotopy between the identity map of $X$ and the map $j \circ r$. Also, for $a \in A$, $H(a,t)=a$, then $a$ is fixed during the homotopy and thus $id_*$ and $j_* \circ r_*$ are equal.\\
+		On the other hand, $r \circ j$ is just the identity map of $A$, so that $r_* \circ j_*$ is the identity homomorphism of $\pi_1(A)$. And thus, $j_*$ is an isomorphism of fundamental groups because it has both left and right inverses.
+	\end{proof}
+	
+	\begin{exmp}
+		Let $B$ denote the $z$-axis in $\mathbb{R}^3$. Consider the space $\mathbb{R}^3-B$. The punctured xy-plane $(\mathbb{R}^2-\textbf{0}) \times 0$ is a deformation retract of the space. The map $H$ defined by
+		\begin{equation}
+			H(x,y,z,t) = (x,y,(1-t)z)
+		\end{equation}
+		is a deformation retraction. Since the punctured xy-plane has an infinite cyclic fundamental group, the space $\mathbb{R}^3-B$ has an infinite cyclic fundamental group.
+	\end{exmp}
+	
+	\begin{exmp}
+		One deformation retract of $\mathbb{R}^2-p-q$ is the "theta space"
+		\begin{equation}
+			\theta = S^1 \cup (0\times [-1,1]);
+		\end{equation}
+		Another deformation retract of the same space is the figure eight so figure eight and the "theta space" have isomorphic fundamental groups. But neither the figure eight nor the "theta space" is a deformation retract of the other.
+	\end{exmp}
+	
+	From the example above, there might be a more general way to show that two spaces have isomorphic fundamental groups than by showing that one is a deformation retract of another.
+	
+	\begin{defn}
+		Let $f: X \to Y$ and $g: Y \to X$ be continuous maps. suppose that the map $f \circ g$ is the identity map of $X$ and the map $g \circ f$ is the identity map of $Y$. Then the maps $f$ and $g$ are called \textbf{homotopy equivalences}, and each is said to be a \textbf{homotopy inverse} of the other.
+	\end{defn}
+	It's straightforward to show the transitivity of the relation of the homotoopy equivalence and it follows that this relation is an equivalence relation. And two spaces that are homotopy equivalent are said to have the same \textbf{homotopy type}.\\
+	We then proceed to show that if two spaces have the same homotopy type have isomorphic fundamental groups. And we prove this fact by first studying what happens when we have a homotopy between two continuous maps of $X$ into $Y$ such that the base point of $X$ does not remain fixed during the homotopy.
+	
+	\begin{lem}
+		Let $h,k:X \to Y$ be continuous maps; let $h(x_0)=y_0$ and $k(x_0)=y_1$. If $h$ and $k$ are homotopic, there is a path $\alpha$ in $Y$ from $y_0$ to $y_1$ such that $k_*=\hat{\alpha} \circ h_*$. Indeed, if $H: X \times I \to Y$ is the homotopy between $h$ and $k$, then $\alpha$ is the path $\alpha(t)=H(x_0,t)$.
+	\end{lem}
+	\begin{proof}
+		Let $f$ be a loop in $X$ based at $x_0$. We must show that 
+		\begin{equation}
+			k_*([f]) = \hat{\alpha}(h_*([f])).
+		\end{equation}
+		which is equivalent to showing that
+		\begin{equation}
+			[\alpha]*[k \circ f] = [h \circ f]*[\alpha].
+		\end{equation}
+		Consider the loops $f_0$, $f_1$ and $c$ in the space $X \times I$ given by the equations
+		\begin{equation}
+			f_0(s) = (f(s),0) \;\;\; and \;\;\; f_1(s) = (f(s),1) \;\;\; and \;\;\; c(t) = (x_0,t).
+		\end{equation}
+		Then $H \circ f_0 = h \circ f$ and $H \circ f_1 = k \circ f$, while $H \circ c$ is the path $\alpha$.\\
+		Let $F: I \times I \to X \times I$ be the map $F(s,t)=(f(s),t)$. Consider the following paths in $I\times I$, which run along the four edges of $I \times I$:
+		\begin{equation}
+			\beta_0(s)=(s,0) \;\;\; and \;\;\; \beta_1(s)=(s,1),
+		\end{equation}
+		\begin{equation}
+			\gamma_0(t) = (0,t) \;\;\; and \;\;\; \gamma_1(t) = (1,t).
+		\end{equation}
+		Then $F \circ \beta_0 = f_0$ and $F \circ beta_1 = f_1$, and $F \circ \gamma_0 = F \circ \gamma_1 = c$.
+		The paths $\beta_0 * \gamma_1$ and $\gamma_0*\beta_1$ are path homotopic with path homotopy $G$. Then $F \circ G$ is a path homotopy between $f_0*c$ and $c*f_1$. And $H \circ (F \circ G)$ is a path homotopy in $Y$ between
+		\begin{equation}
+			(H \circ f_0)*(H \circ c) = (h \circ f)*\alpha \;\;\; and
+		\end{equation}
+		\begin{equation}
+			(H \circ c)*(H \circ f_1) = \alpha*(k \circ f),
+		\end{equation}
+		which is Equation (4.11).
+	\end{proof}
+	
+	\begin{cor}
+		Let $h,k: X \to Y$ be homotopic continuous maps; let $h(x_0)=y_0$ and $k(x_0)=y_1$. If $h_*$ is injective, orsurjctive, or trivial, so is $k_*$.
+	\end{cor}
+	\begin{cor}
+		Let $h: X \to Y$. If $h$ is nulhomotopic, then $h_*$ is the trivial homomorphism.
+	\end{cor}
+	\begin{thm}
+		Let $f: X \to Y$ be continuous; let $f(x_0)=y_0$. If $f$ is a homotopy equivalence, then
+		\begin{equation}
+			f_*:\pi_1(X,x_0) \to \pi_1(Y,y_0)
+		\end{equation}
+		is an isomorphism.
+	\end{thm}
+	
+	\begin{proof}
+		Let $g: Y \to X$ be a homotopy inverse for $f$. Consider the map $f \circ g \circ f$ and let $g(y_0)=x_1$ and $f(x_1) = y_1$. Then we have the corresponding induced homomorphisms of this composition, $(f_{x_1})_* \circ g_* \circ (f_{x_0})_*$. We need to distinguish the homomorphisms induced by $f$ relative to two different base points, $x_1$ and $x_0$.\\
+		For the fact that $g \circ f$ is homotopic to the identity map, there is a path $\alpha$ in $X$ such that
+		\begin{equation}
+			(g \circ f)_* = \hat{\alpha} \circ (i_X)_* = \hat{\alpha}.
+		\end{equation}
+		It follows that $(g \circ f)_* = g_* \circ (f_{x_0})_*$ is an isomorphism.\\
+		Similarly, since $f \circ g$ is homotopic to the identity map $i_Y$, the homomorphism $(f \circ g)_*$ is also an isomorphism.\\
+		Thus $g_*$ is both surjective and injective and thus $g_*$ is an isomorphism.\\
+		Using Equation (4.21), we have
+		\begin{equation}
+			(f_{x_0})_* = (g_*)^{-1} \circ \hat{\alpha},
+		\end{equation}
+		so that $(f_{x_0})_*$ is also an isomorphism.
+	\end{proof}
+
+\section{Preliminaries for Van Kampen's Theorem}
+
+\section{Van Kampen's Theorem}
+
+\section{Applications of van Kampen's Theorem}
+
+\end{document}
+
