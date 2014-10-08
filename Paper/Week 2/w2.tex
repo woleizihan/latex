@@ -1,0 +1,172 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{Motivation}
+
+	\section{Orientation}
+		\begin{defn}
+			$V$ finite-dimensional real vector space and $\beta = \{v_1,...,v_k\}$, $\beta^\prime = \{w_1,...,x_k\}$ are two ordered basis. Then there exists a unique linear isomorphism $A: V \to V$ such that $\beta^\prime = A \beta$. Then $\beta$ and $\beta^\prime$ are equivalently oriented if det $A > 0$.
+		\end{defn}
+		\begin{defn}
+			An orientation of $V$ is an arbitrary decision to affix a positive sign to the elements of one equivalence class and a negative sign to the others.
+		\end{defn}
+		\begin{defn}
+			An orientation for a manifold with boundary $X$, is a smooth assignment of orientations of the tangent spaces $T_x(X)$.
+		\end{defn}
+		\begin{defn}
+			A manifold with boundary $X$ is orientable if we can give an orientation on $X$.
+		\end{defn}
+		\begin{prop}
+			A connected, orientable manifold with boundary admits exactly two orientations.
+		\end{prop}
+		\begin{defn}(Product Orientation)
+			If $X$ and $Y$ are oriented and one of them is boundaryless, then $X \times Y$ has a product orientation as follows. Given any $(x,y) \in X \times Y$, 
+			\begin{equation}
+				T_{(x,y)}(X \times Y) = T_x(X) \times T_y(Y).
+			\end{equation}
+			And given $\alpha$, $\beta$ ordered bases for $T_x(X)$ and $T_y(Y)$, $(\alpha \times 0, 0\times \beta)$ is an ordered basis for $T_{(x,y)}(X \times Y)$. Define the orientation by
+			\begin{equation}
+				sign(\alpha \times 0, 0 \times \beta) = sign(\alpha)sign(\beta).	
+			\end{equation}			 
+		\end{defn}
+		\begin{defn}(Boundary Orientation)
+			An orientation on $X$ induces a boundary orientation on $\partial X$. For each point $x \in \partial X$, dim $T_x(X) -$ dim $T_x(\partial X) = 1$. And thus there are exactly two unit vectors in $T_x(X)$ perpendicular to $T_x(\partial X)$. One inward and one outward. Let the outward vector by $n_x$, then define the orientation for $\{v_1,...v_{k-1}\}$ an ordered basis for $T_x(\partial X)$ by sign$(n_x,v_1,...v_{k-1})$ in $T_x(X)$.
+		\end{defn}
+		\begin{obs}
+			The sum of the orientation numbers at the boundary points of any compact oriented one-dimensional manifold with boundary is zero.
+		\end{obs}
+		\begin{defn}(Preimage Orientation)
+			Let $f: X \to Y$ be a smooth map and $f$\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$ and $\partial f$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$, where $X,Y,Z$ are all oriented. Then we can define the preimage orientation on the manifold with boundary $S = f^{-1}(Z)$. Let $N_x(S;X)$ be the orthogonal complement to $T_x(S)$ in $T_x(X)$. Then we have
+			\begin{equation}
+				N_x(S;X) \oplus T_x(S) = T_x(X),
+			\end{equation}
+			so we need an orientation on $N_x(S;X)$ to get a direct sum orientation on $T_x(S)$. Also using the transversality condition we have 
+			\begin{equation}
+				df_xT_x(X) + T_z(Z) = T_z(Y).
+			\end{equation}
+			Since the $T_x(S)$ is the entire preimage of $T_z(Z)$, we have
+			\begin{equation}
+				df_xN_x(S;X) \oplus T_z(Z) = T_z(Y).
+			\end{equation}
+		\end{defn}
+		In fact we can replace $N_x(S;X)$ by any other subspace of $T_x(X)$ complementary to $T_x(S)$, and we have 
+		\begin{equation}
+			df_xH \oplus T_z(Z) = T_z(Y)
+		\end{equation}
+		\begin{equation}
+			H \oplus T_x(S) = T_x(X).
+		\end{equation}
+		\begin{prop}
+			$\partial[f^{-1}(Z)] = (-1)^{codim Z}(\partial f)^{-1}(Z)$.
+		\end{prop}
+		
+	\section{Applications}
+	\begin{prop}
+		The relation of being "equivalently oriented" is an equivalence relation on ordered bases.
+	\end{prop}
+	\begin{prop}
+		Suppose that $V$ is the direct sum of $V_1$ and $V_2$. Then the direct sum orientation from $V_1 \oplus V_2$ equals $(-1)^{(dimV_1)(dimV_2)}$ times the orientation from $V_2 \oplus V_1$.
+	\end{prop}
+	\begin{proof}
+		Let $\alpha = \{v_1,...,v_k\}$ and $\beta = \{w_1,...,w_l\}$ be ordered bases for $V_1$ and $V_2$. Then the ordered basis in $V_1 \oplus V_2$ is $\{v_1,...,v_k,w_1,...w_l\}$ and the ordered basis in $V_2 \oplus V_1$ is $\{w_1,...,w_l,v_1,...v_k\}$. And it takes $kl$ permutations to switch these two ordered bases. Then determinant is $(-1)^{kl}$.
+	\end{proof}
+	\begin{prop}
+		$\partial H^k$ can be both oriented by a boundary orientation of $H^k$ and by the standard orientation of $\mathbb{R}^{k-1}$. Then the boundary orientation agrees with the standard orientation if and only if $k$ is even.
+	\end{prop}
+	\begin{proof}
+		Let $\alpha = \{ a_1,...,a_{k-1} \} $ be an ordered basis for $\partial H^k$ as $\mathbb{R}^{k-1}$. And let $A = (a_1,...,a_{k-1})$ be $k-1$ by $k-1$ matrix. Then sign$(\alpha) =$ det $A$ in $\mathbb{R}^{k-1}$. On the other hand, the outward normal vector is $n=(-1,0,...,0)$ and when consider in the boundary orientation sign$(\alpha)$ = sign$(\{ n,v1,..,v_{k-1} \}) = (-1)^k$ det $A$.
+	\end{proof}
+	\begin{prop}
+		Let $X$ and $Z$ be transversal submanifolds of $Y$, all three being oriented. Let $X \cap Z$ denote the intersection manifold with the orientation prescribed by the inclusion map $i: X \to Y$. Now suppose 
+		\begin{equation}
+			dim X + dim Z = dim Y,
+		\end{equation}
+		so $X \cap Z$ is zero dimensional. Then at any point $y \in X \cap Z$,
+		\begin{equation}
+			T_y(Y) \oplus T_y(Z) = T_y(Y).
+		\end{equation}
+		The orientation number of $y$ in $X \cap Z$ is $1$ if the orientations of $X$ and $Z$ add up to the orientation of $Y$.
+	\end{prop}
+	\begin{prop}
+		If dim $X+$ dim $Z = $ dim $Y$ and $X,Z$ intersect transversally, then
+		\begin{equation}
+			X \cap Z = (-1)^{(dim X)(dim Z)} Z \cap X.	
+		\end{equation}		 
+	\end{prop}
+	\begin{proof}
+		For $y \in X \cap Z$, the orientation is prescribed by the inclusion map $i_1: X \to Y$, and is determined by 
+		\begin{equation}
+			T_y(X) \oplus T_y(Z) = T_y(Y).
+		\end{equation}
+		And for $y^\prime \in Z \cap X$, the orientation is prescribed by the inclusion map $i_2: X \to Y$, and is determined by 
+		\begin{equation}
+			T_y(Z) \oplus T_y(X = T_y(Y).
+		\end{equation}
+		And by previous proposition, the orientation is differed by $(-1)^{(dim T_y(X))(dim T_y(Z))}$.
+	\end{proof}
+	\begin{prop}
+		The definition of boundary orientation uses the outward unit normal $n_x$ to $\partial X$ at $x$. But the perpendicularity is unnecessary.
+	\end{prop}
+	\begin{proof}
+		Given any $h_x \in T_x(X)$ vector pointing outward, we have $h_x = cn_x + v$, where $c$ is a positive real number and $v \in T_x(\partial X)$, then we have 
+		\begin{equation}
+			sign(h_x,v_1,...,v_k) = c^{k+1}sign(n_x,v_1,...,v_k),
+		\end{equation}
+		where $\{ v_1,..,v_k \}$ is an ordered basis of $T_x(\partial X)$. Then the signs are the same since $c$ is positive.
+	\end{proof}
+	\begin{prop}
+		The orthogonality is not needed in defining preimage orientations. Specifically, if
+		\begin{equation}
+			H \oplus T_x(S) = T_x(X),
+		\end{equation}
+		then this equation, together with the condition
+		\begin{equation}
+			df_xH \oplus T_z(Z) = T_z(Y), 
+		\end{equation}
+		defines the same preimage orientation as the one defined by the orthogonal complement.
+	\end{prop}
+	\begin{proof}
+		$H$ can be decomposed into sum of some orthogonal $N$ and some elements in $T_x(S)$. Then following the similar argument as previous exercise.
+	\end{proof}
+\end{document}

@@ -1,0 +1,64 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{The Duality Theorem}
+		\begin{defn}
+			For an arbitrary space $X$ and coefficitn ring $R$, define an
+			R-linear cap product $\frown : C_k(X;R)\times C^l(X;R) \to C_{k-l}
+			(X;R)$ for $k \geq l$ by setting
+				\begin{equation}
+					\sigma \frown \phi = \phi(\sigma | [v_0,...,v_l]) \sigma | [v_l,...,v_k]
+				\end{equation}
+				for $\sigma \Delta^k \to X$ and $\phi \in C^k(X;R)$.
+		\end{defn}
+		This induces a cap product in homology and cohomology by the formula
+		\begin{equation}
+			\partial (\sigma \frown \phi) = (-1)^l (\partial \sigma \frown \phi - \sigma \from \delta \phi).
+		\end{equation}
+		\begin{theorem}
+			If $M$ is a closed $R$-orientable $n$-manifold with fundamental class
+			$[M] \in H_n(M;R)$, then the map $D: H^k(M;R) \to H_{n-k}(M;R)$ defined 
+			by $D(\alpha) = [M]\frown \alpha$ is an isomorphism for all $k$.
+		\end{theorem}
+\end{document}

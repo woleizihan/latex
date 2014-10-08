@@ -1,0 +1,144 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{Oriented Intersection Number}
+		The following will be assumed in this section: $X,Y,Z$ are boundaryless manifolds, $X$ is compact, $Z$ is a closed submanifold of $Y$ and dim $X +$ dim $Z = $ dim $Y$.
+		\begin{defn}
+			If $f: X \to Y$ is transversal to $Z$, then $f^{-1}(Z)$ is a finite number of points, each with orientation number $1$ or $-1$ by the preimage orientation. Define the \textit{intersection number} $I(f,Z)$ to be the sum of these orientation numbers.
+		\end{defn}
+		Given any point $x$, such that $f(x) = z \in Z$, we have
+		\begin{equation}
+			df_xT_x(X) \oplus T_z(Z) = T_z(Z)	
+		\end{equation}
+		by our assumptions. Then the orientation number at $x$ is $1$ if the orientation on $df_xT_x(X) \oplus T_z(Z)$ is the same as the prescribed orientation on $T_z(Y)$, and $-1$ otherwise.\\
+		\begin{prop}
+			If $X = \partial W$ and $f:X \to Y$ extends to $W$, then $I(f,Z)=0$.
+		\end{prop}
+		\begin{proof}
+			Suppose $f$ extends to $F$, we may assume $F$ transversal to $Z$ by the Extension Theorem. And thus $f^{-1}(Z) = \partial F^{-1}(Z)$. Since $F^{-1}(Z)$ is an one-manifold with boundary, $I(f,Z)=0$. 	
+		\end{proof}
+		\begin{prop}
+			In particular, homotopic maps always have the same intersection number.
+		\end{prop}
+		Then we can define the intersection number for any arbitrary function.
+		\begin{defn}
+			Given any $g: X \to Y$, pick $f$ such that $f$ homotopic to $g$ and $f$ transversal to $Z$. Define intersection number $I(g,Z) = I(f,Z)$.
+		\end{defn}			 
+		By the previous proposition, the intersection number is well defined.
+		\begin{defn}
+			When $Y$ is connected and has the same dimension as $X$, we define the degree of an arbitrary smooth map $f:X \to Y$ to be the intersection number $I(f,\{y\})$.
+		\end{defn}
+		\begin{prop}
+			Suppose that $f:X \to Y$ is a smooth map of compact oriented manifolds having the same dimension and that $X = \partial W$. If $f$ can be extended to all of $W$, then deg$(f)=0$.
+		\end{prop}
+		\begin{prop}
+			Let $W$ be a smooth compact region in $\mathbb{C}$ whose boundary contains no zeros of the polynomial $p$. Then the total number of zeros of $p$ inside $W$ counting multiplicities is the degree of the map $p/|p|: \partial W \to S^1$.
+		\end{prop}
+		\begin{lem}
+			Let $U$ and $W$ be subspaces of the vector space $V$. Then $U \oplus W = V$ if and only if $U \times W \oplus \Delta = V \times V$. Assume also, that $U$ and $W$ are oriented, and give $V$ the direct sum orientation. Now assign $\Delta$ the orientation carried from $V$ by the natural isomorphism $V \to \Delta$. Then the product orientation on $V \times V$ agrees with the direct sum orientation form $U \times W \oplus \Delta$ if and only if $W$ is even dimension.
+		\end{lem}
+		\begin{prop}
+			$f$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $g$ if and only if $f\times g$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $\Delta$, and then
+			\begin{equation}
+				I(f,g) = (-1)^{dim Z}I(f\times g, \Delta).
+			\end{equation}
+		\end{prop}
+		\begin{defn}
+			For arbitrary maps $f: X \to Y$, $g: Z \to Y$, we define $I(f,g) = (-1)^{dimZ}I(f\times g, \Delta)$.
+		\end{defn}
+		\begin{prop}
+			If $f_0$ and $g_0$ are respectively homotopic to $f_1$ and $g_1$, then $I(f_0,g_0)= I(f_1,g_1)$.
+		\end{prop}
+		\begin{cor}
+			If $Z$ is a submanifold of $Y$ and $i: Z \to Y$ is its inclusion map, then $I(f,i) = I(f,Z)$ for any map $f: X \to Y$.
+		\end{cor}
+		\begin{cor}
+			If dim $X =$ dim $Y$ and $Y$ is connected, then $I(f,\{y\})$ is the same for every $y \in Y$. Thus deg$(f)$ is well defined.
+		\end{cor}
+		\begin{prop}
+			$I(f,g)=(-1)^{(dim X)(dim Z)}I(f,g)$.
+		\end{prop}
+	\section{Exercise}
+		\begin{prop}
+			Suppose that $f:X \to Y$ is a diffeomorphism of compact connected manifolds. Then deg$(f)$ = $1$ if $f$ preserves orientation, and $-1$ otherwise.
+		\end{prop}
+		\begin{proof}
+			$f$ diffeomorphism, then deg$(f) = I(f,\{y\}) = sign(f^{-1}(y))$. If $f$ orientation preserving, we have $sign(f^{-1}(y)) = 1$ and $-1$ otherwise.
+		\end{proof}
+		\begin{prop}
+			The antipodal map is homotopic to the identity if and only if $k$ is odd.
+		\end{prop}
+		\begin{proof}
+			Degree of antipodal map is $(-1)^{k+1}$. If antipodal map is homotopic to the identity, then degree$=1$, which implies that $k$ is odd. When $k$ is odd, we can find a homopoty between antipodal map and identity.
+		\end{proof}
+		\begin{prop}
+			Suppose that $f: X \to Y$ and $g: Y \to Z$, then we have $deg(g \circ f) = deg(f)deg(g)$.
+		\end{prop}
+		\begin{proof}
+			Given any $z \in Z$, we have $deg(g \circ f) = I(g\circ f, \{z\}) = \sum_{(g \circ f)(x) = z} sign(x) = \sum_{y:g(y)=z} \sum_{x:f(x)=y}sign(x) = \sum_{y}deg(g)sign(y) = deg(f)deg(g)$.
+		\end{proof}
+		\begin{prop}
+			Assume that $X$\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$ both compact oriented and then 
+			\begin{equation}
+				I(X,Z) = (-1)^{(dim X)(dim Z)}I(Z,X).
+			\end{equation}
+		\end{prop}
+		\begin{proof}
+			Since $X$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$, we have
+			\begin{equation}
+				di_xT_x(X) \oplus T_z(Z) = T_z(Y),
+			\end{equation}
+			where $i$ is the inclusion map $X \to Z$. Similarly, we have 
+			\begin{equation}
+				di^{\prime}_zT_z(Z) \oplus T_x(X) = T_x(Y),
+			\end{equation}
+			where $i^\prime$ is the inclusion map $Z \to X$. And it takes $(dim X)(dim Z)$ transposition to switch the basis.
+		\end{proof}
+		\begin{prop}
+			The map $S^1 \to S^1$ given by $z \to \bar{z}^m$ has degree $-m$.
+		\end{prop}
+		\begin{proof}
+			Define $f: S^1 \to S^1$ and $g: S^1 \to S^1$ such that $f(z) = \bar{z}$, $g(z) = z^m$. We have $deg(f) = -1$ and $deg(g) = m$. Then degree of the map is $deg(f)deg(g) = -m$.
+		\end{proof}
+\end{document}

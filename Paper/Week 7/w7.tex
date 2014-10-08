@@ -1,0 +1,161 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{The Duality Theorem}
+		\begin{defn}
+			For an arbitrary space $X$ and coefficitn ring $R$, define an
+			R-linear cap product $\frown : C_k(X;R)\times C^l(X;R) \to C_{k-l}
+			(X;R)$ for $k \geq l$ by setting
+				\begin{equation}
+					\sigma \frown \phi = \phi(\sigma | [v_0,...,v_l]) \sigma | [v_l,...,v_k]
+				\end{equation}
+				for $\sigma \Delta^k \to X$ and $\phi \in C^k(X;R)$.
+		\end{defn}
+		This induces a cap product in homology and cohomology by the formula
+		\begin{equation}
+			\partial (\sigma \frown \phi) = (-1)^l (\partial \sigma \frown \phi - \sigma \frown \delta \phi).
+		\end{equation}
+		\begin{theorem}
+			If $M$ is a closed $R$-orientable $n$-manifold with fundamental class
+			$[M] \in H_n(M;R)$, then the map $D: H^k(M;R) \to H_{n-k}(M;R)$ defined 
+			by $D(\alpha) = [M]\frown \alpha$ is an isomorphism for all $k$.
+		\end{theorem}
+
+	\section{The Lefschetz Fixed Point Theorem}
+		Let $X$ be a closed oriented smooth manifold of dimension $n$. Let $A$ and $B$ be oriented smooth submanifolds of $X$ of dimensions $n-i$ and $n-j$ respectively. Then $A \cap B$ is a submanifold of dimension $n-(i+j)$. When $i+j = n$, $A \cap B$ is a finite set of points.\\
+		\indent By Poincore duality, there is a isomorphism $D: H^i(M,\mathbb{Z}) \to H_{n-i}(M)$ such that $D(\alpha) = [M] \frown \alpha$.
+		Let $[A],[B],[A \cap B]$ be images of the fundamental classes of $A,B,A \cap B$ under the inclusion map into $X$. Then we have $[A] \in H_{n-i}(X)$, $[B] \in H_{n-j}(X)$ and $[A \cap B] \in H_{n-(i+j)}(X)$. We denote their Poincare duals by $[A]^*$, $[B]^*$ and $[A \cap B]^*$. Then we can show that cup product in Poincare dual to intersection:
+		\begin{theorem}
+			$[A]^* \smile [B]^* = [A \cap B]^*$.
+		\end{theorem}
+		\begin{defn}
+			Given $X$ a closed oriented manifold of dimension $n$, we define the \textit{intersection pairing}
+			\begin{equation}
+				\cdot: H_{n-i}(X) \otimes H_{n-j}(X) \to H_{n-i-j}(X)
+			\end{equation}
+			by first applying Poincare duality, taking the cup product and then applying Poincare duality again:
+			\begin{equation}
+				\alpha \cdot \beta = [X] \frown (\alpha^* \smile \beta^*).
+			\end{equation}
+		\end{defn}
+		And by definition, we have
+		\begin{equation}
+			[A] \cdot [B] = [A \cap B].
+		\end{equation}
+		When $A$ and $B$ have complementary dimensions and $X$ is connected, we have $[A] \cdot [B] \in H_0(X) = \mathbb{Z}$ is the signed number of intersection points.\\
+		\indent Let $f: X \to X$ be a smooth map. A \textit{fixed point} of $f$ is a point $p \in X$ such that $f(p) = p$. Then we have:
+		\begin{theorem}(The Lefschetz fixed point theorem)
+			Let $X$ be a closed smooth manifold and let $f: X \to X$ be a smooth map with all fixed points nondegenerate. Then
+			\begin{equation}
+				L(f) = \sum_{i} (-1)^i Tr(f_*: H_i(X;\mathbb{Q}) \to H_i(X;\mathbb{Q})).
+			\end{equation}
+		\end{theorem}
+		It follows from the universal coefficient theorem that the above traces are integers.
+		\begin{defn}
+			Define the \textit{diagonal} to be
+			\begin{equation}
+				\Delta = \{(x,x) | x\in X \}.
+			\end{equation}
+			Also define the \textit{graph} of $f$ to be
+			\begin{equation}
+				\Gamma (f) = \{ (x,f(x)) | x\in x \}.
+			\end{equation}
+		\end{defn}
+		Since given any fixed point $p$ of $f$, we have $p \in \Delta \cap \Gamma (f)$, to prove the Lefschetz theorem, we will look at $\Delta \cap \Gamma (f) \subset X \times X$. We also have
+		\begin{lem}
+			$f$ has nondegenerate fixed points if and only if $\Gamma(f)$ and $\Delta$ intersect transversally in $X \times X$. In that case, for each fixed point $p$, the local Lefschetz number at $p$ agrees with the sign of intersection of $\Gamma (f)$ and $\Delta$ at $(p,p)$.
+		\end{lem}
+		It follows that if $f$ has only nondegerate fixed points, we have
+		\begin{equation}
+			L(f) = [\Gamma(f) \cap \Delta] = [\Gamma(f)] \cdot [\Delta].
+		\end{equation}
+		To prove the Lefschetz theorem, we just need to compute the intersection number $[\Gamma(f)] \cdot [\Delta]$.\\
+		\indent Recall that for any topological spaces $X$ and $Y$ there is a homology cross product
+		\begin{equation}
+			\times : H_i(X) \otimes H_j(Y) \to H_{i+j}(X \times Y).
+		\end{equation}
+		If $X$ and $Y$ are smooth manifolds and $A$ and $B$ are closed oriented submanifolds of $X$ and $Y$, then we have 
+		\begin{equation}
+			[A] \times [B] = [A \times B].
+		\end{equation}
+		Let $n = dim(X)$ and if $\alpha \in H_*(X)$ has pure degree, denoted by $|\alpha|$. Then we have the following lemmas
+		\begin{lem}
+			Let $\alpha, \beta, \gamma, \delta \in H_*(X)$ with $|\alpha|+|\beta|=|\gamma|+|\delta| = n$. Then
+			\begin{equation}
+				(\alpha \times \beta)\cdot (\gamma \times \delta) = (-1)^{|\beta|} (\alpha \cdot \gamma)(\beta \cdot \delta),
+			\end{equation}
+			if $|\beta| = |\gamma|$; and $0$ otherwise.
+		\end{lem}
+		\begin{lem}
+			If $\alpha , \beta \in H_*(X)$ with $|\alpha|+|\beta| = n$, then
+			\begin{equation}
+				[\Gamma(f)]\cdot (\alpha \times \beta) = (-1)^{|\alpha|}f_*\alpha \cdot \beta.
+			\end{equation}
+		\end{lem}
+		Note that if $\alpha, \beta, \gamma, \delta$ can be represented by submanifolds, above lemmas can be proved by Theorem 1.1. In general, these two lemmas follow from the basic properties of cup products and we skip the computation here.\\
+		\indent Let $\{ e_k \}$ be a basis for the vector space $H_*(X;\mathbb{Q})$ and let $\{ e_k ^\prime \}$ be the dual basis of $H_*(X;\mathbb{Q})$, with respect to the intersection pairing $\cdot$, i.e., $e_i \cdot e_j^\prime = \delta_{i,j}$. This dual basis exists and is unique since the intersection paring is a perfect paring.\\
+		\indent By Kunneth theorem $H_*(X \times X; \mathbb{Q}) = H_*(X;\mathbb{Q}) \otimes H_*(X;\mathbb{Q})$, with the isomorphism given by homology cross product. Then $\{ e_i \times e_j^\prime \}$ is a basis for $H_*(X \times X; \mathbb{Q})$. Then we can write $[\Delta]$ in terms of these basis elements:
+		\begin{lem}
+			$[\Delta] = \sum_k e_k \times e_k^\prime .$
+		\end{lem}
+		\begin{proof}
+			Since $\{ e_i^\prime \times e_j \}$ is also a basis, it is sufficient to check that both sides have the same intersection pairing with $e_i^\prime \times e_j$ for any $|e_i^\prime|+ |e_j| = n$.
+			\begin{eqnarray}
+				(\sum_k e_k \times e_k^\prime) \cdot (e_i^\prime \times e_j) &=& \sum_{k:|e_k^\prime| = |e_i^\prime|} (-1)^{|e_i^\prime|} (e_k \cdot e_i^\prime)(e_k^\prime \cdot e_j) \\
+				&=& (-1)^{|e_i^\prime|} e_i^\prime \cdot e_j \\
+				&=& [\Delta] \cdot (e_i^\prime \times e_j).
+			\end{eqnarray}
+			Then we have $[\Delta] = \sum_k e_k \times e_k^\prime$ as desired.
+		\end{proof}
+		
+		With this equality, we can proof Lefschetz fixed point theorem.
+		\begin{proof}
+			By previous lemmas, we have
+			\begin{eqnarray}
+				[\Gamma(f)] \cdot [\Delta] &=& [\Gamma(f)] \cdot \sum_k e_k \times e_k^\prime \\
+				&=& \sum_k (-1)^{|e_k|} f_* e_k \cdot e_k^\prime \\
+				&=& \sum_i (-1)^i Tr(f_*: H_i(X) \to H_i(X)).
+			\end{eqnarray}
+		\end{proof}
+\end{document}

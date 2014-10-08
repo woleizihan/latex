@@ -1,0 +1,71 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{A Kunneth Formula}
+		\begin{defn}
+			The cross product is the map 
+			\begin{equation}
+				H^*(X;R) \times H^*(Y;R) \to H^*(X\times Y;R)
+			\end{equation}
+			given by $a \times b = p_1^*(a) \smile p_2^*(b)$ where $p_1$ and $p_2$ are the projections of $X \times Y$ onto $X$ and $Y$.
+		\end{defn}
+		Since cup product is distributive, the cross product is bilinear.
+		\begin{theorem}
+			The cross product $H^*(X;R) \otimes_R H^*(Y;R) \to H^*(X \times Y; R)$ is an isomorphism of rings if $X$ and $Y$ are CW complexes and $H^k(Y;R)$ is a finitely generated R-module for all $k$.
+		\end{theorem}
+		
+		 \begin{prop}
+		 	If a natural transformation between unreduced cohomology theories on the category of CW pairs is an isomorphism when the CW pair is (point,$\O$), then it is an isomorphism for all CW pairs.
+		 \end{prop}
+		 \begin{theorem}
+		 	For CW pairs $(X,A)$ and $(Y,B)$ the cross product homomorphism $H^*(X,A;R) \otimes_R H^*(Y,B;R) \to H^*(X\times Y, A \times B ;R)$ is an isomorphism of rings if $H^k(Y,B;R)$ is a finitely generated free R-module for each $k$.
+		 \end{theorem}
+	\section{Exercise}
+		\begin{prop}
+			$S^2 \vee S^1 \vee S^1 = X$.
+		\end{prop}
+		\begin{proof}
+			By Mayer-Vietoris, $H^n(S^2 \vee S^1 \vee S^1) = H^n(S^2) \oplus H^n(S^1) \oplus H^n(S^1)$, for $n > 0$. Then we have $H^0(X) = \mathbb{Z}$, $H^1(X) = \mathbb{Z}^2$ and $H^2(X) = \mathbb{Z}$. And $H^1(X) \simeq Hom(\mathbb{Z}^2,\mathbb{Z})$ with basis $\{ \alpha, \beta \}$. We have $\alpha$ represented by cocycle $\phi$ and $\beta$ represented by cocycle $\psi$. Where $phi$ and $psi$ take $1$ on each simplex represented by two $S^1$ and $0$ else where. Then we look at their cup product $\phi \smile \psi$. Given any $2$-simplex $c$, we have $(\phi \smile \psi)(c) = 0$ and thus $\phi \smile \psi = 0$ is not a generator of $H^2(X)$.
+		\end{proof}
+\end{document}

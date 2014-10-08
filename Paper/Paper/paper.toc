@@ -1,0 +1,5 @@
+\contentsline {section}{\tocsection {}{1}{Introduction}}{1}
+\contentsline {section}{\tocsection {}{2}{Background knowledge on manifold and algebraic topology}}{2}
+\contentsline {section}{\tocsection {}{3}{Lefschetz fixed point theorem}}{5}
+\contentsline {section}{\tocsection {}{4}{Fixed points of Frobenius map and counting points}}{7}
+\contentsline {section}{\tocsection {}{}{References}}{9}

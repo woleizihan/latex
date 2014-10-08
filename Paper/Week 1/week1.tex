@@ -1,0 +1,132 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+\begin{document}
+	\section{Manifolds with Boundary}
+	\begin{theorem}
+		Let $f$ be a smooth map of a manifold $X$ with boundary onto a boundaryless manifold $Y$ and suppose that both $f: X \to Y$ and $\partial f: \partial X \to Y$ are transversal with respect to a boundaryless submanifold $Z$. Then the preimage $f^{-1}(Z)$ is a manifold with boundary and the codimension of $f^{-1}(Z)$ in $X$ equals the codimension of $Z$ in $Y$.
+	\end{theorem}
+	
+	\section{Transversality}
+		\begin{theorem}(The Transversality Theorem)
+			 that $F: X \times S \to S$ is a smooth map of manifolds, where only $X$ has boundary, and let $Z$ be any boundaryless submanifold fo $Y$. If both $F$ and $\partial F$ are transversal to $Z$, then for almost every $sn \in S$, both $f_s$ and $\partial f_s$ are transversal to $Z$.
+		\end{theorem}
+		
+		\begin{theorem}(Transversality Homotopy Theorem)o
+			For any smooth map $f: X \to Y$ and any boundaryless submainfold $Z$ of the boundaryles manifold $Y$, there exists a smooth map $g: X \to Y$ homotopic to $f$ such that $g$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$ and $\partial g$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$.
+		\end{theorem}
+		\begin{theorem}
+			Suppose that $Z$ is a closed submanifold of $Y$, both boundaryless, and $C$ is a closed subset of $X$. Let $f: X \to Y$ be a smooth map with $f$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$ on $C$ and $\partial f$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$ on $C$ intersect $\partial X$. Then $f$ can be extended to $g$ which is  transversal to $Z$.
+		\end{theorem}
+		\begin{cor}
+			If, for $f: X \to Y$, the boundary map is transversal to $Z$, then there exists a map $g: X \to Y$ homotopic to $f$ such that $\partial g = \partial f$ and $g$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $Z$.
+		\end{cor}
+		
+	\section{Applications}
+	\begin{theorem}(General Position Lemma)
+		Let $X$ and $Y$ be submanifolds of $\mathbb{R}^N$. Then for almost every $a \in \mathbb{R}^N$ the translation $X + a$ intersects $Y$ transversally.
+	\end{theorem}
+	\begin{proof}
+		Define $F: X \times \mathbb{R}^N \to \mathbb{R}^N$ such that $F(x,a) = i(x) + a$, where $i$ is the inclusion map of $X$. Then for any fixed $x \in X$, $F(x,a) = x + a$ just translate $\mathbb{R}^N$ by $x$ and thus $F$ and $\partial F$ are submersions. Then $F$ and $\partial F$ are transversal to $Z$. By the Transversality Theorem, for almost every $a \in \mathbb{R}^N$, $f_a(x) = x+a$ is transversal to $Z$.
+	\end{proof}
+	
+	\begin{prop}
+		Suppose that $X$ is a submanifold of $\mathbb{R}^N$. Then almost every vector space $V$ of any fixed dimension $l$ in $\mathbb{R}^N$ intersects $X$ transversally.
+	\end{prop}
+	\begin{proof}
+		Let $S \subset (\mathbb{R}^N)^l$ be the set of all linearly independent $l$-tuples of vectors in $\mathbb{R}^N$. $S$ is open in $\mathbb{R}^Nl$, which implies $S$ is a manifold. Define a map $F: \mathbb{R}^l \times S \to \mathbb{R}^N$ such that
+		\begin{equation}
+			F[(t_1,...,t_l),v_1,...,v_l] = t_1v_1 + ... + t_lv_l.
+		\end{equation}
+		For fixed $(t_1,...t_l)$, $F$ is just a linear combination of $v_1,...,v_l$ and thus $F$ is a submersion. Then $F$ and $\partial F$ intersect $X$ transversally. By the Transversality Theorem, for almost every $s=(v_1,...,v_l) \in S$, $f_s(t_1,...t_l) = F[(t_1,...t_l),s]$ is transversal to $X$, which means
+		\begin{equation}
+			Image(df_s)_v + T_x(X) = T_x(\mathbb{R}^n),
+		\end{equation}
+		where $f_s(t) = x$. By definition of $f_s$, $Image(df_s)_x$ is just $Splan\{ v_1,...,v_l \}$, which is $T_t(V)$, where $V$ is the vector space spaned by $v_1,...,v_l$. Hence for almost every vector space $V$ of fixed dimension $l$, we have 
+		\begin{equation}
+			T_x(V) + T_x(X) = T_x(\mathbb{R}^N).
+		\end{equation}
+		$V$ intersects $X$ transversally.
+	\end{proof}
+	
+	\section{Intersection Theory Mod 2}
+		\begin{theorem}
+			If $f_0,f_1: X\to Y$ are homotopic and both transversal to $Z$, then $I_2(f_0,Z) = I_2(f_1,Z)$.
+		\end{theorem}
+		\begin{cor}
+			If $g_0,g_1: X \to Y$ are arbitrary homotopic maps, then we have $I_2(g_0,Z) = I_2(g_1,Z)$.
+		\end{cor}
+		\begin{theorem}(Boundary Theorem)
+			Suppose that $X$ is the boundary of some compact manifold $W$ and $g: X \to Y$ is a smooth map. If $g$ may be extended to all of $W$, then $I_2(g,Z) = 0$ for any closed submanifold $Z$ in $Y$ of complementary dimension.
+		\end{theorem}
+		\begin{theorem}
+			If $f: X \to Y$ is a smooth map of a compact manifold $X$ into a connected manifold $Y$ and dim $X$ $=$ dim $Y$, then $I_2(f,\{y\})$ is the same for all points $y \in Y$. This common value is called the mod 2 degree of $deg_2(f)$. 
+		\end{theorem}
+		\begin{theorem}
+			Homotopic maps have the same mod 2 degree.
+		\end{theorem}
+		\begin{theorem}
+			If $X = \partial W$ and $f: X \to Y$ may be extended to all of $W$, then $deg_2(f) = 0$.
+		\end{theorem}
+		\begin{prop}
+			If the mod 2 degree of $p/ | p | : \partial W \to S^1$ is nonzero, then the function has a zero inside $W$.
+		\end{prop}
+	\section{Applications}
+		\begin{prop}
+			Let $f: X \to Y$ and $g: Y \to Z$ be a sequence of smooth maps of manifolds , with $X$ compact. Assume that $g$ is transversal to a closed submanifold $W$ of $Z$, then
+			\begin{equation}
+				I_2(f,g^{-1}(W)) = I_2(g\circ f, W).
+			\end{equation}
+			\begin{proof}
+				$I_2(f,g^{-1}(W)) =$ card $f^{-1}(g^{-1}(W))=$ card $(g \circ f)^{-1}(W)$ = $I_2(g\circ f, W)$.\\
+				Furthermore, if $I_2(f,g^{-1}(W))$ is defined, we have dim$X+$ dim$g^{-1}(W)=$ dim$Y$. Then dim$X+$ dim$W=$ dim$Z$, i.e, $I_2(g\circ f, W)$ is defined.
+			\end{proof}
+		\end{prop}
+		\begin{prop}
+			If $f: X \to Y$ is homotopic to a constant map, then $I_2(f,Z)=0$ for all complementary dimensional closed $Z$ in $Y$, except perhaps if dim$X=0$.
+		\end{prop}
+		\begin{proof}
+			If dim$X >0$, then dim$Z <$ dim$Y$. Then $f$ is homotopic to the constant map $g(x) = y$, where $y$ is not i $Z$. Then we know 
+			\begin{equation}
+				I_2(f,Z) = I_2(g,Z) = |g^{-1}(Z)| = 0.
+			\end{equation}
+		\end{proof}
+\end{document}

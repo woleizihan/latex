@@ -1,0 +1,196 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{Lefschetz Fixed-Point Theory}
+		\begin{defn}
+			The global Lefschetz number of $f$ is the intersection number $I(\Delta, graph(f))$, denoted $L(f)$.
+		\end{defn}
+		\begin{theorem}(Smooth Lefschetz Fixed-Point Theorem)
+			Let $f:X \to X$ be a smooth map on a compact orientable manifold. If $L(f) \neq 0$, then $f$ has a fixed point.			
+		\end{theorem}
+		\begin{prop}
+			$L(f)$ is a homotopy invariant.
+		\end{prop}
+		\begin{prop}
+			If $f$ is homotopic to the identity, then $L(f)$ equals the Euler characteristic of $X$. In particular, if $X$ admits a smooth map $f: X \to X$ that is homotopic to the identity and has no fixed points, then $\chi(X) = 0$.
+		\end{prop}
+		\begin{defn}
+			$f: X \to X$ is a Lefschetz map if $graph(f)$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $\Delta$
+		\end{defn}
+		\begin{prop}
+			Every map $f: X \to X$ is homotopic to a Lefschetz map.
+		\end{prop}
+		Given any $x$ a fixed point of a Lefschetz map, we have $graph(f)$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $\Delta$ if and only if
+		\begin{equation}
+			graph(df_x) + \Delta_x = T_x(X) \times T_x(X).
+		\end{equation}
+		And this implies that $df_x$ has no nonzero fixed point.
+		\begin{defn}
+			A fixed point $x$ is a Lefshetz fixed point of $f$ if $df_x$ has no nonzero fixed point.
+		\end{defn}
+		So $f$ is a Lefschetz map if and only if all its fixed points are Lefschetz. If $x$ is a Lefschetz fixed point, we denote the orientation number of $(x,x)$ in the intersection $\Delta \cap graph(f)$ by $L_x(f)$, called the local Lefschetz number of $f$ at $x$. Thus for $f$ Lefschetz map,
+		\begin{equation}
+			L(f) = \sum_{f(x)=x}L_x(f).
+		\end{equation}
+		$x$ is a Lefschetz fixed point if and only if$df_x - I$ is an isomorphism of $T_x(X)$.
+		\begin{prop}
+			The local Lefschetz number $L_x(f)$ at a Lefschetz fixed point is $1$ if the isomorphism $df_x-I$ preserves orientation on $T_x(X)$, and $-1$ if the isomorphism reverses orientation. That is the sign of $L_x(f)$ equals the sign of the determinant of $df_x - I$.
+		\end{prop}
+		\begin{prop}
+			The Euler characteristic of $S^2$ is $2$.
+		\end{prop}
+		\begin{cor}
+			Every map of $S^2$ that is homotopic to the identity must possess a fixed point. In particular, the antipodal map is not homotopic to the identity.
+		\end{cor}
+		\begin{prop}
+			The surface of genus $k$ admits a Lefschetz map homotopic to the identity, with one source, one sink, and $2k$ saddles. Consequently, its Euler characteristic is $2-2k$.
+		\end{prop}
+		\begin{prop}(Splitting Proposition)
+			Let $U$ be a neighborhood of the fixed point $x$ that contains no other fixed points of $f$. Then there exists a homotopy $f_t$ of $f$ such that $f_t$ has only Lefschetz fixed points in $U$, and each $f_t$ equals $f$ outside some compact subset of $U$.
+		\end{prop}
+		\begin{defn}
+			Suppose that $x$ is an isolated fixed point of $f$ in $\mathbb{R}^k$. If $B$ is a small closed ball centered at $x$ that contains no other fixed point, then the degree of map
+			\begin{equation}
+				z \to \frac{f(z)-z}{|f(z)-z|}
+			\end{equation}
+			is called the local Lefschetz number of $f$ at $x$, denoted $L_x(f)$.
+		\end{defn}
+		\begin{prop}
+			At Lefschetz fixed points, the two definitions of $L_x(f)$ agree.
+		\end{prop}
+		\begin{prop}
+			Suppose that the map $f$ in $\mathbb{R}^k$ has an isolated fixed point at $x$, and let $B$ be a closed ball around $x$ containing no other fixed point of $f$. Choose any map $f_1$ that equals $f$ outside some compact subset of $Int(B)$ but has only Lefschetz fixed points in $B$. Then
+			\begin{equation}
+				L_x(f) = \sum_{f_1(z)=z}L_z(f_1),
+			\end{equation}
+			for any $z \in B$.
+		\end{prop}
+		\begin{theorem}(Local Computation of the Lefschetz Number).
+			Let $f:X \to Y$ be any smooth map on a compact manifold, with only finitely many fixed points. Then the global Lefschetz number equals the sum of the local Lefschetz numbers:
+			\begin{equation}
+				L(f) = \sum_{f_x(x)}L_x(f).
+			\end{equation}
+			
+		\end{theorem}
+		
+	\section{Exercises}
+		\begin{prop}
+			Let $A: V \to V$ be a linear map. Then the following statements are equivalent:
+			\begin{enumerate}
+				\item $0$ is an isolated fixed point of $A$.
+				\item $A-I: V \to V$ is an isomorphism.
+				\item $0$ is a Lefschetz fixed point of $A$.
+				\item $A$ is a Lefschetz map.
+			\end{enumerate}
+		\end{prop}
+		\begin{prop}
+			The following are equivalent
+			\begin{enumerate}
+				\item $x$ is a Lefschetz fixed point of $f: X \to X$.
+				\item $0$ is a Lefschetz fixed point of $df_x: T_x(X) \to T_x(X)$.
+				\item $df_x$ is a Lefschetz map.
+			\end{enumerate}
+		\end{prop}
+		\begin{proof}
+			If $x$ Lefschetz fixed point of $f$, we have $df_x - I$ isomorphism and then by previous proposition, this is equivalent to $0$ is a Lefschetz fixed point of $df_x$. And also by 3,4 in previous proposition, we know that 2,3 are equivalent.
+		\end{proof}
+		\begin{prop}
+			The map $f(x) = 2x$ on $\mathbb{R}^k$ has $L_0(f)=1$ and $f(x) = 0.5x$ has $L_0(f) = (-1)^k$.
+		\end{prop}
+		\begin{proof}
+			Only fixed point of $f$ is $0$ and $0$ is  a Lefschetz fixed point since $df_0 - I = I or -0.5I$ isomorphism. Then we have $L_0(f) = det(df_0 - I)$.
+		\end{proof}
+		\begin{prop}
+			$\chi(X \times Y) = \chi(X) \chi(Y)$.
+		\end{prop}
+		\begin{proof}
+			Since any map $f$ is homotopic to some Lefschetz maps, we can pick $f$, $g$ homotpic to $id_X$ and $id_Y$. Thus $\chi(X) = L(f)$ and $\chi(Y) = L(g)$. Also $f \times g$ is homotopic to $id_X \times id_Y = id_{X \times Y}$. Then we have $\chi(X \times Y) = L(f \times g)$. To compute $L(f \times g)$, we know
+			\begin{equation}
+				L(f \times g) = \sum_{x,y:f(x)=x,g(y)=y} L_{(x,y)}(f \times g) = \sum_{x,y:f(x)=x,g(y)=y} L_x(f)L_y(g) = L(f)L(g).
+			\end{equation}
+			Then we have
+			\begin{equation}
+				\chi(X\times Y) = \chi(X) \chi(Y).
+			\end{equation}
+		\end{proof}
+		\begin{prop}
+			Summing local Lefschetz numbers does not define a homotopy invariant without the compactness assumption.
+		\end{prop}
+		\begin{proof}
+			Pick any $A,B$ $n \times n$ matrices such that $det(A-I)>0$ and $det(B-I)<0$. $\mathbb{R}^n$ contractible so we have $A$ homotopic to $B$ but $L(A) = 1$ while $L(B) = -1$.
+		\end{proof}
+		\begin{prop}
+			The Euler characteristic of a compact connected Lie group is zero.
+		\end{prop}
+		\begin{proof}
+			Let the compact connected Lie group be $G$ and let $g \in G$ such that $g \neq 1$. Define $f: G \to G$ by $f(x) = g \cdot x$. This smooth map is homotopic to $id_G$ but has no fixed point. Then we know
+			\begin{equation}
+				\chi (G) = L(f) = 0.
+			\end{equation}
+		\end{proof}
+	\section{Exterior Algebra}
+		\begin{theorem}
+			Let $\{ \phi_1,...,\phi_k \}$ be a basis for $V^*$. Then the $p$-tensors $\{ \phi_{i_1},..., \phi_{i_p} \}$ form a basis for $\mathcal{T}^p(V^*)$. Consequently, the dimension is $k^p$.
+		\end{theorem}
+		\begin{lem}
+			If $Alt(T) = 0$, then $T \wedge S = S \wedge T = 0$.
+		\end{lem}
+		\begin{theorem}
+			If $\{ \phi_1,...,\phi_k \}$ is a basis for $V^*$, then $\phi_I = \phi_{i_1} \wedge ... \wedge \phi_{i_p}$ such that $1 \leq i_1,...,i_p \leq k$ is a basis for $\Lambda^p(V^*)$. Consequently,
+dimension is ${k \choose{p}}$.
+		\end{theorem}
+		\begin{cor}
+			The wedge product satisfies the following anticommutativity relation:
+			\begin{equation}
+				T \wedge S = (-1)^{pq} S \wedge T,
+			\end{equation}
+			when $T \in \Lambda^p(V^*)$ and $S \in \Lambda^q(V^*)$.
+		\end{cor}
+		\begin{theorem}
+			If $A: V \to V$ is a linear map, then $A^*T = (detA)T$ for every $T \in \Lambda^k(V^*)$, where $k = dim V$. In particular, if $\phi_1,...,\phi_k \in \Lambda^1(V^*)$, then
+			\begin{equation}
+				A^*\phi_1 \wedge ... \wedge A^*\phi_k = (det A)\phi_1 \wedge ... \wedge \phi_k.
+			\end{equation}
+		\end{theorem}
+\end{document}
