@@ -1,0 +1,625 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+%--------Meta Data: Fill in your info------
+\title{Dirichlet's Theorem about Primes in Arithmetic Progressions}
+
+\author{Ang Li}
+
+\date{}
+
+\begin{document}
+
+	\begin{abstract}
+		Dirichlet's theorem states that if $q$ and $l$ are two relatively prime positive integers, there are infinitely many primes of the form $l + kq$. Dirichlet's theorem is a generalized statement about prime numbers and the theory of Fourier series on the finite abelian group $(\mathbb{Z}/q\mathbb{Z})^*$ plays an important role in the solution.
+	\end{abstract}
+	
+	\maketitle	
+		
+	\tableofcontents
+	
+	\section{Dirichlet's theorem on arithmetic progressions}
+		Dirichlet's theorem on arithmetic progressions is a statement about the infinitude of prime numbers.
+		\begin{thm}
+			If $q$ and $l$ are relatively prime positive integers, then there are infinitely many primes of the form $l+kq$ with $k \in \mathbb{Z}$
+		\end{thm}
+		This theorem was proved by Dirichlet in 1837, and before that, there were several mathematicians whose work dealt closely with the achievements related to Dirichlet's theorem.
+		We can easily prove by contradiction that there exist infinitely many primes and by constructing a converging alternating series, we can also prove that there are infinitely many primes in the form $4k +1$.
+		Dirichlet proved this theorem by showing that the series
+		\begin{equation}
+			\sum_{p \equiv l mod q} \frac{1}{p}
+		\end{equation}
+		diverges, where the sum is over all primes congruent to $l$ modulo $q$.\\
+		The starting point of Dirichlet's argument is Euler's product formula for the zeta function, and Legendre conjectured the theorem for his proof of the law of quadratic reciprocity. Later, Riemann extended the zeta function to the complex plane and indicated the non-vanishing of zeta function was essential in the understanding of the distribution of prime numbers.\\
+		The main idea of this proof is to prove that 
+		\begin{center}
+			$\sum_{p \equiv l} \frac{1}{p^s}$,
+		\end{center}
+		 diverges as $s \rightarrow 1^+$, and the proof starts with Fourier analysis, which reduces the theorem to a statement, which is easier to analyze and related to the Dirichlet $L$-function. We analyze the $L$-functions and introduce a general form of Euler's product formula,
+		 \begin{center}
+		 	$\sum_{n=1}^{\infty} \frac{\chi(n)}{n^s} = \prod_{p} \frac{1}{(1-\chi(p)p^{-s})}$,
+		 \end{center}\
+		 where the product is over all primes.
+		  We then prove the non-vanishing of $L$-functions and finish the proof.\\
+		Moreover, the requirement of relatively prime integers $q$ and $l$ is indispensable for the result since we can easily construct a counterexample by picking $q=2$, $l=4$ and there is only one prime, namely $2$, contained in the arithmetic progression of $q,l$.
+		
+	\section{Fourier analysis, Direchlet characters, and reduction of the theorem}
+		\begin{defn}
+			Let $\mathbb{Z}^*(q)$ denote the abelian group of all non-negative integers, which are smaller than $q$ and relatively prime to $q$. Define the \textbf{Euler phi-function} by the order of $\mathbb{Z}^*(q)$. And the operation on this group is the normal multiplication. Write 
+			\begin{center}
+				$\phi(q) = |\mathbb{Z}^*(q)|$.
+			\end{center}
+		\end{defn}
+	 Set $G = \mathbb{Z}^*(q)$,consider the function $\delta_l$ on $G$, the characteristic function of $l$; if $n \in \mathbb{Z}^*(q)$, then\\
+		\begin{center}
+			$\delta_l(n)=\left\{\begin{array}{cl}
+								1 & if \hspace{1mm} n \equiv l \hspace{1mm} mod \hspace {1mm} q,\\
+								0, & otherwise.
+									\end{array}\right.$
+		\end{center}
+		\vspace{2mm}
+		Expand the function in a Fourier series as follows:
+			\begin{center}
+				$\delta_l(n) = \sum_{e \in \hat{G}} \delta_l(e)e(n) $
+			\end{center}
+			\vspace{1mm}
+			where, $\hat{G}$ denotes the group of all characters of $G$, and $\hat{\delta_l}(e)$ denotes the Fourier coefficient of $\delta_l(n)$ with respect to $e$.
+			\begin{center}
+				$\hat{\delta_l}(e) = \frac{1}{|G|} \sum_{m \in G}\hat{\delta_l}(m) \overline{e(m)} = \frac{1}{|G|} \overline{e(l)}$
+			\end{center}
+			\vspace{1mm}
+			Hence
+			\begin{equation}
+				\delta_l(n) = \frac{1}{|G|} \sum_{e \in \hat{G}} \overline{e(l)}e(n)
+			\end{equation}
+			
+			\begin{defn}
+				The \textbf{Dirichlet characters} modulo $q$ is a function defined on $\mathbb{Z}$ given by
+				\begin{center}
+					$\chi(m)=\left\{\begin{array}{cl}
+								e(m) & gcd(m,q) = 1\\
+								0, & otherwise.
+									\end{array}\right.$
+				\end{center}
+			\end{defn}
+			Clearly, the Dirichlet characters modulo $q$ are multiplicative on all of $\mathbb{Z}$ and for each character $e$ of $G$, there is an associated Dirichlet character.
+			
+			\begin{lem}
+				The Dirichlet characters are multiplicative. Moreover,
+				\begin{equation}
+					\delta_l(m) = \frac{1}{\varphi(q)} \sum_{\chi} \overline{\chi(l)} \chi{m},
+				\end{equation}
+				where the sum is over all Dirichlet characters.
+			\end{lem}			
+			This lemma shows that
+			\begin{center}
+				$\sum_{p \equiv l} \frac{1}{p^s} = \sum_{p} \frac{\delta_l(p)}{p^s} = \frac{1}{\phi(q)} \sum_{\chi} \overline{\chi(l)} \sum_{p} \frac{\chi(p)}{p^s}$.
+			\end{center}
+			
+			We divide the above sum in two parts depending on whether or not $\chi$ is trivial. Let $\chi_0$ denotes the trivial Dirichlet character. So we have
+			
+			\begin{eqnarray}
+				\sum_{p \equiv l} \frac{1}{p^s} &=& \frac{1}{\varphi(q)} \sum_{p} \frac{\chi_0(p)}{p^s} + \frac{1}{\varphi(q)} \sum_{\chi \neq \chi_0} \overline{\chi(l)} \sum_{p} \frac{\chi(p)}{p^s} \nonumber \\
+				&=& \frac{1}{\varphi(q)} \sum_{p \nmid q} \frac{1}{p^s} + \frac{1}{\varphi(q)} \sum_{\chi \neq \chi_0} \overline{\chi(l)} \sum_{p} \frac{\chi(p)}{p^s}
+			\end{eqnarray}
+			
+			Since there are finitely many primes dividing $q$, the first sum on the right-hand side diverges when $s$ tends to $1$. Therefore, Dirichlet theorem is a consequence of the following assertion.
+			
+			\begin{thm}
+				If $\chi$ is a nontrivial Dirichlet character, then the sum
+				\begin{center}
+					$\sum_{p} \frac{\chi(p)}{p^s}$
+				\end{center}
+			\vspace{1mm}
+			remains bounded as $s \rightarrow 1^+$.
+			\end{thm}
+			
+		\section{Dirichlet's $L$-functions}
+		To prove the Dirichlet's theorem, we introduce Dirichlet's $L$-functions, which are general forms of the Euler 
+zeta function.
+			\begin{defn}
+				The \textbf{zeta function} is defined by $\zeta(s) = \sum_{n=1}^{\infty} =\frac{1}{n^s}$.
+			\end{defn}		
+			\begin{defn}
+				Let $\chi$ be a Dirichlet character.Then the $L$-function, $L(s,\chi)$ is defined for $s > 1$ by
+				\begin{equation}
+					L(s,\chi) = \sum_{n=1}^{\infty} \frac{\chi(n)}{n^s},
+				\end{equation}
+				where $\chi$ is a Dirichlet character.
+			\end{defn}
+			
+			\begin{prop}
+				Suppose $\chi_0$ is the trivial Dirichlet character,
+				\begin{center}
+			$\chi_0(n)=\left\{\begin{array}{cl}
+								1 & if \hspace{1mm} gcd(q,n) = 1,\\
+								0, & otherwise,
+									\end{array}\right.$
+				\end{center}
+				and $q = \prod_{n=1}^{N}p_n^{a_n}$ is the prime factorization of q. Then
+				\begin{equation}
+					L(s,\chi_0) = (\prod_{n=1}^N (1-p_n^{-s}))\zeta(s).
+				\end{equation}
+				Therefore $L(s,\chi_0) \rightarrow \infty$ as $s \rightarrow 1^+$.
+				
+				\begin{proof}
+				For the fact that $\chi(n)=0$ if $\gcd(n,q) \neq 1$, we have
+				\begin{center}
+					$L(s,\chi_0) = \sum_{n=1}^{\infty} \frac{\chi_0(n)}{n^s} = \sum_{p_i \nmid n} \frac{\chi_0(n)}{n^s}$,
+				\end{center}
+					 where the sum is over all positive integers, which can be divided by $p_i$ ($i=1,2,...,N$).Therefore
+					\begin{center}
+						$L(s,\chi_0) = \prod_{p \neq p_i} (\frac{1}{1-p}) = (\prod_{n=1}^N (1-p_n^{-s}))\zeta(s)$.
+					\end{center}
+					Moreover, $\zeta(s) \rightarrow \infty$ as $s \rightarrow \infty$, therefore $L(s,\chi_0) \rightarrow \infty $.
+				\end{proof}
+			\end{prop}
+			
+			\begin{prop}
+				If $\chi$ is a non-trivial Dirichlet character, then $L(s,\chi)$ converges for $s > 0$. Moreover:
+				\begin{enumerate}
+					\item The function $L(s,\chi)$ is continuously differentiable for $0 < s < \infty$.
+					\item There exists constants $c,c^{\prime} > 0$ so that
+						\begin{center}
+							$L(s,\chi) = 1 + O(e^{-cs})$ \vspace{2mm} as $s \rightarrow \infty$
+, and\\
+							$L^{\prime}(s,\chi) = O(e^{-c^{\prime}}s)$ \vspace{2mm} as $s \rightarrow \infty$.						
+						\end{center}
+				\end{enumerate}
+			\end{prop}
+			
+			We first prove the cancellation property that non-trivial Dirichlet characters possess. We will need the following lemma
+			
+			\begin{lem}
+				If $\chi$ is a non-trivial Dirichlet character, then
+				\begin{equation}
+					\left|\sum_{n=1}^{k} \chi(n)\right| \leq q,
+				\end{equation}
+				for any $k$.
+				
+				\begin{proof}
+					First prove that $\sum_{n=1}^{q} \chi(n) = 0$. Let $S = \sum_{n=1}^{q} \chi(n)$ and select $a \in \mathbb{Z}^*(q)$, we have
+					\begin{center}
+						$\chi(a)S = \sum \chi(a)\chi(n) = \sum \chi(an) = \sum \chi(n) = S$.
+					\end{center}
+					Since $\chi$ is nontrivial, $\chi(a) \neq 1$ for some $a$. Therefore $S = 0$. We write $k = aq + b$ with $0 \leq b < q$, then
+					\begin{center}
+						$|\sum_{n=1}^{k} \chi(n)| = |\sum_{n=1}^{aq}\chi(n) +\sum_{n=aq+1}^{qa+b} \chi(n)| =|\sum_{n=aq+1}^{aq+b} \chi(n)| \leq q$
+					\end{center} 
+				\end{proof}
+			\end{lem}
+			
+			We can now prove the proposition 3.6 .
+			\begin{proof}
+				Let $s_k = \sum_{n=1}^{k} \chi(n)$, and $s_0 = 0$. Know that $L(s,\chi)$ is defined for $s > 1$ as $\sum_{n=1}^{\infty} \frac{\chi(n)}{n^s}$, which converges absolutely and uniformly for $s > \delta > 1$. We have
+				\begin{eqnarray}
+				\sum_{n=1}^{N} \frac{\chi{k}}{k^s} &=& \sum_{k=1}^{N} \frac{s_k-s_{k-1}}{k^s} \nonumber \\
+				&=& \sum_{k=1}^{N-1} s_k\left[\frac{1}{k^s}-\frac{1}{(k+1)^s} + \frac{s_N}{N^s}\right] \nonumber \\
+				&=& \sum_{k=1}^{N-1} f_k(s) +\frac{s_N}{N^s},
+				\end{eqnarray}
+				where $f_k(s) = s_k[k^{-s} - (k+1)^{-s}]$.  Let$g(x) = x^{-s}$. The Mean value theorem implies
+				\begin{center}
+					$|g(k)-g(k+1)| = |g^{\prime}(x)| \leq |sx^{-s-1}|$.
+				\end{center}
+				We also have $|s_k| \leq q$, so $|f_k(s)| \leq qsk^{-s-1}$. Therefore the series $\sum {f_k(s)}$ converges uniformly and absolutely for $s > \delta > 0$, and this proves that $L(s,\chi)$ is continuous.
+				To prove $L(s,\chi)$ is also continuously differentiable, we differentiate $L(s,\chi)$ and get
+				\begin{center}
+					$\sum (\log(n)) \frac{\chi(n)}{n^s}$.
+				\end{center}
+				Using a similar method, we can prove this series converges uniformly and absolutely for $s > \delta >0$ and thus $L^{\prime}(s, \chi)$ is continuously differentiable.\\
+				To prove the second proposition, we notice that for $s$ large enough
+				\begin{equation}
+					|L(s,\chi) - 1| = \left|\sum_{n=1}^{\infty} \frac{\chi(n)}{n^{s}}\right| \leq 2q\sum_{n=2}^{\infty} \frac{1}{n^s} \leq 2^{-s}a,
+				\end{equation}
+				where $a$ is a constant. If we take $a = \log2$, then $L(s,\chi) = 1 + O(e^{-cs})$ as $s \rightarrow \infty$.\\
+				For $L^{\prime}(s,\chi)$, we have
+				\begin{equation}
+					|L^{\prime}(s,\chi)| = |\sum (\log n) \frac{\chi}{n^s}| \leq 2q\sum_{n=2}^{\infty} (\log n) n^{-s} \leq 2^{-s} a^{\prime},
+				\end{equation}
+				where $a^{\prime}$ is also a constant. Therefore, similarly $L^{\prime}(s,\chi) = O(e^{-c^{\prime}s})$ as $s \rightarrow \infty$ with $c^{\prime} = c$.
+			\end{proof}						
+			
+			\begin{thm}
+				If $s > 1$, then
+				\begin{equation}
+					\sum_{n=1}^{\infty} \frac{\chi(n)}{n^s} = \prod_{p} \frac{1}{(1-\chi(p)p^{-s})},
+				\end{equation}
+				where the product is over all primes.
+			\end{thm}
+			
+		\section{Logarithms}
+		To prove the theorem above, we need to construct two logarithms, which are different from the normal logarithms. 		
+			\begin{defn}
+				For the first logarithm, we define
+				\begin{equation}
+					\log_1(\frac{1}{1-z}) = \sum_{k=1}^{\infty} \frac{z^k}{k}
+				\end{equation}
+				for $|z| <1$.
+			\end{defn}
+			
+			\begin{prop}
+				The logarithm function $log_1$ satisfies the following properties:\\
+				\begin{enumerate}
+					\item If $|z| <1$, then
+						\begin{equation}
+							\exp({log_1(\frac{1}{1-z})}) = \frac{1}{1-z}.
+						\end{equation}
+					\item If $|z| < 1$,then
+						\begin{equation}
+							log_1(\frac{1}{1-z}) = z + E_1(z),
+						\end{equation}
+						where the error $E_1$ satisfies $\left|E_1(z) \leq |z|^2\right|$ if $|z| < 1/2$.
+					\item If $|z| < 1/2$, then
+						\begin{equation}
+							\left|log_1(\frac{1}{1-z})\right| \leq 2|z|.
+						\end{equation}
+				\end{enumerate}
+				
+				\begin{proof}
+					To establish the first property, let $z = re^{i\theta}$ with $0 \leq r < 1$, and we prove that 
+					\begin{equation}
+						(1-z)e^{log_1(\frac{1}{1-z})} = (1-re^{i\theta})e^{\sum_{k=1}^{\infty}(re^{i\theta})^k/k} = 1
+					\end{equation}
+					\vspace{1mm}
+					We differentiate the left-hand side with respect to r, and get
+					\begin{center}
+						$[-e^{i\theta}+(1-re^{i\theta})(\sum_{k=1}^{\infty} (re^{i\theta})^k/k)^{\prime}] e^{\sum_{k=1}^{\infty}(re^{i\theta})^k/k}$
+					\end{center}
+					\vspace{1mm}
+					We also have
+					\begin{center}
+						$-e^{i\theta}+(1-re^{i\theta})(\sum_{k=1}^{\infty} (re^{i\theta})^k/k)^{\prime} = -e^{i\theta} + (1-re^{i\theta})e^{i\theta} \frac{1}{1-re^{i\theta}} = 0$.
+					\end{center}
+					Hence, the left-hand side of the equation (4.7) is constant. Let $r = 0$, we get the desired result.\\
+					For the second property, we simply replace $log_1(\frac{1}{1-z})$ by the infinite series.
+					\begin{center}
+						$|E_1(z)| = \left|\sum_{k=2}^{\infty} \frac{z^k}{k}\right| \leq |z|^2 \sum_{k=0}^{\infty} |z|^k \leq |z|^2$.
+					\end{center}
+					The last inequality holds since $|z|<1/2$.
+					Therefore, 
+					\begin{center}
+					$\left|log_1(\frac{1}{1-z})\right| = |z + E_1(z)| \leq |z| + |z|^2 \leq 2|z|$ for $|z| < 1/2$
+					\end{center}
+					for $|z| <1/2$ and this proves the third property.
+				\end{proof}
+			\end{prop}	
+			
+			\begin{prop}
+				If $\sum|a_n|$ converges, and $a_n \neq 1$ for all $n$, then $\prod_{n = 1}^{\infty} (\frac{1}{1-a_n})$ converges. Moreover, this product is non-zero.
+			\end{prop}
+			The proof of this proposition is omitted.\\
+			
+			We now can prove theorem 3.12, the Dirichlet product formula
+			\begin{equation}
+				\sum_{n} \frac{\chi{n}}{n^s} = \prod_{p} \frac{1}{(1-\chi(p)p^{-s})} .
+			\end{equation}
+			\begin{proof}[Proof of Theorem 3.12]
+			Let $L$ denote the left-hand side of equation (4.9). Define
+			\begin{center}
+				$S_N = \sum_{n \leq N} \chi(n)n^{-s}$ \hspace{2mm} and \hspace{2mm}  $\prod_{N} = \prod_{p \leq N} (\frac{1}{1-\chi(p)p^{-s}})$.
+			\end{center}
+			\vspace{1mm}
+			If we set $a_n = \chi(p_n)p_n^{-s}$, where $p_n$ is the $n^{\text{th}}$ prime, then $\sum|a_n|$ converges when $s \geq 1$. By the previous proposition, the infinite product $\prod = \lim_{N \rightarrow \infty} \prod_{N} = \prod_{p} (\frac{1}{1-\chi(p)p^{-s}})$ converges. Also, define
+			\begin{center}
+				$\prod_{N,M} = \prod_{p \leq N} (1+ \frac{\chi(p)}{p^s} + ... +\frac{\chi(p^M)}{p^{Ms}})$
+			\end{center}
+			\vspace{1mm}
+			Now given $\epsilon >0$ and choose $N$ large enough so that
+			\begin{center}
+			$|S_N-L| < \epsilon$ \hspace{2mm} and \hspace{2mm} $|\prod_N - \prod| < \epsilon$.
+			\end{center}
+			\vspace{1mm}
+			Given prime $p \leq N$, according to the fundamental theorem of arithmetic, there exists $M_p \in \mathbb{Z}$ such $p^{M_p}$ doesn't divide any integer $n \leq N$ but there exists $n_0 \leq N$ such that $p^{M_p-1}$ divides $n_0$. Together with the fact that the Dirichlet characters are multiplicative, we can find $M$ large enough so that 
+			\begin{center}
+				$\left|S_N - \prod_{N,M}\right| < \epsilon$ \hspace{2mm} and \hspace{2mm} $\left|\prod_{N,M} - \prod_{N}\right| < \epsilon$.
+			\end{center}
+			\vspace{1mm}
+			Therefore, we have
+			\begin{equation}
+				\left|L-\prod\right| \leq |L-S_N| + \left|S_N-\prod_{N,M}\right| + \left|\prod_{N,M} -\prod_N\right| + \left|\prod_N - \prod\right| < 4\epsilon.
+			\end{equation}
+			Then
+			\begin{equation}
+				\sum_{n} \frac{\chi(n)}{n^s} = \prod_{p} \frac{1}{(1-\chi(p)p^{-s})} .
+			\end{equation}.
+			\end{proof}
+			
+			We can now define the logarithm for $L(s,\chi)$, and associate it with the logarithm defined for $\frac{1}{1-z}$.
+			
+			\begin{defn}
+				If $\chi$ is a nontrivial Dirichlet character and $s > 1$, we define
+				\begin{equation}
+					\log_2 L(s,\chi) = -\int_{s}^{\infty} \frac{L^{\prime}(t,\chi)}{L(t,\chi)} dt.
+				\end{equation}
+			\end{defn}
+			
+			The following proposition links $\log_1$ and $\log_2$.
+			\begin{prop}
+				If $s > 1$ then
+				\begin{equation}
+					e^{\log_2 L(s,\chi)} = L(s,\chi).
+				\end{equation}\\
+				Moreover 
+				\begin{equation}
+					\log_2 L(s,\chi) = \sum_{p} \log_1(\frac{1}{1-\chi(p)p^{-s}}).
+				\end{equation}
+									
+				\begin{proof}
+					Differentiating $e^{-\log_2 L(s,\chi)}L(s,\chi)$ with respect to $s$, we get
+					\begin{equation}
+					-\frac{L^{\prime}(s,\chi)}{L(s,\chi)}e^{-\log_2 L(s,\chi)}L(s,\chi) + e^{-\log_2 L(s,\chi)} L^{\prime}(s,\chi) = 0
+					\end{equation}
+					is immediate from the definition of $\log_2$.
+					This implies that $e^{-\log_2 L(s,\chi)}L(s,\chi)$ should be a constant and take $s \rightarrow \infty$, we have $e^{-\log_2 L(s,\chi)}L(s,\chi) = 1$.
+					To associate two logarithms, simply take the exponential of both sides. We have
+					\begin{equation}
+						\exp\left({\sum_{p} \log_1(\frac{1}{1-\chi(p)p^{-s}})}\right) = \prod_{p} \left(\frac{1}{1-\chi(p)p^{-s}}\right) = L(s,\chi),
+					\end{equation}
+					This means for each $s$,there exists $M(s) \in \mathbb{Z}$ such that $\log_2 L(s,\chi) - \sum_{p} \log_1(\frac{1}{1-\chi(p)p^{-s}}) = 2\pi iM(s)$.\\
+					The left side is continuous in $s$, but $M(s)$ is integer-valued so $M(s)$ should be constant. Moreover, let $s \rightarrow \infty$, we have $M(s) = 0$.
+				\end{proof}								
+			\end{prop}
+			Recall that in order to prove theorem 1.1 $\sum_{p} \frac{\chi(p)}{p^s}$ is bounded for any nontrivial Dirichlet character $\chi$. From the proposition above, we have
+				\begin{eqnarray}
+				\log_2L(s,\chi)	&=& \sum_p \log_1(\frac{1}{1-\chi(p)p^{-s}}) \nonumber \\
+				&=& \sum_p \frac{\chi(p)}{p^s} + O(\sum_{p}\frac{1}{p^{2s}}) \nonumber \\
+				&=& \sum_p \frac{\chi(p)}{p^s} + O(1).
+				\end{eqnarray}
+			The equation above implies that if $L(1,\chi) \neq 0$ for nontrivial Dirichlet character, then $log_2 L(s,\chi)$ remains bounded as $s \rightarrow 1^+$. Thus $\sum_{p} \frac{\chi(p)}{p^s}$ remains bounded.
+		
+		\section{Non-vanishing of the $L$-function}
+		Therefore, our next goal is to prove that $L(1,\chi) \neq 0$ for nontrivial Dirichlet character $\chi$.
+			\begin{thm}
+				If $\chi \neq \chi_0$, then $L(1,\chi) \neq 0$.
+			\end{thm}
+			
+			\begin{defn}
+				A Dirichlet character is said to be \textbf{real} if it takes only real values and \textbf{complex} otherwise.
+			\end{defn}	
+			We prove $L(1,\chi) \neq 0$ for real and complex characters separately.
+			
+			\subsection{Complex Dirichlet characters} We prove by contradiction that for complex Dirichlet characters, $L(1,\chi) \neq 0$.
+			\begin{lem}
+				The product is real-valued and if $s > 1$, then
+				\begin{equation}
+					\prod_{\chi} L(s,\chi) \geq 1,
+				\end{equation}
+				where the product is taken over all Dirichlet characters.
+				\begin{proof}
+					By the Proposition 4.16, we know that
+					\begin{eqnarray}
+						\prod_{\chi}L(s,\chi) &=& \exp(\sum_{\chi}\sum_p \log_1(\frac{1}{1-\chi(p)p^{-s}})) \nonumber \\
+						&=& \exp\left(\sum_{\chi}\sum_{p}\sum_{k=1}^{\infty} \frac{1}{k} \frac{\chi(p^k)}{p^{ks}}\right) \nonumber \\
+						&=& \exp\left(\sum_p\sum_{k=1}^{\infty}\sum_{\chi} \frac{1}{k} \frac{\chi(p^k)}{p^{ks}}\right).
+					\end{eqnarray}
+					Lemma 2.4 implies that $\sum_{\chi} \chi(p^k) = \sum_{\chi} \overline{\chi(1)} \chi(p^k) = \varphi(q) \delta_1(p^k)$. Therefore
+					\begin{equation}
+						\prod_{\chi}L(s,\chi) = exp\left(\varphi(q)\sum_{p}\sum_{k=1}^{\infty} \frac{1}{k} \frac{\delta_1(p^k)}{p^{ks}}\right) \geq 1,
+					\end{equation}
+					since every term in the exponential is non-negative.
+				\end{proof}
+			\end{lem}
+			
+			\begin{lem}
+				The following three properties hold:
+				\begin{enumerate}
+					\item If $L(1,\chi) = 0$, then $L(1,\overline{\chi}) = 0$.
+					\item If $\chi$ is non-trivial and $L(1,\chi) = 0$, then
+						\begin{equation}
+							|L(s,\chi)| \leq C|s-1|,
+						\end{equation} 
+						when $1 \leq s \leq 2$.
+					\item For the trivial Dirichlet character $\chi_0$, we have
+						\begin{equation}
+							|L(s,\chi_0)| \leq \frac{C}{|s-1|},
+						\end{equation}
+						when $1 < s \leq 2$.
+				\end{enumerate}
+				
+				\begin{proof}
+					It's easy to show that $L(1,\overline{\chi}) = \overline{L(1,\chi)}$, the first statement is obvious.
+					To prove the second statement, we apply mean the value theorem to $L(s,\chi)$. We have
+					\begin{equation}
+						|L(s,\chi) - L(1,\chi)| = |s-1|L(a,\chi),
+					\end{equation}
+					for some $1 < a < s \leq 2$. Therefore, $|L(s,\chi)| \leq C|s-1|$.\\
+					Finally, the last statement follows because
+					\begin{equation}
+						|L(s,\chi_0)| = \left|\prod_{p_i \mid q}(1-p_i^{-s})\zeta(s)\right| \leq \left|A(1+\int_1^{\infty}\frac{dx}{x^s})\right| = \left|A(1+\frac{1}{s-1})\right| \leq \frac{C}{|s-1|}.
+					\end{equation}
+					The first equality holds according to proposition 3.4 and the first inequality holds because there are only finitely many $p_i$ so the product is bounded by some $A$ and $\zeta(s)$ is bounded by $\left(1+\int_1^{\infty}\frac{dx}{x^s}\right)$.
+				\end{proof}
+				Now we can conclude the proof that $L(1,\chi) \neq 0$ for a non-trivial complex Dirichlet character $\chi$.
+				\begin{proof}
+					Suppose we have $L(1,\chi) = 0$, then $L(1,\overline{\chi}) = 0$ and $\chi \neq \overline{\chi}$. Therefore, there are at least two terms in $\prod_{\chi}L(s,\chi)$, that vanish like $|s-1|$ as $s \rightarrow 1^+$. Moreover, by the last proposition, only the trivial character contributes to a increasing term as $s \rightarrow 1^+$, and this growth is no better than $O(\frac{1}{|s-1|})$. Thus, the product $\prod_{\chi}L(s,\chi)$ vanishes as $s \rightarrow 1^+$, which contradicts Lemma 5.3.
+				\end{proof}
+			\end{lem}		
+			
+		\subsection{Real Dirichlet characters}
+			As for the a real and non-trivial $\chi$, we use the summation along hyperbolas to prove that $L(s,\chi) \neq 0$.\\
+			Given a real and non-trivial Dirichlet character $\chi$, let
+			\begin{equation}
+				F(m,n) = \frac{\chi(n)}{(nm)^{1/2}},
+			\end{equation}
+			and define
+			\begin{equation}
+				S_N = \sum\sum F(m,n),
+			\end{equation}
+			where the sum is over all integers $m,n \geq 1$ that satisfy $mn \leq N$.\\
+			Before we start to prove that $L(1,\chi) \neq 0$, we first analyze the sum $\sum_{1 \leq n \leq N} \frac{1}{n^{1/2}}$
+			\begin{prop}
+				If $N$ is a positive integer, then
+				\begin{equation}
+					\sum_{1 \leq n \leq N} \frac{1}{n^{1/2}} = 2N^{1/2}+c+O\left({\frac{1}{N^{1/2}}}\right).
+				\end{equation}
+				\begin{proof}
+					Let $a_n = \frac{1}{n^{1/2}} - \int_{n}^{n+1} \frac{dx}{x^{1/2}}$, we have
+					\begin{equation}
+						0 \leq a_n \leq \frac{1}{n^{1/2}}-\frac{1}{(n+1)^{1/2}} \leq \frac{C}{n^{3/2}}.
+					\end{equation}
+					Suppose the series $\sum_{n=1}^{\infty}a_n$ converges to a limit $a$. Moreover, we have
+					\begin{equation}
+						\sum_{N+1}^{\infty} a_n \leq \sum_{n=N+1}^{\infty} \frac{C}{n^{3/2}} \leq C\int_{N}^{\infty} \frac{dx}{n^{3/2}} = O(\frac{1}{N^{1/2}}).
+					\end{equation}							
+					Therefore
+					\begin{equation}
+						\sum_{n=1}^{N}\frac{1}{n^{1/2}}-\int_{1}^{N}\frac{dx}{x^{1/2}} = a - \sum_{n=N+1}^{\infty}+\int_{N}^{N+1}\frac{dx}{x^{1/2}} = a + O(\frac{1}{N^{1/2}}).
+					\end{equation}
+				\end{proof}
+			\end{prop}			
+			
+			
+			\begin{prop}
+				The following statements are true for $S_N$::
+				\begin{enumerate}
+					\item $S_N \geq c\log N$ for some constant $c > 0$.
+					\item $S_N = 2N^{1\2} L(1,\chi) + O(1)$.
+				\end{enumerate}
+				
+				\begin{proof}
+					For the first statement, we first prove the following lemma.
+					\begin{lem}
+						$\sum_{n \mid k} \chi(n) \geq \left\{\begin{array}{cl}
+								0 & for \hspace{1mm} all \hspace{1mm} k\\
+								1, & if \hspace{1mm} k=l^2 \hspace{1mm} for \hspace{1mm} l \in \mathbb{Z},
+									\end{array}\right.$
+					\end{lem}
+					\begin{proof}
+						If $k$ is a power of a prime, $k = p^a$, then the divisor of $k$ are only the powers of $p$. We have
+						\begin{eqnarray}
+						\sum_{n \mid k} \chi(n) &=& \chi(1) + \chi(p) +...+\chi(p^a) \nonumber \\
+						&=& 1 + \chi(p) + \chi(p)^2 +...+ \chi(p)^a.
+						\end{eqnarray}
+						Hence, $\sum_{n \mid k} \chi(n) \geq 0$ for any $a$, and $\sum_{n \mid k} \chi(n) \geq 1$ for even $a$.\\
+						Generally, if $k = \prod_{n=1}^{N} p_n^{a_n}$, any divisor of $k$ is  of the form $\prod_{n=1}^{N} p_n^{b_n}$, where $0 \leq b_n \leq a_n$. Therefore,
+						\begin{equation}
+							\sum_{n \mid k} \chi(n) = \prod_{j=1}^{N}(\chi(1) + \chi(p_j) + \chi(p_j^2) + ... + \chi(p_j^{a_j})).
+						\end{equation}
+						Therefore, $\sum_{n \mid k}\chi(n) \geq 1$ if $k = l^2$ for some $l \in \mathbb{Z}$.
+					\end{proof}
+					From lemma (5.20), we then have
+					\begin{eqnarray}
+						S_N &=& \sum_{nm = N} \frac{\chi(n)}{(nm) ^{1/2}} \nonumber \\
+							&=& \frac{1}{N^{1/2}} \sum_{n \mid N} \chi(n) \nonumber \\
+							& \geq & \sum_{k=l^2, l \leq N^{1/2}} \frac{1}{k^{1/2}} \geq c\log N,
+					\end{eqnarray}
+					for some constant $c$.\\
+					To prove the second statement, we calculate the sum $S_N$ by taking the sum in a different way. Consider the sums over three separated regions,
+					\begin{center}
+						$S_1 = \sum F(m,n)$;\\
+						$S_2 = \sum F(m,n)$;\\
+						$S_3 = \sum F(m,n)$.
+					\end{center}
+					where $S_1,S_2,S_3$ are sums over the regions $\{1 \leq m < N^{1/2}, N^{1/2} < n \leq N/m\}$, $\{1 \leq m \leq N^{1/2}, 1 \leq n \leq N^{1/2}\}$ and $\{N^{1/2} < m \leq N/n, 1 \leq n < N^{1/2}\}$
+					We write
+					\begin{equation}
+						S_N =  S_1 + (S_2 + S_3),
+					\end{equation}
+					and we evaluate $S_1$ by first fixing $m$, and $S_2 + S_3$ by first fixing $n$. To prove the statement, we also need the following lemma:
+					
+					\begin{lem}
+						For all integers $0 < a < b$ we have
+						\begin{enumerate}
+							\item $\sum_{n=a}^{b} \frac{\chi(n)}{n^{1/2}} = O(a^{-1/2})$,
+							\item $\sum_{n=a}^{b} \frac{\chi(n)}{n} = O(a^{-1})$.
+						\end{enumerate}
+						
+						\begin{proof}
+							We use summation by parts. Let $s_n = \sum_{1 \leq k \leq n} \chi(k)$, and by Lemma 3.7, we have $|s_n| \leq q$ for all $n$. Therefore													\begin{eqnarray}
+								\sum_{n=a}^{b} \frac{\chi(n)}{n^{1/2}} &=& \sum_{n=a+1}^{b} (s_n-s_{n-1})\frac{1}{n^{1/2}} + \frac{\chi(a)}{a^{1/2}} \nonumber \\
+								&=& \sum_{n=a}^{b-1} s_n[n^{-1/2}-(n+1)^{-1/2}] +O(a^{-1/2}) \nonumber \\
+								&=& O(\sum_{n=a}^{\infty} n^{-3/2}) + O(a^{-1/2}) \nonumber \\
+								&=& O(a^{-1/2}).
+							\end{eqnarray}
+							Similarly we can prove the second statement.
+						\end{proof}
+					\end{lem}					
+					With this lemma, we can finish the proof of the proposition. Summing vertically for $S_1$, we have
+					\begin{equation}
+						S_1 = \sum_{m < N^{1/2}} \frac{1}{m^{1/2}} \left(\sum_{N^{1/2} < n \leq N/m} \frac{\chi(n)}{n^{1/2}}\right) = \sum_{m < N^{1/2}} \frac{1}{m^{1/2}} O(N^{-1/4}).
+					\end{equation}										
+					Moreover, 
+					\begin{equation}
+						O\left(\sum_{m < N^{1/2}} \frac{1}{m^{1/2}}\right) = O\left(\int_{1}^{N^{1/2}}\frac{1}{m^{1/2}}dm\right) = O(N^{1/4}).
+					\end{equation}
+					Therefore, $S_1 = O(1)$.\\
+					Finally, we sum horizontally for $S_2 + S_3$:
+					\begin{eqnarray}
+						S_2+S_3 &=& \sum_{1 \leq n \leq N^{1/2}} \frac{\chi(n)}{n^{1/2}}\left(\sum_{m \leq N^{1/2}} \frac{1}{m^{1/2}}\right) \nonumber \\
+						&=& \sum_{1 \leq n \leq N^{1/2}} \frac{\chi(n)}{n^{1/2}}\{2(N/n)^{1/2} + c + O((n/N)^{1/2})\} \nonumber \\
+						&=& 2N^{1/2} \sum_{1 \leq n \leq N^{1/2}}\frac{\chi(n)}{n} + c\sum_{1 \leq n \leq N^{1/2}} \frac{\chi(n)}{n^{1/2}} +O(\frac{1}{N^{1/2}} \sum_{1 \leq n \leq N^{1/2}} 1).
+					\end{eqnarray}
+					Let $A = 2N^{1/2} \sum_{1 \leq n \leq N^{1/2}}\frac{\chi(n)}{n}$, then 
+					\begin{equation}
+						A = 2N^{1/2}L(1,\chi) + 2N^{1/2}O{N^{-1/2}} = 2N^{1/2}L(1,\chi) + O(1).
+					\end{equation}
+					Moreover, the Lemma 5.25 gives $c\sum_{1 \leq n \leq N^{1/2}} \frac{\chi(n)}{n^{1/2}} = O(1)$ and we also have \\ $O(\frac{1}{N^{1/2}} \sum_{1 \leq n \leq N^{1/2}} 1) = O(1)$. Thus $S_N = 2N^{1/2}L(1,\chi) + O(1)$, which is the second statement of Proposition 5.19.
+				\end{proof}
+			\end{prop}
+			Suppose $L(1,\chi) = 0$ for some non-trivial real Dirichlet character $\chi$, by Proposition 5.19, we know that
+			\begin{equation}
+				S_N = O(1) \geq c\log N,
+			\end{equation}
+			which is impossible. Therefore $L(1,\chi) \neq 0$ for non-trivial $\chi$.
+			
+		\section{Conclusion}
+			From the last section, we know that $L(1,\chi) \neq 0$ for any non-trivial Dirichlet character $\chi$. Then by equation 4.21, we have that $\sum_{p} \frac{\chi(p)}{p^s}$ remains bounded as $s \rightarrow 1^+$, which by equation 2.6 implies that $\sum_{p \equiv l} \frac{1}{p^s}$ diverges as $s \rightarrow 1^+$.\\
+			Thus there are infinitely many primes $p$ such that $p \equiv l$ mod $q$ and we have proved the Dirichlet's theorem.
+		
+		\subsection*{Acknowledgments}  It is a pleasure to thank my mentor, 
+Wouter van Limbeek and Bena Tshishiku, for all their help in picking this interesting theorem and writing this paper. 
+
+	\begin{thebibliography}{9}
+
+		\bibitem{elias}
+			Elias M. Stein, Rami Shakarchi.
+			Fourier Analysis : An Introduction.
+			Princeton University Press. 2003.
+	
+		\bibitem{armstrong}
+			M.A. Armstrong.
+			Groups and Symmetry.
+			Springer-Verlag New York Inc. 1988. 
+
+\end{thebibliography}
+		
+\end{document}

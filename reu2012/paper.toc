@@ -1,0 +1,5 @@
+\contentsline {section}{\tocsection {}{1}{What does the table of contents command do?}}{1}
+\contentsline {section}{\tocsection {}{2}{How do the environment commands work?}}{1}
+\contentsline {section}{\tocsection {}{3}{Xypic and diagrams}}{2}
+\contentsline {subsection}{\tocsubsection {}{}{Acknowledgments}}{2}
+\contentsline {section}{\tocsection {}{}{References}}{2}

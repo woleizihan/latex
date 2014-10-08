@@ -1,0 +1,389 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+\begin{document}
+	\begin{abstract}
+		Abstract here.
+	\end{abstract}
+	
+	\title{Dirichlet's Theorem}
+	\author{Ang Li}
+	\date{}
+	\maketitle
+	
+	\tableofcontents
+	
+	\section{Fourier analysis on $\mathbb{Z}(N)$ }
+		\vspace{5mm}
+		\subsection{The group $\mathbb{Z}(N)$}
+			\begin{defn}
+				A complex number $z$ is an $N^{\text{th}}$ \textbf{root of unity} if $z^N = 1$. We denote the set of all $N^{\text{th}}$ roots of unity by $\mathbb{Z}(N)$
+			\end{defn}
+		
+			\begin{defn}
+				Two integers $x$ and $y$ are \textbf{congruent modulo} $N$ if the difference $x-y$ is divisible by $N$, and we write $x \equiv y$ mod $N$.
+			\end{defn}
+		
+			\begin{itemize}
+				\item $x \equiv x$ mod $N$ for all integers $x$
+				\item If $x \equiv y$ mod $N$, then $y \equiv x$ mod $N$
+				\item If $x \equiv y$ mod $N$, and $y \equiv z$ mod $N$, then $x \equiv z$ mod $N$ 
+			\end{itemize}	
+			\vspace{2mm}
+			Thus the relation $\equiv$ on $\mathbb{Z}$ is an equivalence relation. Let $R(x)$ denote the equivalence class, or residue class, of integer $x$. There are $N$ equivalence classes and each class has a unique representative between $0$ and $N-1$
+		
+			\begin{defn}
+				The group of integers modulo $N$, sometimes denoted by $\mathbb{Z}/N\mathbb{Z}$, is $\{0,1,2.....N-1\}$.
+			\end{defn}		
+		\vspace{1mm}		
+		
+		\subsection{Fourier inversion theorem and Plancherel identity on $\mathbb{Z}(N)$}
+			Let $e_n(x) = e^{2\pi inx}$\\
+			$e_n(x+y) = e_n(x)+e_n(y)$\\
+			On $\mathbb{Z}(N)$, the appropriate analogues are the $N$ functions $e_0$,...,$e_{N-1}$ defined by\\
+			
+			\begin{center}
+				$e_l(k) = \zeta ^{lk} = e^{2\pi lk/N}$ for $l = 0,...,N-1$ and $k = 0,...N-1$,			
+			\end{center}
+			\vspace{2mm}
+			where $\zeta = e^{2\pi ilk/N}$
+			
+			\begin{defn}
+				The \textbf{Hermitian inner product} over a vector space is defined by
+				\begin{center}
+					$(F,G) = \sum_{k=0}^{N-1} F(k)\overline{G(k)}$
+				\end{center}	
+				and associated norm 
+				\begin{center}
+					$\|F\| = \sum_{k=0}^{N-1} |F(k)|^2$
+				\end{center}
+			\end{defn}
+			
+			\begin{lem}
+				The family $\{e_0,...e_{N-1} \}$ is orthogonal. In fact,\\
+				\begin{center}
+					$(e_m,e_l)=\left\{\begin{array}{cl}
+								N, & if \hspace{1mm} m=l,\\
+								0, & if \hspace{1mm} m\neq l.
+									\end{array}\right.
+					$
+				\end{center}
+				
+				\begin{proof}
+					We have\\
+					\begin{center}
+						$
+					(e_m,e_l)=\sum_{k=0}^{N-1} \zeta ^{mk} \zeta^{-lk}=\sum_{k=0}^{N-1} \zeta ^{(m-l)k}.			
+						$
+					\end{center}
+					\vspace{2mm}
+					If $m=l$, $\zeta ^{(m-l)k}=1$ for each $k$, and $(e_m,e_l)=N$. If $m\neq n$ then $q=\zeta ^{m-l}$ is not equal to 1, and\\
+					
+					\begin{center}
+						$1+q+q^2+...+q^{N-1}=\frac{1-q^N}{1-q}=0$
+					\end{center}
+					\vspace{2mm}
+					because $q^N=\zeta ^{(m-l)N=e^{2(m-l)\pi}}=1$
+				\end{proof}
+			\end{lem}
+			
+			\begin{defn}
+				The $n^{\text{th}}$ \textbf{Fourier coefficient} of $F$ by\\
+				\begin{center}
+					$a_n=\sum_{k=0}^{N-1} F(k)e^{-2\pi ikn/N} $
+				\end{center}
+			\end{defn}
+			
+			\vspace{2mm}			
+			
+			\begin{thm}
+				\emph{If $F$ is a function on $\mathbb{Z}(N)$, then\\
+					\begin{center}
+						$F(k)=\sum_{n=0}^{N-1} a_ne^{2\pi ink/N}$.
+					\end{center}	
+					Moreover,\\
+					\begin{center}
+						$\sum_{n=0}^{N-1}|a_n|^2 = \frac{1}{N} \sum_{k=0}^{N-1} |F(k)|^2$.
+					\end{center}													
+				}
+				\vspace{2mm}				
+				
+				\begin{proof}
+					We define $e_l^* = \frac{1}{\sqrt{N}} e_l$. Since the vector space $V$ of all complex-valued functions on $\mathbb{Z}(N)$ is $N$-dimensional, and from the lemma $\{ e_0,...e_{N-1}\}$ is orthogonal, $\{ e_0^*,...,e_{N-1}^*\}$ is an orthonormal basis for $V$. Hence for any $F \in V$ we have\\
+					\begin{center}
+						$F = \sum_{n=0}^{N-1} (F,e_n^*)e_n^*$ \hspace{2mm} and \hspace{2mm} $\|F\| = \sum_{n=0}^{N-1}|(F,e_n^*)|^2$
+					\end{center}
+					We also have\\
+					\begin{center}
+						$(F,e_n^*) = \sqrt{N}\sum_{k=0}^{N-1} F(k)e^{-2\pi ink/N} = \sqrt{N}a_n$
+					\end{center}
+					\vspace{2mm}
+					Then\\
+					\begin{center}
+						$F(k) = \sum_{n=0}^{N-1} \sqrt{N} a_ne_n^*(k) = \sum_{n=0}^{N-1} a_ne^{2\pi ink/N} $
+					\end{center}
+					\vspace{2mm}
+					Moreover,\\
+					\begin{center}
+						$\sum_{n=0}^{N-1} |a_n|^2 = \sum_{n=0}^{N-1} |(F,e_n^*)|^2 = \|F\|^2 = \frac{1}{N} \sum_{k=0}^{N-1} |F(k)|$
+					\end{center}
+				\end{proof}
+			\end{thm}
+			
+			\vspace{5mm}
+			
+	\section{Fourier analysis on finite abelian groups}
+		\vspace{5mm}
+		\subsection{Abelian groups}
+			\begin{defn}
+				An \textbf{abelian group} (or commutative group) is a set $G$n together with a binary operation on pairs of elements of $G$, $(a,b) \longmapsto a \cdot b$, that satsfies the following conditions \\
+				\begin{enumerate}
+					\item \emph{Associativity} : $a \cdot (b \cdot c) = (a \cdot b)\cdot c$ \hspace{2mm} for all $a,b,c \in G$.
+					\vspace{2mm}
+					\item \emph{Identity} : There exists an element $u \in G$(often written as either 1 or 0) such that $a \cdot u = u \cdot a = a$ \hspace{2mm} for all $a \in G$.
+					\vspace{2mm}
+					\item \emph{Inverses} : For every $a \in G$, there exists an element $a^{-1} \in G$ such that $a \cdot a^{-1} = a^{-1} \cdot a = u$.
+					\vspace{2mm}
+					\item \emph{Commutativity} : For $a,b \in G$, we have $a \cdot b = b \cdot a$.
+				\end{enumerate}
+			\end{defn}
+			
+			\begin{defn}
+				A \textbf{homomorphism} between two abelian groups $G$ and $H$ is a map $f:G \rightarrow H$ which satisfies the property\\
+				\begin{center}
+					$f(a \cdot b) = f(a) \cdot f(b)$,
+				\end{center}
+				\vspace{2mm}
+				where the dot on the left-hand side is the operation in $G$, and the dot on the right-hand side the operation in $H$.
+			\end{defn}
+			
+			\begin{defn}
+				Two groups $G$ and $H$ are \textbf{isomorphic}, and write $G \approx H$, if there is a bijective homomorphism from $G$ to $H$.
+			\end{defn}
+			
+			\begin{defn}
+				In finite abelian group $G$, the \textbf{order} of $G$ is the number of elements in $G$, denoted by $|G|$.
+			\end{defn}
+			
+			\begin{defn}
+				If $G_1$ and $G_2$ are two finite abelian groups, their \textbf{direct product} $G_1 \times G_2$ is the group whose elements are pairs $(g_1,g_2)$ with $g_1 \in G_1$ and $g_2 \in G_2$. The operation in $G_1 \times G_2$ is them defined by\\
+				\begin{center}
+					$(g_1,g_2) \cdot (g_1^{\prime}, g_2^{\prime}) = (g_1 \cdot g_1^{\prime} , g_2 \cdot g_2^{\prime})$.
+				\end{center}
+			\end{defn}
+			
+			\vspace{2mm}
+			
+			Clearly, if $G_1$ and $G_2$ are two finite abelian groups, then so is $G_1 \times G_2$
+			
+			\begin{defn}
+				An integer $n \in \mathbb{Z}(q)$ is a \textbf{unit} if there exists an integer $m \in \mathbb{Z}(q)$ so that\\
+				\begin{center}
+					$nm \equiv 1$ \hspace{3mm} mod $q$.
+				\end{center}
+				\vspace{2mm}		 						
+				The set of all units in $\mathbb{Z}(q)$ is denoted by $\mathbb{Z}^*(q)$.
+			\end{defn}
+			
+		\subsection{Characters}
+			\begin{defn}
+				Let $G$ be a finite abelian group and $S^1$ the unit circle in the complex plane. A \textbf{character} on $G$ is a complex-valued function $e : G \rightarrow S^1$ which satisfies the following condition:\\
+				\begin{center}
+					$e(a \cdot b) = e(a) \cdot e(b)$ \hspace{3mm} fro all $a,b \in G$
+				\end{center}
+				The \textbf{trivial} or \textbf{unit character} is defined by $e(a) = 1$ for all $a \in G$
+			\end{defn}
+			
+			If $G$ is a finite abelian group, we denote by $\hat{G}$ the set of all characters of $G$.
+			
+			\begin{lem}
+				The set $\hat{G}$ is an abelian group under multiplication defined by\\
+				\begin{center}
+					$(e_1 \cdot e_2)(a) = e_1(a) \cdot e_2(a)$ \hspace{2mm} for all $a \in G$.
+				\end{center}
+			\end{lem}			
+			
+			\vspace{2mm}
+			
+			\begin{lem}
+				Let G be a finite abelian group, and $e : G \rightarrow \mathbb{C} - \{0\}$ a multiplicative function, namely $e(a \cdot b) = e(a)e(b)$ for all $a,b \in G$. Then e is a character.
+				\begin{proof}
+					The group $G$ is finite, then $|e(a)|$ is bounded above and below as as $a$ ranges over $G$. Since $|e(b^n)| = |e(b)|^n$, $|e(b)| = 1$ for all $b \in G$
+				\end{proof}
+			\end{lem}
+			
+		\subsection{The orthogonality relations}
+			\begin{lem}
+				If $e$ is a non-trivial character of the group $G$, then $\sum_{a \in G} e(a) = 0$.
+				\begin{proof}
+					Choose $b \in G$ such that $e(b) \neq 1$. Then\\
+						\begin{center}
+							$e(b)\sum_{a \in G} e(a) = \sum_{a \in G} e(b)e(a) = \sum_{a \in G} e(ab) = \sum_{a \in G} e(a)$.
+						\end{center}
+						\vspace{2mm}
+					Therefore $\sum_{a \in G} e(a) = 0$.
+				\end{proof}
+			\end{lem}		
+		
+			\begin{thm}
+				The characters of $G$ form an orthonormal family with respect to the Hermitian inner product.
+				\begin{proof}
+					Since $|e(a)| = 1$ for any character, we have\\
+					\begin{center}
+						$(e,e) = \frac{1}{|G|} \sum_{a \in G} e(a)\overline{e(a)} = \frac{1}{|G|} \sum_{a \in G} |e(a)|^2 = 1$.
+					\end{center}
+					\vspace{2mm}
+					If $e \neq e^{\prime}$ and both $e$ and $e^{\prime}$ are characters, we must prove that $(e,e^{\prime}) = 0$.
+					$e \neq e^{\prime}$ implies that $e(e^{\prime})^{-1}$ is non-trivial. The lemma shows that\\
+					\begin{center}
+						$\sum_{a \in G} e(a)(e^{\prime}(a))^{-1} = 0$.
+					\end{center}
+					\vspace{2mm}
+					
+					Since $(e^{\prime}(a))^{-1} = \overline{e^{\prime}(a)}$, the theorem is proved.
+				\end{proof}
+			\end{thm}			
+		\vspace{1mm}
+		
+		\subsection{Characters as a total family}
+			\begin{defn}
+				A linear transformation $T : V \rightarrow V$ is \textbf{unitary} if it preserves the inner product, $(Tv,Tw) = (v,w)$ for all $v,w \in V$
+			\end{defn}		
+		
+			\begin{thm}
+				(spectral theorem)\\
+				Any unitary transformation on a finite-dimensional space is diagonalizable. In other words, there exists a basis $\{v_1,...,v_d\}$(eigenvectors) of $V$ such that $T(v_i)=\lambda_iv_i$, where $\lambda_i \in \mathbb{C}$ is the eigenvalue attached to $v_i$.
+			\end{thm}
+			
+			\begin{lem}
+				Suppose $\{T_1,...,T_k\}$ is a commuting family of unitary transformations on the finite-dimensional inner product space V; that is,\\
+				\begin{center}
+					$T_iT_j = T_jT_i$ \hspace{2mm} for all $i,j$.
+				\end{center}
+				\hspace{2mm}
+				Then $T_1,...,T_k$ are simultaneously diagonalizable. In other words, there exists a basis for $V$ which consists of eigenvectors for every $T_i$.
+			\end{lem}
+						
+			\begin{thm}
+				The characters of a finite abelian group $G$ form a basis for the vector space of functions on $G$.
+			\end{thm}
+			
+		\subsection{Fourier inversion and Plancherel formula}
+			\begin{defn}
+				Given a finite abelian group $G$ and a function $f$ on $G$, define the \textbf{Fourier coefficient} of $f$ with respect to character $e$ of $G$, by\\
+				\begin{center}
+					$\hat{f}(e) = (f,e) = \frac{1}{|G|} \sum_{a \in G} f(a)\overline{e(a)}$,
+				\end{center}
+				\vspace{2mm}
+				and the \textbf{Fourier series} of f as\\
+				\begin{center}
+					$f \sim \sum_{e \in \hat{G}} \hat{f}(e)e$
+				\end{center}
+			\end{defn}
+			\vspace{2mm}
+			\begin{thm}
+				Let $G$ be a finite abelian group. The characters of $G$ form an orthonormal basis for the vector space $V$ of functions on $G$ equipped with the Hermitian inner product.In particular, any function $f$ on $G$ is equal to its Fourier series\\
+				\begin{center}
+					$f = \sum_{e \in G} \hat{f}(e)e$.
+				\end{center}
+				
+				\begin{proof}
+					Since the characters of the finite abelian group $G$ forms an orhtonormal basis for the vector space $V$ of functions on $G$, then\\
+					\begin{center}
+						$f = \sum_{e \in \hat{G}} c_ee$
+					\end{center}
+					\vspace{2mm}
+					for some set of constants $c_e$. Also, by because the orthogonality, we have\\
+					\begin{center}
+						$(f,e) = c_e = \hat{f}(e)$.
+					\end{center}
+					\vspace{2mm}
+					Therefore, $f = \sum_{e \in \hat{G}} \hat{f}(e) e$.
+				\end{proof}
+			\end{thm}
+			
+			\begin{thm}
+				(the Parseval-Plancherel formula)
+				If $f$ is a function on $G$, then $\|f\|^2 = \sum_{e \in \hat{G}} |\hat{f}()e|^2$.
+				\begin{proof}
+					Since the characters of $G$ form an orthonormal basis for vector space $V$, and $(f,e) = \hat{f}(e)$, we have\\
+					\begin{center}
+						$\|f\|^2 = (f,f) = \sum_{e \in \hat{G}} (f,e)\overline{\hat{f}()e} = \sum_{e \in \hat{G}} |\hat{f}(e)|^2$
+					\end{center}										
+				\end{proof}
+			\end{thm}
+	
+	\section{Elementary number theory}
+		\vspace{5mm}
+		\subsection{The fundamental theorem of arithmetic}
+			\begin{thm}
+				(Euclid's algorithm) For any integers $a$ and $b$ with $b > 0$, there exists unique integers $q$ and $r$ with $0 \leq r < b$ such that\\
+				\begin{center}
+					$a = qb +r$.
+				\end{center}
+			\end{thm}
+							
+			\begin{defn}
+				An integer $a$ \textbf{divides} $b$ if there exists another integer $c$ such that $ac = b$; we then write $a|b$ and say that $a$ is a \textbf{divisor} of $b$. A \textbf{prime number} is a positive integer greater than $1$ that has no positive divisors besides $1$ and itself. 
+			\end{defn}
+			
+			\begin{defn}
+				The \textbf{greatest common divisor} of two positive integers $a$ and $b$ is the largest integer that divides both $a$ and $b$. Two positive integers are \textbf{relatively prime} if their greatest common divisor is $1$.
+			\end{defn}			
+			
+			\begin{thm}
+				If $gcd(a,b) = d$, then there exist integers $x$ and $y$ such that\\
+				\begin{center}
+					$ax + by = d$
+				\end{center}								
+				\vspace{2mm}
+				
+				\begin{proof}
+					Consider the set $S$ of all positive integers of the form $ax+by$ where $x,y \in \mathbb{Z}$, and let $s$ be the smallest element in $S$. Claim that $s = d$. There exists integers $x$ and $y$ such that\\
+					\begin{center}
+						$ax+by = s$
+					\end{center}
+					\vspace{2mm}
+					
+					Clearly, any divisor of $a$ and $b$ divides $s$, so we have $d \leq s$. BY Euclid's algorithm, we can write $a = qr + r$ with $0 \leq r < s$. By $ax+by = s$, we have $qax + qby = qs = a - r$. Hence, $r = a(1-qx) + b(-qy)$. Since $s$ is the minimal in $S$, we have $r = 0$. Therefore, $s|a$ and similarly $s|b$. Then $s = d$.
+				\end{proof}
+			\end{thm}
+\end{document}
