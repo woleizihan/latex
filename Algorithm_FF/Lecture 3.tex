@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsthm} 
+\usepackage[margin=1.25in]{geometry}
+\usepackage{graphicx,ctable,booktabs}
+\usepackage{enumerate}
+
+\makeatletter
+\newenvironment{problem}{\@startsection
+       {section}
+       {1}
+       {-.2em}
+       {-3.5ex plus -1ex minus -.2ex}
+       {2.3ex plus .2ex}
+       {\pagebreak[3]%forces pagebreak when space is small; use \eject for better results
+       \large\bf\noindent{Problem }
+       }
+       }
+       {%\vspace{1ex}\begin{center} \rule{0.3\linewidth}{.3pt}\end{center}}
+       \begin{center}\large\bf \ldots\ldots\ldots\end{center}}
+\makeatother
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Redmond McNamara}
+\chead{} 
+\rhead{\thepage} 
+\lfoot{\small\scshape Algorithms in Finite Groups} 
+\cfoot{} 
+\rfoot{\footnotesize Problem Set 3} 
+\renewcommand{\headrulewidth}{.3pt} 
+\renewcommand{\footrulewidth}{.3pt}
+\setlength\voffset{-0.25in}
+\setlength\textheight{648pt}
+
+\newcommand{\fff}{\mathbb F}
+\newcommand{\zzz}{\mathbb Z}
+
+\begin{document}
+
+	\title{Algorithms in Finite Groups}
+	\author{MATH 37500: L\'aszl\'o Babai \\
+       	 Scribe: Ang Li} 
+	\date{10/07/14}
+
+	\maketitle
+
+	\theoremstyle{definition}
+	\newtheorem{ex}{Exercise}[section]
+	\newtheorem{definition}[ex]{Definition}
+	\setcounter{section}{1}
+
+	\begin{ex}
+		$S_k^{(2)} \leq S_{k \choose{2}}$ is primitive if $k \geq 5$.
+	\end{ex}
+
+	\begin{ex}
+		Peterson's graph is isomorphic to the line graph of $K_5$.
+	\end{ex}
+	
+	\begin{ex}
+		Automorphism group of Dodecahedron is not isomorphic to $S_5$.
+	\end{ex}
+	
+	\begin{ex}
+		$\mathrm{Aut}^+(Dodecahedron) \cong A_5$ and $\mathrm{Aut}(Dodecaheron) \cong A_5 \times C_2$.
+	\end{ex}
+	
+	\begin{ex}
+		If $A$ is an orientation preserving congruence of $\mathbb{R}^3$, then $A \in \mathrm{SO}(3)$, which is the set of orthogonal matrices of determinant $1$. Hence $A$ is a rotation.
+	\end{ex}
+	
+	\begin{ex}
+		Given $A \in \mathrm{O}(3) \setminus \mathrm{SO}(3)$. Then $A$ can be represented by rotation and reflection in a plane perpendicular to the rotation axis.
+	\end{ex}
+	
+	\begin{ex}
+		Realize $4$-cycles in $\mathrm{Aut}(Tetrahedron)$ as rotational reflection.
+	\end{ex}
+	
+	\begin{ex}
+		$\mathrm{Aut}(Q_n)$ includes $\mathbb{Z}_2^n$ and $\mathbb{Z}_2^n \lhd \mathrm{Aut}(Q_n)$.
+	\end{ex}
+	
+	\begin{ex}
+		$\mathrm{Aut}(Q_n) / \mathbb{Z}_2^n \cong S_n$.
+	\end{ex}
+	
+	\begin{ex}
+		$\mathrm{Aut}(Q_n) \cong \mathbb{Z}_2^n \wr S_n$.
+	\end{ex}
+	
+	\begin{ex}
+		Is $\mathrm{Aut}(Q_n)$ primitive?
+	\end{ex}
+	
+	\begin{ex}
+		If $A$ is primitive and not of prime order and $B$ is primitive. Then $A \wr B$ in product action is primitive.
+	\end{ex}
+	
+	\begin{ex}
+		$G_{x \to y} = \{g: x^g = y \} = G_x \cdot g_0 = g_0 \cdot G_y$, where $g_0 \in G$ such that $x^{g_0} = y$.
+	\end{ex}
+	
+	\begin{ex}
+		$[R_G, L_G] = 1$. $R_G, L_G$ centralize each other.
+	\end{ex}
+	
+	\begin{ex}
+		$C_{\mathrm{Sym}(G)}(R_G) = L_G$.
+	\end{ex}
+	
+	\begin{ex}
+		$L_G$ and $R_G$ are permutationally isomorphic. In particular, every regular permutation group any regular permutation group $H \leq \mathrm{Sym}(G)$ is isomorphic to $R_G$.
+	\end{ex}
+	
+	\begin{ex}
+		If $G$ is semiregular, then $C_{\mathrm{Sym}(\Omega)}(G)$ is transitive.
+	\end{ex}
+	
+	\begin{ex}
+		If $G$ is transitive, then $C_{\mathrm{Sym}(\Omega)}(G)$ is semiregular.
+	\end{ex}
+	
+	\begin{ex}
+		$G$ transitive and $N \lhd G$, then orbits of $N$ form a $G$-invariant partition of $\Omega$.
+	\end{ex}
+	
+	\begin{ex}
+		$G$ primitive and has a normal subgroup $N$ which is not trivial, then $N$ is transitive.
+	\end{ex}
+	
+	\begin{ex}
+		Transitive abelian group is regular.
+	\end{ex}
+	
+	\begin{ex}
+		Give $H \leq G$, there exists a unique permutation action of $G$ such that $G_x$ corresponds to $H$.
+	\end{ex}
+	
+	\begin{ex}
+		The kernel of this permutation action is $\mathrm{Core}(H) = \cap_{g \in G}H^g$.
+	\end{ex}
+
+\end{document}
