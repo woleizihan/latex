@@ -1,0 +1,267 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+
+	\title{Title}
+	{\bf Corrections}
+	\begin{enumerate}
+	\item Changed Abstract and Intro
+	\item Removed all number labels from equations
+	\item Changed $k$ graph property to $k$-uniform hypergraph property
+	\item Changed condition on prop 4.2 $i \in \mathbb{N} \rightarrow i \leq k$
+	\end{enumerate}
+	
+	\begin{abstract}
+		 Boolean functions $f$ satisfying $bs(f) = \Omega(s(f)^{2})$ are said to demonstrate a quadratic gap between block sensitivity and sensitivity.  In this paper we present a graph property demonstrating a quadratic gap and generalize it to $k$-uniform hypergraph properties. Our class of $k$-uniform hypergraph properties demonstrates a quadratic gap for all $k$ even and a nearly-quadratic gap for $k$ odd.  We also present a $k$-uniform hypergraph property with sensitivity $O(v^{\frac{k}{2}})=O(\sqrt n)$ for all $k$. Finally, we include a general criterion for determining whether a certain type of graph property will achieve a quadratic gap.  
+  
+	\end{abstract}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\section{Introduction}
+The sensitivity of a Boolean function $f$ on $n$ variables is the maximum over all inputs $x$ of the number of $i$ such that flipping the $i$-th bit of $x$ flips the value of $f(x)$. Block sensitivity, introduced by Nisan[REF HERE], is the maximum over all inputs $x$ of the number of disjoint blocks such that flipping each block flips the value of $f(x)$. Many different complexity measures exist for Boolean functions besides sensitivity and block sensitivity.  However, it has been shown [Hatami, Kulkarni, Pankratov] that block sensitivity is polynomially related to several other important complexity measures, including certificate complexity, decision-tree complexity, and degree as a multilinear polynomial. 
+
+It is clear from the definition that for all $f$, $s(f) \leq bs(f)$.  Whether there is a polynomial bound in the other direction is still open and is known as the sensitivity conjecture. In fact, a stronger conjecture by Nisan and Szegedy is that $bs(f) \leq s(f)^{2}$. The largest known gap is quadratic and this is due to Rubinstein[REF HERE]. Turan has shown that for a graph property $f$ on $v$ vertices, $s(f) = \Omega(v)$, which implies the largest gap possible for graph properties is quadratic. In this paper, we prove that the quadratic gap can be achieved for graph properties. Specifically, we demonstrate a graph property $f$ with $\Theta(v)$ sensitivity and $\Theta(v^2)$ block sensitivity. Moreover, we generalize this property to $k$-uniform hypergraphs and produce quadratic gaps for all $k$ even.
+
+	For $k$ odd, our $k$-uniform hypergraph property does not give us a quadratic gap since $s(f) = O(v^{\lceil k/2 \rceil})$, an upper bound strictly larger than $O(v^{k/2})$. Instead, we make indirect progress by constructing $k$-uniform hypergraph properties with $O(v^{k/2})$ sensitivity. Conjecture by Kenyon and Kutin says that for a "nice" boolean function $f$, $s^0(f)s^1(f) = \Omega(n)$. However, Chakraborty showed that this was not true by giving a counterexample with sensitivity $\Theta(n^{1/3})$. Here, we conjecture that the inequality is holds for $k$-uniform hypergraph properties. Assuming this conjecture, we have a lower bound of $\Omega(v^{k/2})$ for the sensitivity of $k$-uniform hypergraphs and we give graph properties for $k$ odd that show that this conjectured lower bound is tight.
+
+	\section{Preliminaries}
+		Let $f: \{0,1\}^n \to {0,1}$ be a Boolean function. For any input $x \in \{0,1 \}^n$, let $x^{(i)}$ be $x$ with $i^{th}$ bit flipped. Then the $i ^ {th}$ bit is said to be \textit{sensitive} for $f$ if $f(x) \neq f(x^{(i)})$. The sensitivity of $f$ on an input $x$, denoted by $s(f,x)$ is the number of sensitive bits for $f$ on $x$.
+		\begin{defn}
+			The \textit{sensitivity} of a Boolean function $f$, denoted by $s(f)$ is the maximum of $s(f,x)$ over all $x \in \{0,1\}^n$.
+		\end{defn}
+		Similarly, given $x \in \{0,1\}^n$ and $B \subset [n]$, let $x^{B}$ be $x$ with $i^{th}$ bit flipped for any $i \in B$. Then the "block" $B$ is sensitive for $f$ on $x$ if $f(x) \neq f(x^B)$. And the \textit{block sensitivity} of $f$ on $x$, denoted by $bs(f,x)$ is the maximum number of \textit{pairwise disjoint} sensitive blocks of $f$ on $x$.
+		\begin{defn}
+			The \textit{block sensitivity} of a Boolean function $f$, denoted by $bs(f)$ is the maximum of $bs(f,x)$ over all $x \in \{0,1\}^n$.
+		\end{defn}
+		Obviously, for any Boolean function $f$, we have 
+		\begin{equation}
+			bs(f) \geq s(f). \nonumber
+		\end{equation}
+		
+		\begin{defn}
+			A Boolean function $f: \{0,1\}^{v \choose{2}} \to \{0,1\}$ is called a \textit{graph property} if for every input $x = (x_{(1,2)},...,x_{(n-1,n)})$ and every permutation $\sigma \in S_v$, we have
+			\begin{equation}
+				f(x_{(1,2)},...,x_{(n-1,n)}) = f(x_{(\sigma (1), \sigma (2))},...,x_{(\sigma (n-1), \sigma (n))}). \nonumber
+			\end{equation}
+		\end{defn}
+		Similarly, we can define $k$-uniform hypergraph property.
+			\begin{defn}
+				A Boolean function $f: \{0,1\}^{v \choose{k}} \to \{0,1\}$ is called a \textit{$k$-uniform hypergraph property} if for every input $x = (x_{(1,2,...,k)},...,x_{(n-k+1,...,n-1,n)})$ and every permutation $\sigma \in S_v$, we have
+			\begin{equation}
+				f(x_{(1,2,...,k)},...,x_{(n-k+1...,n-1,n)}) = f(x_{(\sigma (1), \sigma (2),..., \sigma(k))},...,x_{(\sigma (n-k+1),...,\sigma (n-1), \sigma (n))}). \nonumber
+			\end{equation}
+			\end{defn}
+			
+			\section{Gaps in Sensitivity and Block Sensitivity for Graph Properties}
+	First we start with a $2$ graph property with a quadratic gap between block sensitivity and sensitivity.
+
+\begin{prop}
+There exists a graph property $f$, such that, $s(f) = \Theta(v)$ and $bs(f) = \Theta(v^2)$.
+\end{prop} 
+
+\begin{proof}
+Let $f$ be the graph property, "there exists an isolated triangle". By isolated triangle, we mean three vertices $a,b,c$ that are connected to each other and not connected to any $v \in V\setminus\{a,b,c\}$.
+
+For block sensitivity, consider the block sensitivity on an empty graph input. A triangle is not edge disjoint with $3(v-2)+1$ triangles and there are ${v \choose 3}$ triangles on a graph on $v$ vertices. It follows that there are at least $\Omega(v^2)$ edge disjoint triangles on $v$ vertices. Hence, $bs(f) = \Omega(v^2)$. Since $bs(f) \leq {v \choose 2}$ trivially, it follows that $bs(f) = \Theta(v^2)$.
+
+For sensitivity, we consider $1 \rightarrow 0$ sensitivity first. To change from 1 to 0, we need to either remove an edge from the isolated triangle or add an edge to it so that it is no longer isolated. For the first case, it is easy to see that at most 3 bits are sensitive. For the second case, at most $3(v-3)$ bits can make the triangle not isolated. Hence $1 \rightarrow 0$ sensitivity is $\Theta(v)$.
+
+To change from 0 to 1, we need to either add an edge to complete an isolated triangle or remove an edge so that a triangle becomes isolated. Define "sensitive" 3-tuple to be 3 vertices that is 1 bit away from an isolated triangle. Note that sensitive 3-tuples are pairwise vertex disjoint. 
+
+To see this, let two distinct sensitive 3-tuples be $(a,v_1,v_2)$ and $(a,w_1,w_2)$. Since, $(a,v_1,v_2)$ is 1 bit away from being an isolated triangle, $(a,w_1,w_2)$ can have at most 1 edge incident to $a$ because if the 3-tuple has more than 2 edges incident to $a$, $(a,v_1,v_2)$ will not be isolated from vertices $w_1$ and $w_2$ after flipping 1 bit. In fact, $(a,w_1,w_2)$ has exactly 1 edge incident to $a$ since if it has no edges incident to $a$, it cannot be 1 bit away from a triangle. By the same logic, $(a,v_1,v_2)$ has exactly 1 edge incident to $a$. This implies that induced subgraphs on $(a,v_1,v_2)$ and $(a,w_1,w_2)$ are trees. However, this means that $(a,v_1,v_2)$ cannot be sensitive since there is an edge connecting $a$ to a vertex other than $v_1,v_2$. Hence, sensitive 3-tuples cannot share a vertex. 
+
+Now Let $C_1, C_2, ... C_m$ be sensitive 3-tuples on a graph $G$. Since two sensitive 3-tuples cannot share a vertex, a vertex uniquely determines a sensitive 3-tuple. Hence, $m \leq v$. Since we can have $v/3$ vertex disjoint trees consisting of 3 vertices on $G$, $0 \rightarrow 1$ sensitivity is $\Theta(v)$.  
+Hence, $bs(f) = \Theta(v^2)$ and $s(f) = \Theta(v)$.
+\end{proof}
+
+	Then we can generalize this graph property to a $k$-uniform hypergraph property for any $k \in \mathbb{N}$, which gives a quadratic gap for $k$ even and nearly a quadratic gap for $k$ odd.
+		\begin{prop}
+		Let $k,i \in \mathbb{N}$ and $1 \leq i \leq k/2$, there exists a $k$-uniform hypergraph property $f$ on $v$ vertices such that $s(f) = O(v^{k-i})$ and $bs(f) = \Omega (v^{k})$.
+	\end{prop}
+	We prove the proposition by first proving two lemmas.
+	\begin{lem}
+		In a $k$-uniform hypergraph on $v$ vertices, there are $\Omega (v^k)$ disjoint $K_{k+1}^{(k)}$.
+	\end{lem}
+	\begin{proof}
+		There are $v \choose{k+1}$  many ($k+1$)-cliques and for every clique chosen we eliminate any other cliques with more than $k-1$ points in common. In this way we get at least
+		\begin{equation}
+			\frac{{v \choose{k+1}}}{{k+1 \choose{k}}(v-k)} = c*v^{k} \nonumber
+		\end{equation}		 
+	many cliques and any two of them have no more than $k-1$ points in common, which guarantees that they are disjoint cliques.
+	\end{proof}
+
+	\begin{lem}
+		Given $\mathcal{F}$ a family of subsets of $[n]$ such that any element of $\mathcal{F}$ has size $s \geq i$ and the intersection of any two elements has size at most $i-1$. Then we have
+		\begin{equation}
+			|\mathcal{F}| \leq {n \choose{i}}. \nonumber
+		\end{equation}
+	\end{lem}
+	\begin{proof}
+		Since the intersection of any element of $\mathcal{F}$ has size at most $i-1$, any subset of $[n]$ with size $i$ is contained in at most one element of $\mathcal{F}$. And any element of $\mathcal{F}$ contains at least one $i$ subset of $[n]$, we have 
+		\begin{equation}
+			|\mathcal{F}| \leq {n \choose{i}}. \nonumber
+		\end{equation}
+	\end{proof}
+	With these two lemmas we can define the desired $k$-uniform hypergraph property and analyze its block sensitivity and sensitivity.
+	\begin{proof}
+		Define $f$ be a $k$-uniform hypergraph property on $v$ vertices that there exists a $K_{k+1}^{(k)}$ inside the graph such that $|K_{k+1}^{(k)} \cap E| \leq  i-1$ for any edge $E$ not lying entirely inside the clique. We claim that this is the desired $k$-uniform hypergraph property.\\
+		\indent First we calculate the block sensitivity. Consider the empty graph, by the first lemma, there are $\Omega (v^k)$ disjoint cliques and each of them is a sensitive block. Hence we have 
+		\begin{equation}
+			bs(f) = \Omega (v^k). \nonumber
+		\end{equation}
+		\indent Then we want to show that the sensitivity of $f$ is $O(v^{k-i})$. We calculate the sensitivity by looking at $s^0(f)$ and $s^1(f)$ separately\\
+		\indent When $f=1$, there is a desired $K_{k+1}^{(k)}$ clique inside the graph. To change the value of $f$, we need to either remove an edge from $K_{k+1}^{(k)}$ or add an edge with more than $i-1$ common vertices with the clique. We have
+		\begin{equation}
+			s^1(f) \leq {k+1 \choose{i}}{v-i \choose{k-i}} \leq C*v^{k-i}. \nonumber
+		\end{equation}
+		for some constant $C$.\\
+		\indent When $f=0$, there doesn't exist such $K_{k+1}^{(k)}$ in the graph. We call a ($k+1$)-tuple $\{v_1,...,v_{k+1}\}$ sensitive if adding or removing an edge from the graph will make $\{v_1,...,v_{k+1}\}$ the vertices of a desired clique. Any sensitive edge is associated with a sensitive tuple by this definition. Also, we can show that there is precisely 1 sensitive edge associated with each sensitive tuple since if there are more than 1 sensitive edges associated with a ($k+1$)-tuple, we can't construct a desired clique by just removing or adding just one edge. Thus we have a injection from the set of sensitive edges into the set of sensitive tuples, and let $\mathcal{F}$ denote the set of all sensitive tuples, we have
+		\begin{equation}
+			s^0(f) \leq |\mathcal{F}|. \nonumber
+		\end{equation}
+		\indent Given two sensitive tuples, if they have more than $i-1$ vertices in common, without loss of generality, assume that $\{v_1,...,v_i\}$ are vertices in common. If both of them can form a desired clique by adding an edge to the graph, there are no less than 1 edge through these $i$ points and adding any edge will not remove these edges, which contradicts the fact that these two tuples can form a desired clique by adding an edge. If there exists one tuple can form a desired clique by removing an edge, there exists no less than 2 edges through $\{v_1,...,v_i\}$ in one of the tuples, and thus another tuple can't form a desired clique by either removing or adding exactly 1 edge, which contradicts the fact that the tuple is sensitive. Then given any two sensitive tuples, they have at most $i-1$ common vertices.\\
+		\indent Then $\mathcal{F}$ is a family of subsets of $[v]$ such that any element has size $k+1$ and any two elements have at most $i-1$ intersections. By our second lemma,
+		\begin{equation}
+			|\mathcal{F}| \leq {v \choose{i}} \leq C^{\prime} * v^i \nonumber
+		\end{equation}
+		for some constant $C^\prime$.\\
+		\indent From above $s^1(f) = O(v^{k-i})$ and $s^0(f) = O(v^{i})$ we conclude that $s(f) = O(v^{k-i})$ since $i \leq k/2$. Hence, $f$ is a $k$-uniform hypergraph property with $s(f)=O(v^{k-i})$ and $bs(f) = \Omega(v^{k})$.
+	\end{proof}
+	
+	\begin{cor}
+		For all $k \in \mathbb{N}$, there exists $k$-uniform hypergraph property on $v$ vertices such that $s(f) = O(v^{\lceil k/2 \rceil})$ and $bs(f)= \Omega (v^k)$.
+	\end{cor}
+	\begin{proof}
+		When $k$ is even, choose $i=k/2$ and when $k$ is odd, choose $i=(k-1)/2$ in above proposition.
+	\end{proof}
+	
+	\begin{rem}
+		Note that we don't actually require the "isolated" graph to be a clique, i.e. $K_{k+1}^{(k)}$ in our analysis of the block sensitivity and sensitivity. So we can replace $K_{k+1}^{(k)}$ by any $k$ hypergraph $\mathcal{H}$ on $k+1$ vertices, such that given any $i$ vertices of $\mathcal{H}$, there are at least two edges through these $i$ vertices. Then we can construct many $k$ graph properties with the desired lower bound on block sensitivity and upper bound on sensitivity in a similar way.
+	\end{rem}
+	
+	\begin{rem}
+		Also, for $k$ even, our $k$ graph property has sensitivity $O(v^{k/2})$ but for $k$ odd, the sensitivity is $O(v^{(k+1)/2})$, an upper bound strictly greater than $O(v^{k/2})$.
+	\end{rem}
+	
+	\section{$k$-Uniform  Hypergraph Property with $O(v^{k/2})$ Sensitivity}
+	The case for $k$ even is clear. For $k$ odd, our previous $k$ graph properties has sensitivity  $O((k+1)/2)$ and we want to find $k$ graph properties with sensitivity exactly $O(k/2)$.\\
+	\indent We start with the case $k=3$ and we want find a $3$ graph property with sensitivity exactly $O(v^{3/2})$.
+	
+	\begin{prop} Let $3 < t < v$. Then there exists a 3-uniform graph property with sensitivity $\max \{ {t \choose 2}v, {v \choose 2}/{t \choose 2}\}$. In particular, if $t = v^{1/4}$, we have $O(v^{3/2})$ sensitivity.
+	\end{prop}
+
+\begin{proof}
+Let $H$ be a 3-uniform hypergraph. We say a clique $K$ is "isolated" if $|V(K) \cap E| \leq 1$ for all $E \in H\setminus K$. Let $f$ be the graph property that there exists an isolated $K_t$. We first calculate the $1 \rightarrow 0$ sensitivity.
+
+To change from 1 to 0, we have to either delete an edge from an isolated $K_t$ or add an edge that makes $K_t$ not isolated. We have ${t \choose 2}v$ ways of doing this since we have to choose 2 vertices from $K_t$ and a last vertex from any of the $v$ vertices. If we choose the last vertex to be one of the vertices of the isolated $K_t$, then we are deleting an edge from it. If we choose the last vertex outside of $K_t$, then we are adding an edge that makes $K_t$ not isolated.
+
+To change from 0 to 1, $H$ must contain subgraphs that are 1 flip away from an isolated $K_t$. We shall refer to such subgraphs as sensitive $K_t$'s. Notice that two sensitive $K_t$'s share at most 1 vertex. If they shared 2 vertices, 1 flip is not enough to make one of them a sensitive $K_t$, contradicting their sensitiveness. Since sensitive $K_t$'s share at most 1 vertex with each other, a pair of vertices in $H$ corresponds to at most 1 sensitive $K_t$. There are ${v \choose 2}$ pairs of vertices in $H$ and each sensitive $K_t$ corresponds to ${t \choose 2}$ pairs of vertices. Hence, the maximum number of sensitive $K_t$ is bounded above by ${v \choose 2}/{t \choose 2}$. Therefore, the sensitivity of $f$ is $\max \{ {t \choose 2}v, {v \choose 2}/{t \choose 2}\}$.
+
+
+If we set $t = v^\alpha$, then $s(f)$ is $O(\max \{ v^{2\alpha + 1}, v^{2(1-\alpha)}\})$ asymptotically since ${t \choose 2} \sim t^2/2$ and ${v \choose 2}/{t \choose 2} \sim (v/t)^2$. Minimizing $s(f)$ with respect to $\alpha$, we get $s(f) = O(v^{3/2})$ at $\alpha = 1/4$.
+\end{proof}
+	
+	\begin{prop}
+		Given any $k$ odd, $i \leq k$ and any $t \in [0,1]$, there exists a $k$-uniform hypergraph property $f$, such that $s(f) = max\{O(v^{i(1-t)}), O(v^{k-i(1-t)})\}$.
+	\end{prop}
+	\begin{proof}
+		Let $\mathcal{H}$ be any $k$ hypergraph on $\Theta(v^t)$ vertices such that given any $i$ vertices, there are more than one edge through these vertices. Define a $k$ graph property $f$ such that $f=1$ if there exists a copy of $\mathcal{H}$ inside the graph such that given any edge $E$ not entirely in $\mathcal{H}$, we have
+		\begin{equation}
+			|V(\mathcal{H}) \cap E| < i. \nonumber
+		\end{equation}
+		\indent We claim that this is the desired $k$ graph property, i.e, $s(f) = O(v^{k-t})$. First look at $s^1(f)$. When there exists such $\mathcal{H}$ inside the graph, the only way to eliminate it is to either remove an edge inside $\mathcal{H}$ or add an edge with more than $i-1$ vertices in $V(\mathcal{H})$. Thus we have
+		\begin{equation}
+			s^1(f) \leq {v^t \choose{k}} + {v^t \choose{i}}{v-i \choose{k-i}} = O(v^{k-i(1-t)}). \nonumber
+		\end{equation}
+		Then consider $s^0(f)$. When there's no desired $\mathcal{H}$ inside the graph, we call $v^t$ vertices $\{w_1,...w_{v^t}\}$ sensitive tuple if we can form a desired $\mathcal{H}$ by either removing or adding one edge. It's easy to see that each sensitive tuple contains exactly one sensitive edge and any sensitive edge is contained in at least one sensitive tuple. Let $\mathcal{F}$ denote the set of all sensitive tuples, we have
+		\begin{equation}
+			s^0(f) \leq |\mathcal{F}|. \nonumber
+		\end{equation}
+		Then we can get an upper bound of $s^0(f)$ by finding an upper bound of $|\mathcal{F}|$. We claim that no two elements of $\mathcal{F}$ can share more than $i-1$ vertices. If given $\{w_1,...,w_{v^t}\}$ and $\{w_1^\prime,...,w_{v^t}^\prime\}$ two sensitive tuples, such that they have $i$ common vertices $\{v_1,...,v_i\}$. If both of them can form a desired $\mathcal{H}$ by adding one edges, there is at least one edge through $\{v_1,..,v_i\}$ inside each of them, since there are at least two edges in $\mathcal{H}$ through any $i$ vertices. Hence none of them can form a desired $\mathcal{H}$ by just removing one edge, which is a contradiction. If one of these two tuples can form a desired $\mathcal{H}$ by adding one edge, there are at least two edges through these $i$ points in this tuple, which means another tuple can't form a desired $\mathcal{H}$ by either adding or removing exactly one edge.\\
+		\indent Thus we know that any set of $i$ vertices contained in no more than one element of $\mathcal{F}$ and any sensitive tuple contains $v^t \choose{i}$ distinct sets of $i$ vertices. Then we have
+		\begin{equation}
+			s^0(f) = |\mathcal{F}| \leq \frac{{v \choose{i}}}{{v^t \choose{i}}} = O(v^{i(1-t)}). \nonumber
+		\end{equation}
+		To conclude, we give an upper bound of $s(f)$ by upper bounds of $s^0(f)$ and $s^1(F)$. We have
+		\begin{equation}
+			s(f) \leq max\{s^0(f),s^1(f)\} = max\{ O(v^{k-i(1-t)}), O(v^{i(1-t)})\}. \nonumber
+		\end{equation}
+	\end{proof}
+	
+	By looking at special cases of this proposition, we can find a $k$ graph property for any $k$ odd with sensitivity $O(v^{k/2})$.
+	\begin{cor}
+		There exists $k$ graph property with sensitivity exactly $O(v^{k/2})$ for $k$ odd.
+	\end{cor}
+	\begin{proof}
+		Pick $i=(1+k)/2$ and $t = 1/(k+1)$ in the above proposition, we have
+		\begin{equation}
+			s(f) = max\{O(v^{k- \frac{(k+1)}{2}  \frac{k}{k+1}}), O(v^{\frac{k+1}{2}  \frac{k}{k+1}})\} = O(v^{k/2}). \nonumber
+		\end{equation}
+	\end{proof}
+	Thus we have $k$ graph properties with sensitivity exactly $O(v^{k/2})$ for any positive integer $k$.
+	
+	\section{Further Discussion on Possible Quadratic Gap and Open Problems}
+		Though we have some $k$ graph properties with sensitivity $O(v^{k/2})$ for $k$ odd, a $k$ graph property with a quadratic gap for $k$ odd is still unknown since the lower bound on block sensitivity is strictly less than $\Theta(v^k)$. However, since we just have an upper bound for sensitivity, it's possible that for some hypergraph $\mathcal{H}$, integer $i$ and $t \in [0,1]$, we get a graph property that gives quadratic gap.\\ 
+ \indent First we can analyze for which $i$ and $t$, it's impossible to have a quadratic gap for this $k$ graph property by assuming the trivial upper bound on block sensitivity, $bs(f) = O(v^k)$.\\
+	\indent It's easy to see that $s^1 = \Theta(v^{k-i(1-t)})$ but the best lower bound we get for $s^0$ is 
+	\begin{equation}
+		s^0(f) = \Omega(\frac{{v \choose{v^t}}}{{v^t \choose{i}}{v-i \choose{k-i}}}) = \Omega(v^{i(1-2t)}). \nonumber
+	\end{equation}
+		by embedding $\mathcal{H}$ inside a clique of same size $\Theta(v^t)$ and choosing cliques with less than $i$ vertices in common. Since $s(f) = max \{ s^0(f), s^1(f) \}$, for $i \leq (k-1)/2$, $s(f) = \Omega(v^{(k+1)/2})$ and quadratic gap is impossible. For $i \geq (k+1)/2$, if quadratic gap is possible, i.e, $s^0 = O(v^{k/2})$ and $s^1 = O(v^{k/2})$, we have
+		\begin{equation}
+			i(1-2t) \leq k/2 \leq i(1-t),	\nonumber
+		\end{equation}
+		which gives
+		\begin{equation}
+			\frac{1}{2} (1- \frac{k}{2i}) \leq t \leq 1- \frac{k}{2i}. \nonumber
+		\end{equation}
+		Hence for $t > 1- \frac{k}{2i}$ or $t < \frac{1}{2} (1- \frac{k}{2i})$ or $i \leq (k-1)/2$, there's no possible quadratic gap.\\
+		\indent There are several ways we can improve this criterion. First of all, if we can improve the upper bound on block sensitivity for some $\mathcal{H}$, we have a larger interval on $t$ for fixed $i$, in which a quadratic gap is impossible. Since there is no isolated vertex in $\mathcal{H}$, at $x=0$, $bs(f,0) = O(v^{k-t})$. However, $0$ may not the the point where $bf(f,x)$ achieves maximum.\\
+		\indent Another way we can improve this criterion is by improving the lower bound on sensitivity. It seems that for most "nice" Boolean functions $f$, we have $s^0(f)s^1(f) = \Omega(n)$. Specifically, for $k$ graph properties, we have $s^0(f)s^1(f) = \Omega(v^k)$. If we assume this conjecture to be true, there's possibly a quadratic gap for $\mathcal{H},i$ and $k$ only if $s^1(f) = s^0(f) = O(v^{k/2})$.\\
+		\indent Finally, if we combine these two ways, suppose for some hypergraph $\mathcal{H}$,$i$ and $t$, the upper bound for block sensitivity is strictly less than $O(v^k)$. And also, we assume the conjecture to be true. We know that $s(f) = \Omega(v^{k/2})$, which means a quadratic gap is impossible.\\
+		\indent However, since the conjecture is open, whether some $\mathcal{H}$,$k$ and $i$ give $k$ graph property with a quadratic gap for $k$ odd is still open.
+\end{document}

@@ -1,0 +1,130 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+%--------Meta Data: Fill in your info------
+\title{Boolean Functions}
+
+\author{Kevin Stephen Stotter Cuddy}
+
+\date{DEADLINE AUGUST 26, 2012}
+
+\begin{document}
+
+\begin{abstract}
+
+This paper explores the broad concept of Boolean functions and some of their many applications to objects of smaller scope.  We present some results on the sensitivity conjecture and its relation to graph theory.  
+
+
+\end{abstract}
+
+\maketitle
+
+
+
+\section{Definitions}
+
+\begin{defn}\label{booleanfunction}
+A \textbf{Boolean function} on input strings of length $n$ is a function $$f: \{ 0, 1 \}^{n} \rightarrow \{ 0, 1 \}$$ or equivalently, a subset $S$ of $\{ 0, 1\}^{n}$ via the identification
+ of $S$ with $$\{ x \in \{0, 1\}^{n} \: | \: f(x) = 1\}.$$  A \textbf{class of Boolean functions} $\{ f_{n} \:| \:n \in \mathbb{N} \}$ is one Boolean function for each $n \in \mathbb{N}$, so that 
+our class of functions can accept an input of any length.  When it is clear how a Boolean function is to be defined for strings of any length, we may refer to a class of Boolean functions 
+simply as one Boolean function.  
+\end{defn}
+
+\begin{defn}\label{binarystring}
+A \textbf{binary string} is a finite sequence of 0's and 1's.  We use the binary string representation for inputs to Boolean functions.
+\end{defn}
+
+\begin{rem}\label{numberofBooleanfns}
+There are $2^{2^{n}}$ Boolean functions on $n$ variables.  This can be seen by noting that there are $2^{n}$ Boolean strings of length $n$ and that there is 
+a bijection between subsets $S$ of this set of strings (of which there are $2^{2^{n}}$) and Boolean functions on strings of length $n$ via our identification $f(x)=1$ iff $x \in S$.  
+\end{rem}
+
+% put something here about using x to represent an input string
+
+\begin{defn}\label{weight}
+The \textbf{weight} of a Boolean string of length $n$ is simply $$|x|=\sum_{i=1}^{n} x_{i}$$ where $x_{i}$ is the $i^{th}$ bit of the input string $x$.  This is just the number of $1$'s 
+occuring in $x$.  
+\end{defn}
+
+\begin{exmp}\label{booleanexamples}
+Some examples of intensively studied classes Boolean functions include:
+\begin{itemize}
+\item $\textbf{Parity}(x) = \bigoplus_{i=1}^{n} x_{i}$, or $Parity(x) = 1$ if $|x|$  mod  2 = $1$ and $0$ otherwise
+\item $\textbf{Majority}(x) = 1$ if $|x| \geq \frac{n}{2}$ and 0 otherwise
+\item $\textbf{Threshold}_{\textbf{k}}(x) = 1$ if $|x| \geq k$ and 0 othwerise, so \\ $Majority(x)=Threshold_{\frac{n}{2}}(x)$
+% make sure this is right, and add more stuff
+\end{itemize}
+\end{exmp}
+
+
+Now we introduce some complexity measures that can be used to analyze Boolean functions.  
+
+\begin{defn}\label{sensitivity}
+For a Boolean function $f$ and an input string $x$, the \textbf{sensitivity of $\boldsymbol{f}$ at $\boldsymbol{x}$}, 
+denoted $\boldsymbol{s(f,x)},$ is $$|\{i \in [n] \: | \: f(x) \neq f(x^{i})\}|$$ where 
+$\lbrack n \rbrack$ is the set 
+$\{1,2,\ldots ,n\}$ and 
+$x^{i}$ is the string $x$ with the $i^{th}$ bit flipped, 
+that is, changed either from 0 to 1 or from 1 to 0.  So the sensitivity of $f$ at $x$ is the number of single-bit changes to $x$ that change $f(x)$.  
+\\
+The \textbf{sensitivity of $\boldsymbol{f}$} or $\boldsymbol{s(f)}$ is then $$\max\limits_{x \in \{0,1\}^{n}} s(f,x).$$
+\end{defn}
+
+There is a similar measure called block sensitivity.  
+\begin{defn}\label{blocksensitivity}
+A \textbf{sensitive partition for $\boldsymbol{f}$ at $\boldsymbol{x}$} is a partition of $[n]$ into disjoint subsets $B_{1}, \ldots , B_{k}$ such that 
+$f(x) \neq f(x^{B_{j}}) \: \forall j \in \lbrack k \rbrack$, where $x^{B_{j}}$ is the string $x$ with all bits whose indices are in $B_{j}$ flipped.  
+For example, if $n=3, \: B_{1} = \{1,2\},$ and $x=101$, then $x^{B_{1}}$ is $011$.  
+The \textbf{block sensitivity of $\boldsymbol{f}$ at $\boldsymbol{x}$} or $\boldsymbol{bs(f,x)}$ is then
+$$ \max_{B_{1}, \ldots , B_{k}} k$$ 
+where the maximum is taken over all sensitive partitions for $f$ at $x$.  This is simply the maximum number of subsets of $[n]$ in a sensitive partition for $f$ at $x$.
+The \textbf{block sensitivity of $\boldsymbol{f}$} or $\boldsymbol{bs(f)}$ is then defined to be
+$$ \max\limits_{x \in \{0,1\}^{n}} bs(f,x).$$
+\end{defn}
+
+\begin{defn}\label{oneandzero}
+It will be useful when presenting proofs to use the notation $\boldsymbol{s^{0}(f)}$ for the sensitivity when changing $f$'s value from 0 to 1, 
+and $\boldsymbol{s^{1}(f)}$ for the sensitivity when changing 
+the value from 1 to 0.  Sensivitity is then $\max \{ s^{0}(f), s^{1}(f)\}$.  The same notation will be used for block sensitivity when required.  
+\end{defn}
+
+
+\end{document}

@@ -1,0 +1,82 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+%--------Meta Data: Fill in your info------
+\title{3-Uniform Graph Properties With Low Sensitivity}
+
+\begin{document}
+\maketitle
+
+In this section, we show that there exists a class of 3-uniform graph properties with $o(v^2)$ sensitivity. Moreover, we extend this result to $k$-uniform hypergraphs.
+
+\begin{prop} Let $3 < t < v$. Then there exists a 3-uniform graph property with sensitivity $\max \{ {t \choose 2}v, {v \choose 2}/{t \choose 2}\}$. In particular, if $t = v^{1/4}$, we have $O(v^{3/2})$ sensitivity.
+\end{prop}
+
+\begin{proof}
+Let $H$ be a 3-uniform hypergraph. We say a clique $K$ is "isolated" if $|V(K) \cap E| \leq 1$ for all $E \in H\setminus K$. Let $f$ be the graph property that there exists an isolated $K_t$. We first calculate the $1 \rightarrow 0$ sensitivity.
+
+To change from 1 to 0, we have to either delete an edge from an isolated $K_t$ or add an edge that makes $K_t$ not isolated. We have ${t \choose 2}v$ ways of doing this since we have to choose 2 vertices from $K_t$ and a last vertex from any of the $v$ vertices. If we choose the last vertex to be one of the vertices of the isolated $K_t$, then we are deleting an edge from it. If we choose the last vertex outside of $K_t$, then we are adding an edge that makes $K_t$ not isolated.
+
+To change from 0 to 1, $H$ must contain subgraphs that are 1 flip away from an isolated $K_t$. We shall refer to such subgraphs as sensitive $K_t$'s. Notice that two sensitive $K_t$'s share at most 1 vertex. If they shared 2 vertices, 1 flip is not enough to make one of them a sensitive $K_t$, contradicting their sensitiveness. Since sensitive $K_t$'s share at most 1 vertex with each other, a pair of vertices in $H$ corresponds to at most 1 sensitive $K_t$. There are ${v \choose 2}$ pairs of vertices in $H$ and each sensitive $K_t$ corresponds to ${t \choose 2}$ pairs of vertices. Hence, the maximum number of sensitive $K_t$ is bounded above by ${v \choose 2}/{t \choose 2}$. Therefore, the sensitivity of $f$ is $\max \{ {t \choose 2}v, {v \choose 2}/{t \choose 2}\}$.
+
+
+If we set $t = v^\alpha$, then $s(f)$ is $O(\max \{ v^{2\alpha + 1}, v^{2(1-\alpha)}\})$ asymptotically since ${t \choose 2} \sim t^2/2$ and ${v \choose 2}/{t \choose 2} \sim (v/t)^2$. Minimizing $s(f)$ with respect to $\alpha$, we get $s(f) = O(v^{3/2})$ at $\alpha = 1/4$.
+\end{proof}
+
+We can generalize this result to $k$-uniform hypergraphs by extending the notion of "isolatedness".
+
+\begin{prop} Let $k < t < v$. Then there exists a $k$-uniform graph property with sensitivity $\max \{ {t \choose k-1}v, {v \choose k-1}/{t \choose k-1}\}$. In particular, if $t = v^{\frac {k-2} {2(k-1)}}$, we have $O(v^{k/2})$ sensitivity.
+
+\begin{proof}
+Let $H$ be a $k$-uniform hypergraph. We say a clique $K$ is "isolated" if $|V(K) \cap E| \leq k-2$ for all $E \in H\setminus K$. Let $f$ be the graph property that there exists an isolated $K_t$.
+
+First, we calculate the $1 \rightarrow 0$ sensitivity. As before, to change from 1 to 0, we either delete an edge from $K_t$ or add an edge to $K_t$ that makes it not isolated. There are ${t \choose k-1}v$ ways of doing this.
+
+For the $0 \rightarrow 1$ sensitivity, $H$ must contain subgraphs that are 1 flip away from an isolated $K_t$. Again, we refer to such subgraphs as sensitive $K_t$'s. A pair of sensitive $K_t$'s share at most $k-2$ vertices. Hence, $k-1$ vertices correspond to at most 1 sensitive $K_t$ and the maximum number of $K_t$ is bounded above by ${v \choose k-1}/{t \choose k-1}$. Therefore, the sensitivity of $f$ is $\max \{ {t \choose k-1}v, {v \choose k-1}/{t \choose k-1}\}$.
+
+If we set $t = v^\alpha$, then $s(f)$ is $O(\max \{ v^{(k-1)\alpha + 1}, v^{(k-1)(1-\alpha)}\})$. Minimizing $s(f)$ with respect to $\alpha$, we get $s(f) = O(v^{k/2})$ at $\alpha - \frac {k-2}{2(k-1)}$.
+
+\end{proof}
+
+\end{prop}
+
+\end{document}

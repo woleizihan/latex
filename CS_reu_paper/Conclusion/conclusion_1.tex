@@ -1,0 +1,65 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{Further Discussion on Possible Quadratic Gap and Open Problems}
+		Though we have some $k$ graph properties with sensitivity $O(v^{k/2})$ for $k$ odd, a $k$ graph property with a quadratic gap for $k$ odd is still unknown since the lower bound on block sensitivity is strictly less than $\Theta(v^k)$. However, since we just have an upper bound for sensitivity, it's possible that for some hypergraph $\mathcal{H}$, integer $i$ and $t \in [0,1]$, we get a graph property that gives quadratic gap.\\ 
+ \indent First we can analyze for which $i$ and $t$, it's impossible to have a quadratic gap for this $k$ graph property by assuming the trivial upper bound on block sensitivity, $bs(f) = O(v^k)$.\\
+	\indent It's easy to see that $s^1 = \Theta(v^{k-i(1-t)})$ but the best lower bound we get for $s^0$ is 
+	\begin{equation}
+		s^0(f) = \Omega(\frac{{v \choose{v^t}}}{{v^t \choose{i}}{v-i \choose{k-i}}}) = \Omega(v^{i(1-2t)}),
+	\end{equation}
+		by embedding $\mathcal{H}$ inside a clique of same size $\Theta(v^t)$ and choosing cliques with less than $i$ vertices in common. Since $s(f) = max \{ s^0(f), s^1(f) \}$, for $i \leq (k-1)/2$, $s(f) = \Omega(v^{(k+1)/2})$ and quadratic gap is impossible. For $i \geq (k+1)/2$, if quadratic gap is possible, i.e, $s^0 = O(v^{k/2})$ and $s^1 = O(v^{k/2})$, we have
+		\begin{equation}
+			i(1-2t) \leq k/2 \leq i(1-t),			
+		\end{equation}
+		which gives
+		\begin{equation}
+			\frac{1}{2} (1- \frac{k}{2i}) \leq t \leq 1- \frac{k}{2i}.
+		\end{equation}
+		Hence for $t > 1- \frac{k}{2i}$ or $t < \frac{1}{2} (1- \frac{k}{2i})$ or $i \leq (k-1)/2$, there's no possible quadratic gap.\\
+		\indent There are several ways we can improve this criterion. First of all, if we can improve the upper bound on block sensitivity for some $\mathcal{H}$, we have a larger interval on $t$ for fixed $i$, in which a quadratic gap is impossible. Since there is no isolated vertex in $\mathcal{H}$, at $x=0$, $bs(f,0) = O(v^{k-t})$. However, $0$ may not the the point where $bf(f,x)$ achieves maximum.\\
+		\indent Another way we can improve this criterion is by improving the lower bound on sensitivity. It seems that for most "nice" Boolean functions $f$, we have $s^0(f)s^1(f) = \Omega(n)$. Specifically, for $k$ graph properties, we have $s^0(f)s^1(f) = \Omega(v^k)$. If we assume this conjecture to be true, there's possibly a quadratic gap for $\mathcal{H},i$ and $k$ only if $s^1(f) = s^0(f) = O(v^{k/2})$.\\
+		\indent Finally, if we combine these two ways, suppose for some hypergraph $\mathcal{H}$,$i$ and $t$, the upper bound for block sensitivity is strictly less than $O(v^k)$. And also, we assume the conjecture to be true. We know that $s(f) = \Omega(v^{k/2})$, which means a quadratic gap is impossible.\\
+		\indent However, since the conjecture is open, whether some $\mathcal{H}$,$k$ and $i$ give $k$ graph property with a quadratic gap for $k$ odd is still open.
+\end{document}

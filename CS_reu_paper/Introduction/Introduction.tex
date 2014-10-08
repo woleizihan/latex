@@ -1,0 +1,76 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+\begin{document}
+	\section{Introduction}
+	Sensitivity is a measure on Boolean function such that something something. A major open question in this field is the sensitivity conjecture, which says block sensitivity is polynomially bounded by sensitivity. 
+	\begin{•}	
+	The largest known gap is quadratic and this is due to Rubinstein. Turan has shown that for a graph property on $v$ vertices, $s(f) = \Omega(v)$, which implies the largest gap possible for graph properties is quadratic. In this paper, we prove that the bounds are tight. Specifically, we demonstrate a graph property $f$ with $\Theta(v)$ sensitivity and $\Theta(v^2)$ block sensitivity. Moreover, we generalize this property to $k$-uniform hypergraphs and produce quadratic gaps for all $k$ even.
+
+	For $k$ odd, we don't have this nice quadratic gap. Instead, we make indirect progress by demonstrating $k$-uniform hypergraph properties with $O(v^{k/2})$ sensitivity. Conjecture by Kenyon and Kutin says that for a "nice" boolean function $f$, $s^0(f)s^1(f) = \Omega(n)$. However, Chakraborty showed that this was not true by giving a counterexample with sensitivity $\Theta(n^{1/3})$. Here, we conjecture that the inequality is holds for $k$-uniform hypergraph properties. Assuming this conjecture, we have a lower bound of $\Omega(v^{k/2})$ for the sensitivity of $k$-uniform hypergraphs and we give graph properties for $k$ odd that show that this conjectured lower bound is tight.
+	Let $f: \{0,1\}^n \to {0,1}$ be a Boolean function. For any input $x \in \{0,1 \}^n$, let $x^{(i)}$ be $x$ with $i^{th}$ bit flipped. Then the $i ^ {th}$ bit is said to be \textit{sensitive} for $f$ if $f(x) \neq f(x^{(i)})$. The sensitivity of $f$ on an input $x$, denoted by $s(f,x)$ is the number of sensitive bits for $f$ on $x$.
+		\begin{defn}
+			The \textit{sensitivity} of a Boolean function $f$, denoted by $s(f)$ is the maximum of $s(f,x)$ over all $x \in \{0,1\}^n$.
+		\end{defn}
+		Similarly, given $x \in \{0,1\}^n$ and $B \subset [n]$, let $x^{B}$ be $x$ with $i^{th}$ bit flipped for any $i \in B$. Then the "block" $B$ is sensitive for $f$ on $x$ if $f(x) \neq f(x^B)$. And the \textit{block sensitivity} of $f$ on $x$, denoted by $bs(f,x)$ is the maximum number of \textit{pairwise disjoint} sensitive blocks of $f$ on $x$.
+		\begin{defn}
+			The \textit{block sensitivity} of a Boolean function $f$, denoted by $bs(f)$ is the maximum of $bs(f,x)$ over all $x \in \{0,1\}^n$.
+		\end{defn}
+		Obviously, for any Boolean function $f$, we have 
+		\begin{equation}
+			bs(f) \geq s(f). \nonumber
+		\end{equation}
+		
+		\begin{defn}
+			A Boolean function $f: \{0,1\}^{v \choose{2}} \to \{0,1\}$ is called a \textit{graph property} if for every input $x = (x_{(1,2)},...,x_{(n-1,n)})$ and every permutation $\sigma \in S_v$, we have
+			\begin{equation}
+				f(x_{(1,2)},...,x_{(n-1,n)}) = f(x_{(\sigma (1), \sigma (2))},...,x_{(\sigma (n-1), \sigma (n))}). \nonumber
+			\end{equation}
+		\end{defn}
+		Similarly, we can define $k$-uniform hypergraph property.
+			\begin{defn}
+				A Boolean function $f: \{0,1\}^{v \choose{k}} \to \{0,1\}$ is called a \textit{$k$-uniform hypergraph property} if for every input $x = (x_{(1,2,...,k)},...,x_{(n-k+1,...,n-1,n)})$ and every permutation $\sigma \in S_v$, we have
+			\begin{equation}
+				f(x_{(1,2,...,k)},...,x_{(n-k+1...,n-1,n)}) = f(x_{(\sigma (1), \sigma (2),..., \sigma(k))},...,x_{(\sigma (n-k+1),...,\sigma (n-1), \sigma (n))}). \nonumber
+			\end{equation}
+			\end{defn}
+\end{document}

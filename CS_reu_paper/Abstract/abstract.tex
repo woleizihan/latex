@@ -1,0 +1,65 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+%--------Meta Data: Fill in your info------
+\title{Abstract}
+
+\begin{document}
+\maketitle
+
+Many different complexity measures exist for Boolean functions besides sensitivity and block sensitivity.  However, it has been shown [Hatami, Kulkarni, Pankratov] that block sensitivity 
+is polynomially related to several other important complexity measures, including certificate complexity, decision-tree complexity, and degree as a multilinear polynomial.  
+Two complexity measures $A(f)$ and $B(f)$ are said to be \textbf{polynomially related} if $\exists$ polynomials $ p_{1}(x),  \: p_{2}(x) $ such that $\forall$ Boolean functions $f$, 
+$A(f) \leq p_{1}(B(f))$ and $B(f) \leq p_{2}(A(f))$.  
+If two complexity measures are polynomially related, they are viewed in some sense as measuring the same quantity about Boolean functions, and we regard them as interchangeable.  
+It is clear from the definitions that $\forall$ Boolean functions $f$, $s(f) \leq bs(f)$.  A polynomial bound in the other direction has not yet been proven and is known as the 
+\textbf{sensitivity conjecture}.  In fact, a stronger conjecture by Nisan and Szegedy is that $bs(f) \leq s(f)^{2}$.  Boolean functions $f$ satisfying $bs(f) = \Omega(s(f)^{2})$ are said to 
+demonstrate a \textbf{quadratic gap} between block sensitivity and sensitivity.  In this paper we exhibit a class of Boolean functions achieving this 
+quadratic gap.  Our functions are all $k$-graph properties, or Boolean functions that involve decoding a binary string to create a 
+$k$-uniform hypergraph
+and determining whether that graph has some property.  $k$-graph properties are Boolean functions on input strings of size ${v \choose k}$, with each bit representing the presence or 
+absence of an edge.  Graph properties are invariant under graph isomorhism and thus under relabeling of the vertices and corresponding different encodings of the graph.  Specifically, we present a class of functions demonstrating a quadratic gap for all $k$ even and a nearly-quadratic gap for $k$ odd.  We also present a graph property with 
+sensitivity $O(v^{\frac{k}{2}})=O(\sqrt n)$ for all $k$.  
+Finally, we include a general criterion for determining whether a certain type of graph property will achieve a quadratic gap.  
+
+
+\end{document}

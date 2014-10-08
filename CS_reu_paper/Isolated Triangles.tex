@@ -1,0 +1,70 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+
+\makeatletter
+\let\c@equation\c@thm
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+
+%--------Meta Data: Fill in your info------
+\title{A Graph Property with Quadratic Gap}
+
+\begin{document}
+\maketitle
+
+\begin{thm}
+There exists a graph property $f$, such that, $s(f) = \Theta(v)$ and $bs(f) = \Theta(v^2)$.
+\end{thm} 
+
+\begin{proof}
+Let $f$ be the graph property, "there exists an isolated triangle". By isolated triangle, we mean three vertices $a,b,c$ that are connected to each other and not connected to any $v \in V\setminus\{a,b,c\}$.
+
+For block sensitivity, consider the block sensitivity on an empty graph input. A triangle is not edge disjoint with $3(v-2)+1$ triangles and there are ${v \choose 3}$ triangles on a graph on $v$ vertices. It follows that there are at least $\Omega(v^2)$ edge disjoint triangles on $v$ vertices. Hence, $bs(f) = \Omega(v^2)$. Since $bs(f) \leq {v \choose 2}$ trivially, it follows that $bs(f) = \Theta(v^2)$.
+
+For sensitivity, we consider $1 \rightarrow 0$ sensitivity first. To change from 1 to 0, we need to either remove an edge from the isolated triangle or add an edge to it so that it is no longer isolated. For the first case, it is easy to see that at most 3 bits are sensitive. For the second case, at most $3(v-3)$ bits can make the triangle not isolated. Hence $1 \rightarrow 0$ sensitivity is $\Theta(v)$.
+
+To change from 0 to 1, we need to either add an edge to complete an isolated triangle or remove an edge so that a triangle becomes isolated. Define "sensitive" 3-tuple to be 3 vertices that is 1 bit away from an isolated triangle. Note that sensitive 3-tuples are pairwise vertex disjoint. 
+
+To see this, let two distinct sensitive 3-tuples be $(a,v_1,v_2)$ and $(a,w_1,w_2)$. Since, $(a,v_1,v_2)$ is 1 bit away from being an isolated triangle, $(a,w_1,w_2)$ can have at most 1 edge incident to $a$ because if the 3-tuple has more than 2 edges incident to $a$, $(a,v_1,v_2)$ will not be isolated from vertices $w_1$ and $w_2$ after flipping 1 bit. In fact, $(a,w_1,w_2)$ has exactly 1 edge incident to $a$ since if it has no edges incident to $a$, it cannot be 1 bit away from a triangle. By the same logic, $(a,v_1,v_2)$ has exactly 1 edge incident to $a$. This implies that induced subgraphs on $(a,v_1,v_2)$ and $(a,w_1,w_2)$ are trees. However, this means that $(a,v_1,v_2)$ cannot be sensitive since there is an edge connecting $a$ to a vertex other than $v_1,v_2$. Hence, sensitive 3-tuples cannot share a vertex. 
+
+Now Let $C_1, C_2, ... C_m$ be sensitive 3-tuples on a graph $G$. Since two sensitive 3-tuples cannot share a vertex, a vertex uniquely determines a sensitive 3-tuple. Hence, $m \leq v$. Since we can have $v/3$ vertex disjoint trees consisting of 3 vertices on $G$, $0 \rightarrow 1$ sensitivity is $\Theta(v)$.  
+Hence, $bs(f) = \Theta(v^2)$ and $s(f) = \Theta(v)$.
+\end{proof}
+
+The isolated triangle property provides yet another example of a boolean function with a quadratic gap.
+
+\end{document}

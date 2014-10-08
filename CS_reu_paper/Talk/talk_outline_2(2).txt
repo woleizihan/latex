@@ -1,0 +1,49 @@
+Talk Outline
+
+- definition of Boolean function (as either a map or a subset of Boolean cube)
+
+- number of Boolean functions on n variables maybe
+
+- every Boolean function can be represented as a polynomial, a decision 
+tree, or a Boolean circuit (Variation p3)
+
+  definitions of some complexity measures on Boolean functions
+- deterministic decision-tree complexity (Variation p3)
+- degree as a polynomial (Variation p3)
+- certificate complexity (Variation p3)
+- sensitivity and block sensitivity (Variation p1-p2)
+- (Communication complexity maybe?) (Variation p7-p8)
+- maybe here talk about Aaronson's two-colorings of integer lattices (Variantion p19) 
+	(Scott Aaronson: The sensitivity of 2-colorings of the d-dimensional interger lattice, 2010)
+- maybe CREW PRAM and/or quantum decision tree complexity 
+	(Scott Aaronson: Quantum certificate complexity, 2003)
+
+- definition of polynomial relation and some proofs on polynomial relations
+between these quantities (use the hatami-kulkarni-pankratov paper & its references)
+	- definition (Variation p4)
+	- reference for proof (Variation p4)
+
+- sensitivity conjecture and the stronger version about quadratic bound
+	- stronger version about quadratic bound (Variation p7 Question 3.7 by Turan)
+
+- some examples of easy functions to get used to sensitivity and block sensitivity
+like parity, majority, threshold, etc
+
+- Rubinstein's function (Variation p19-p20)
+
+- definition of graph property and cyclically invariant Boolean function 
+(say that this is one nice thing about boolean functions, they are general enough 
+to consider graphs)
+
+- Sourav's function (Sourav p55)
+
+- Turan's theorem about graph properties and sensitivity
+
+- mention hypergraph properties to suggest a larger gap may be possible for 
+hypergraphs / motivate talk
+
+- present the isolated triangle result & proof
+
+- present the i-isolated clique result & proof
+
+- present other results from paper if time allows

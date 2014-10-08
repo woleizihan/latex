@@ -1,0 +1,60 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\begin{lem}
+	Let $q$ be a prime power, and $d \leq  q-1$. Then there exists a collection of sets $S_1, ..., S_m \subseteq [q^{l+1}]$ such that $|S_i| = q$ for all $i$ and $|S_i \cap S_j| < d$ for $i \neq j$ and $m = q^{dl}$.
+	\end{lem}
+	\begin{proof}
+	Let $f : \mathbb{F}_q \rightarrow \mathbb{F}^l_q$ such that $f(x) = (f_1(x), ... ,f_k(x))$ where each $f_i$ is a degree $d-1$ polynomial over $\mathbb{F}_q$. Then each $f$ corresponds to a set of $l+1$-tuples, $S_f = \{(x,f_1(x),...,f_k(x))\text{ }  |\text{ } x \in \mathbb{F}_q\}$. 
+
+If $g \neq f$, then the sets $S_f$ and $S_g$ intersect at most $d-1$ points since the equation $f_1(x) = g_1(x)$ already has at most $d-1$ solutions in $x \in \mathbb{F}_q$. We can relabel $S_f$ by associating $i \in [q^{l+1}]$ to each $f : \mathbb{F}_q \rightarrow \mathbb{F}^l_q$. There are $q^d$ distinct polynomials over $\mathbb{F}_q$ of degree $d-1$, so there are $(q^d)^l$ distinct sets of $(l+1)$-tuples that satisfy the above property. Hence, we can construct a collection of sets $S_1, ..., S_{q^{dl}}$ such that $|S_i| = q$ for all $i$ and $|S_i \cap S_j| < d$ for $i \neq j$.
+	\end{proof}
+	\begin{cor}
+		The upper bounds on 0-sensitivity of our graph properties are tight.
+	\end{cor}
+	\begin{proof}
+		For $s^0(f)$ of our first graph property (Theorem 3.2), let $q$ be the prime power between $k+1$ and $2(k+1)$, $l = \lfloor \log_q(v)-1 \rfloor \geq \log_q(v)-2$ and $d=i$. Then we have $m = q^{dl} \geq \Omega(v^iq^{-2i}) = \Omega(v^i)$ many sets $S_1,....,S_m$ such that $S_i \cap S_j < d$.\\
+		\indent For second graph property (Theorem 4.2), let $q$ be the prime power between $0.5v^t$ and $v^t$, $l = 1/t - 1$. Then we have $m = q^{dl} \geq \Omega(v^iq^{-2i}) = \Omega(v^{i(1-t)})$ many sets $S_1,....,S_m$ such that $S_i \cap S_j < d$.\\
+	\end{proof}
+\end{document}
