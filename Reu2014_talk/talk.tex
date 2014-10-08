@@ -1,0 +1,164 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{Lefschetz fixed point theorem}
+	\begin{defn}
+			The global Lefschetz number of $f$ is the intersection number $I(\Delta, graph(f))$, denoted $L(f)$.
+		\end{defn}
+		\begin{theorem}(Smooth Lefschetz Fixed-Point Theorem)
+			Let $f:X \to X$ be a smooth map on a compact orientable manifold. If $L(f) \neq 0$, then $f$ has a fixed point.			
+		\end{theorem}
+		\begin{prop}
+			$L(f)$ is a homotopy invariant.
+		\end{prop}
+		\begin{prop}
+			If $f$ is homotopic to the identity, then $L(f)$ equals the Euler characteristic of $X$. In particular, if $X$ admits a smooth map $f: X \to X$ that is homotopic to the identity and has no fixed points, then $\chi(X) = 0$.
+		\end{prop}
+		\begin{defn}
+			$f: X \to X$ is a Lefschetz map if $graph(f)$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $\Delta$
+		\end{defn}
+		\begin{prop}
+			Every map $f: X \to X$ is homotopic to a Lefschetz map.
+		\end{prop}
+		Given any $x$ a fixed point of a Lefschetz map, we have $graph(f)$ \;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\ $\Delta$ if and only if
+		\begin{equation}
+			graph(df_x) + \Delta_x = T_x(X) \times T_x(X).
+		\end{equation}
+		And this implies that $df_x$ has no nonzero fixed point.
+		\begin{defn}
+			A fixed point $x$ is a Lefshetz fixed point of $f$ if $df_x$ has no nonzero fixed point.
+		\end{defn}
+		So $f$ is a Lefschetz map if and only if all its fixed points are Lefschetz. If $x$ is a Lefschetz fixed point, we denote the orientation number of $(x,x)$ in the intersection $\Delta \cap graph(f)$ by $L_x(f)$, called the local Lefschetz number of $f$ at $x$. Thus for $f$ Lefschetz map,
+		\begin{equation}
+			L(f) = \sum_{f(x)=x}L_x(f).
+		\end{equation}
+		$x$ is a Lefschetz fixed point if and only if$df_x - I$ is an isomorphism of $T_x(X)$.
+		\begin{prop}
+			The local Lefschetz number $L_x(f)$ at a Lefschetz fixed point is $1$ if the isomorphism $df_x-I$ preserves orientation on $T_x(X)$, and $-1$ if the isomorphism reverses orientation. That is the sign of $L_x(f)$ equals the sign of the determinant of $df_x - I$.
+		\end{prop}
+		
+		\begin{prop}(Splitting Proposition)
+			Let $U$ be a neighborhood of the fixed point $x$ that contains no other fixed points of $f$. Then there exists a homotopy $f_t$ of $f$ such that $f_t$ has only Lefschetz fixed points in $U$, and each $f_t$ equals $f$ outside some compact subset of $U$.
+		\end{prop}
+		\begin{defn}
+			Suppose that $x$ is an isolated fixed point of $f$ in $\mathbb{R}^k$. If $B$ is a small closed ball centered at $x$ that contains no other fixed point, then the degree of map
+			\begin{equation}
+				z \to \frac{f(z)-z}{|f(z)-z|}
+			\end{equation}
+			is called the local Lefschetz number of $f$ at $x$, denoted $L_x(f)$.
+		\end{defn}
+		\begin{prop}
+			At Lefschetz fixed points, the two definitions of $L_x(f)$ agree.
+		\end{prop}
+		\begin{prop}
+			Suppose that the map $f$ in $\mathbb{R}^k$ has an isolated fixed point at $x$, and let $B$ be a closed ball around $x$ containing no other fixed point of $f$. Choose any map $f_1$ that equals $f$ outside some compact subset of $Int(B)$ but has only Lefschetz fixed points in $B$. Then
+			\begin{equation}
+				L_x(f) = \sum_{f_1(z)=z}L_z(f_1),
+			\end{equation}
+			for any $z \in B$.
+		\end{prop}
+		\begin{theorem}(Local Computation of the Lefschetz Number).
+			Let $f:X \to Y$ be any smooth map on a compact manifold, with only finitely many fixed points. Then the global Lefschetz number equals the sum of the local Lefschetz numbers:
+			\begin{equation}
+				L(f) = \sum_{f_x(x)}L_x(f).
+			\end{equation}
+			
+		\end{theorem}
+		
+	\section{Examples}
+	
+		\begin{exmp}
+			The Euler characteristic of $S^2$ is $2$.
+		\end{exmp}
+		\begin{proof}
+			Let $\pi : \mathbb{R}^3 \to S^2$ be the projection $\pi (x) = x/|x|$. Then we define the map $f: S^2 \to S^2$:
+			\begin{equation}
+				f(x) = \pi (x+(0,0,-1/2)).
+			\end{equation}
+			This map has a source at $(0,0,1)$, a sink at $(0,0,-1)$ and no fixed point elsewhere, which gives $L(f) = 2$. Also the map $F: S^2 \times I \to S^2$ defined by
+			\begin{equation}
+				F(x,t) = \pi (x+(0,0,-t/2))
+			\end{equation}
+			is a homotopy between $f$ and the identity map. By Proposition 1.4, we know that 
+			\begin{equation}
+				\chi (S^2) = 2.
+			\end{equation}
+		\end{proof}					
+		
+		\begin{cor}
+			Every map of $S^2$ that is homotopic to the identity must possess a fixed point. In particular, the antipodal map is not homotopic to the identity.
+		\end{cor}
+		\begin{exmp}
+			The surface of genus $k$ admits a Lefschetz map homotopic to the identity, with one source, one sink, and $2k$ saddles. Consequently, its Euler characteristic is $2-2k$.
+		\end{exmp}
+		
+		\begin{exmp}
+			The Euler characteristic of a compact connected Lie group is zero.
+		\end{exmp}
+		\begin{proof}
+			Let the compact connected Lie group be $G$ and let $g \in G$ such that $g \neq 1$. Define $f: G \to G$ by $f(x) = g \cdot x$. This smooth map is homotopic to $id_G$ but has no fixed point. Then we know
+			\begin{equation}
+				\chi (G) = L(f) = 0.
+			\end{equation}
+		\end{proof}
+		
+		\section{Homology version}
+		\begin{theorem}(The Lefschetz fixed point theorem)
+			Let $X$ be a closed smooth manifold and let $f: X \to X$ be a smooth map with all fixed points nondegenerate. Then
+			\begin{equation}
+				L(f) = \sum_{i} (-1)^i Tr(f_*: H_i(X;\mathbb{Q}) \to H_i(X;\mathbb{Q})).
+			\end{equation}
+		\end{theorem}
+		
+		\begin{exmp}(Brouwer Fixed Point Theorem)
+			Every smooth $f: D^n \to D^n$ has a fixed point.
+		\end{exmp}
+		\begin{proof}
+			Since $D^n$ is contractible, we know that the only nontrivial homology group of $D^n$ is $H_0(D^n) = \mathbb{Z}$. Then we know that 
+			\begin{equation}
+				L(f) = L(f) = \sum_{i} (-1)^i Tr(f_*: H_i(X) \to H_i(X)) = 1.
+			\end{equation}
+			Then $f$ must have a fixed point.
+		\end{proof}
+\end{document}

@@ -1,0 +1,123 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\section{Introduction}
+		We start with a well known fixed point theorem, the Brouwer fixed point theorem.
+		\begin{theorem} (Brouwer Fixed Point Theorem)
+			Any smooth map $f: D^n \to D^n$ has a fixed point.
+		\end{theorem}
+		
+		The theorem is suppose to have originated from Brouwer's observation of a cup of coffee. If one stir to dissolve sugar, it appears that there is always a point without motion. The motivation to study Lefschetz theorem is to find a more general fixed point theorem. In fact, Brouwer fixed point theorem is just a special case of Lefschetz theorem.\\ 
+		\indent We first define the Lefschetz number of a function $f$.
+		\begin{defn}
+			Let $X$ be a compact connected oriented manifold and $f: X \to X$  a smooth map with only non-degenerate fixed points. The Lefschetz number is defined to be the signed sum of number of fixed points
+			\begin{equation}
+				L(f) = \sum_{f(x) = x} sign(f,x).
+			\end{equation}
+		\end{defn}
+		Non-degenerate means all the fixed points are isolated plus some trasversality condition. Also, the sign assigned to each fixed point seems unclear now, I'll probably return to it later.
+		
+		\begin{theorem}(The Lefschetz fixed point theorem)
+			Let $X$ be a closed oriented smooth manifold and let $f: X \to X$ be a smooth map with all fixed points nondegenerate. Then
+			\begin{equation}
+				L(f) = \sum_{i} (-1)^i Tr(f_*: H_i(X;\mathbb{Q}) \to H_i(X;\mathbb{Q})).
+			\end{equation}
+		\end{theorem}
+		\indent The homology groups are some kind of vector spaces attached to topological spaces and under some condition, it's finite-dimensional, so that we can calculated the traces of induced map on vector space.\\
+		There are several direct corollaries.
+		\begin{cor}
+			If $L(f) \neq 0$, $f$ has a fixed point.
+		\end{cor}
+		Since homotopic maps have same induced map on homology groups, we know $L(f)$ is homotopy invariant
+		\begin{cor}
+			$L(f)$ is homotopy invariant.
+		\end{cor}
+		Then we can look at the special case when $f$ is homotopic to identity map.
+		\begin{cor}
+			When $f$ is homotopic to the identity map, we have 
+			\begin{equation}
+				L(f) = \sum_i (-1)^i dim H_i(X;\mathbb{Q}).
+			\end{equation}
+			We define this $L(f)$ to be the Euler characteristic of $X$, denoted by $\chi (X)$.
+		\end{cor}
+		Then we return to the Brouwer fixed point theorem. To prove the Brouwer fixed point theorem from Lefschetz fixed point theorem, notice that $H_0(D^n)$ is the only none trivial homology group of $D^n$ and since $D^n$ is connected, $L(f) = 1$ for any $f: D^n \to D^n$ smooth. Thus, $f$ has a fixed point.\\
+		
+		\section{Applications}
+		Then we look at more applications of Lefschetz fixed point theorem.\\
+		\indent First of all, if we understand the homology groups of a manifold, we know something about the number of fixed points of a function $f$ by applying the Lefschetz theorem. The example is just the Brouwer fixed point theorem we proved previously.\\
+		\indent Secondly, we can calculate $\chi (X)$ by calculating $L(f)$ for any $f$ homotopic to $id_X$. For example we can calculate the Euler characteristic of $S^2$.
+		\begin{exmp}
+			The Euler characteristic of $S^2$ is $2$.
+		\end{exmp}
+		\begin{proof}
+			Just look at the map $f(x) = \pi (x + (0,0,-1/2))$ and $F: S^2 \times I \to S^2$ defined by
+			\begin{equation}
+				F(x,t) = \pi (x + (0,0,-t/2))
+			\end{equation}
+			is a homotopy between $f$ and $id$.
+		\end{proof}
+		We can also use the same method to calculate the Euler characteristic of a compact connected Lie group.
+		\begin{exmp}
+			The Euler characteristic of a compact connected Lie group is zero.
+		\end{exmp}
+		\begin{proof}
+			Let the compact connected Lie group be $G$ and let $g \in G$ such that $g \neq 1$. Define $f: G \to G$ by $f(x) = g \cdot x$. This smooth map is homotopic to $id_G$ but has no fixed point. Then we know
+			\begin{equation}
+				\chi (G) = L(f) = 0.
+			\end{equation}
+		\end{proof}
+		
+		Finally, knowledge of a map can give us knowledge of another map by Lefschetz fixed point theorem. For example, we have the following proposition for $X = S^2$.
+		\begin{prop}
+			Every map of $S^2$ that is homotopic to the identity must possess a fixed point. In particular, the antipodal map is not homotopic to the identity.
+		\end{prop}
+		This proposition follows directly from the fact that $\chi (S^2) = 2$ and any map with non zero Lefschetz number has a fixed point.
+		
+		\section{Proof}]
+			The complete proof of Lefschetz fixed point theorem is long and beyond the topics of this talk. Next I'll talk about some key points in the proof.\\
+			\indent First key observation is that the number of fixed point is the number of points in the intersection of $\Gamma(f)$ and $\Delta$, where $\Gamma (f) = \{(x,f(x)): x \in X\}$ is the graph of $f$ and $\Delta = \{ (x,x): x \in X \}$ is the diagonal. Both of them are submanifolds of the manifold $X \times X$.\\
+			\indent Thus to calculate he Lefschetz number we need some kind of intersection theory. Also, we also want the intersection theory to be homotopy invariant since the Lefschetz number itself is homotopy invariant. For example, \\ \\ \\ \\ \\ \\ \\
+			\indent If we look at these two graphs, they are actually homotopic. But the numbers of intersection points are different. However, if we take into account the orientation on both lines, we can have a nice intersection theory, which is homotopy invariant.\\
+			\indent After we have a nice intersection theory, we use Poincare duality and Kunneth formula to generalize our intersection theory to homology. Then we can prove the Lefschetz fixed point theorem.
+\end{document}
