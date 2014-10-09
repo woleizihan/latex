@@ -1,0 +1,87 @@
+\documentclass[psamsfonts]{amsart}
+
+%-------Packages---------
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{conj}[theorem]{Conjecture}
+\newtheorem{quest}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{defns}[theorem]{Definitions}
+\newtheorem{con}[theorem]{Construction}
+\newtheorem{exmp}[theorem]{Example}
+\newtheorem{exmps}[theorem]{Examples}
+\newtheorem{notn}[theorem]{Notation}
+\newtheorem{notns}[theorem]{Notations}
+\newtheorem{addm}[theorem]{Addendum}
+\newtheorem{exer}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[theorem]{Remark}
+\newtheorem{rems}[theorem]{Remarks}
+\newtheorem{warn}[theorem]{Warning}
+\newtheorem{sch}[theorem]{Scholium}
+
+\makeatletter
+\let\c@equation\c@theorem
+\makeatother
+\numberwithin{equation}{section}
+
+\bibliographystyle{plain}
+%\;\;\makebox[0pt]{$\top$}\makebox[0pt]{$\cap$}\;\
+
+\begin{document}
+	\title{The Isomorphism between complex torus and corresponding elliptic curve}
+	In this presentation, I'll talk about the two ways we can look at a specific class of complex manifolds, namely, the elliptic curve and why these two forms of elliptic curve are isomorphic. We'll start by defining what's an elliptic curve and elliptic function. Then we'll introduce the Weierstrass p function and analyze it's properties in order to establish our isormorphism. At last, I'll brief mention how we can use this result.\\
+	\indent So let's start with the definition of elliptic curve. An elliptic curve is generally defined by the zeros set of an equation of the form $y^2 = x^3 + ax + b$ in some field. In this talk we'll assume the underlying field is $\mathbb{C}$. We also consider the point at infinity to be one of the solutions to make our complex manifold compact. There's another way to look at an elliptic curve, which is $\mathbb{C}/L$, where $L$ is some complex lattice with period $1$ and $\tau$. These two forms are actually equivalent and there exists an isomorphism between them. In order to understand this connection, we need more knowledge of elliptic function and Weierstrass p function.
+	\begin{defn}
+		Given a lattice $L = <1,i>$, an elliptic function is meromorphic function function with the same periods as $L$
+	\end{defn}
+	Using some complex analysis, we can show that elliptic functions have the same number of poles and zeroes, and this number is called the order of an elliptic function. Then to construct our isomorphism, we also need to introduce the Weierstrass p function.
+	\begin{defn}
+		The Weierstrass $\wp$-function of a lattice $L$ is defined by 
+			\begin{equation}
+				\wp(z) = \frac{1}{z^2} + \sum_{w \in \Lambda^*} [\frac{1}{(z+w)^2} - \frac{1}{w^2}].
+			\end{equation}
+	\end{defn}
+	We can see that Weierstrass p function is defined by $1/z^2$ plus some infinite sum over the lattice points. This sequence actually converges and that's why we have $-1/w^2$ terms in the sum. Then we'll prove that it is actually an elliptic function.
+	\begin{theorem}
+		The function $\wp$ is an elliptic function with periods $1, \tau$ and has double poles at lattice points.
+	\end{theorem}
+	\begin{proof}
+		The fact that $\wp$ has double poles and is meromorphic is trivial directly from the definition, so we just need to show it has the correct periods. But we can't prove this by simply replace $z$ by $z+1$ or $z+\tau$ into the function since we can see there is a $1/z^2$ term. To avoid this, we look at the derivative $\wp^\prime$:
+		\begin{equation}
+				\wp^\prime(z) = -2 \sum_{w \in L^*}\frac{1}{(z+w)^3}.
+		\end{equation}
+		It looks nice and we notice immediately, $\wp^\prime$ is actually doubly periodic with periods $1,\tau$. So there exists two constants $a$ and $b$ such that 
+		\begin{equation}
+			\wp(z+1) = a + \wp(z); \wp(z+ \tau) = b + \wp(z).
+		\end{equation}
+		And notice that $\wp$ is even by definition, we simply plug in $z=-1/2$ and $-\tau/2$ and we know that $a=b=0$, which finish the proof.
+		\end{proof}
+		So we understand this p function a little but how is this function related to our elliptic curve? That's because $\wp$ and p prime satisfies the following equality.
+		\begin{theorem}
+			$(\wp^\prime)^2 = 4(\wp - e_1)(\wp - e_2)(\wp - e_3)$, where $e_1 = \wp(1/2)$, $e_2 = \wp(\tau/2)$ and $e_3 = \wp(1+\tau/2)$.
+		\end{theorem}
+		Before proving this theorem, we first look this equality. If we divide both sides by $4$, we notice that $(\wp(z), \wp^\prime(z) / 2)$ is actually a solution to our elliptic curve for any $z \in \mathbb{C}/L$. And this actually defines the desired isomorphism.\\
+		\indent Then let's return to the proof.
+		\begin{proof}
+			To prove this, it's sufficient to prove that $F$ defined by left hand side over right hand side is actually a constant and the constant equals $4$. Since $F$ has a compact domain, we just need to prove $F$ is holomorphic in the domain. Then since both sides are defined by a series, we just need to check their poles and zeroes cancel out.\\
+			\indent $\wp^\prime$ has just one pole at every lattice points with order $3$, and it has three zeros at $1/2$, $\tau/2$ and $(1+\tau)/2$. We know that these three zeroes all have order $1$ and they are the only zeroes of $\wp^\prime$. And thus $\wp(z) - e_i$ has just a zero of order $2$ at corresponding points. Since they have only one pole at every lattice point with order $2$, we know that $e_i$ is the only zero.\\
+			\indent To conclude the right hand side has zeroes of order $2$ at each of these points and a pole with order $6$ at lattice points while the left hand side has exactly the same poles and zeroes with same order. So our $F$ is holomorphic and thus constant.\\
+			\indent Then we simply look at both sides close to $z=0$, we know $F=4$ and thus prove the theorem.
+		\end{proof}
+		So the map sending $z$ to $(\wp(z),\wp^\prime(z)/2)$ is a map $ \mathbb{C}/L \to E(\mathbb{C})$. With some complex analysis we can show that this map is injective as well as surjective. Since the proof is beyond the scope of this talke, I'll skip it here. So we have the desired isomorphism.\\
+		\indent Then I'll brief talk about the applications of this result, basically, how I use it. If $a,b$ are integers, this elliptic curve makes sense in both complex number and a finite field. This result enables us to view an elliptic curve as $\mathbb{C}/L$ for some corresponding $L$ and this is just a complex torus $S^1 \times S^1$. And then we can compute its homology as well cohomology groups. And if we assume these groups are the same for $E(\mathbb{C})$ and $E(\bar{\mathbb{F_q}})$ in the complex number and a closure of finite field, we can apply the Lefschetz fixed point theorem to count the cardinality of $E(\mathbb{F}_q)$. And I believe that there are of course other applications.
+\end{document}
